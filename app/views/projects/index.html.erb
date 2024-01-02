@@ -1,0 +1,22 @@
+<div class="container-md">
+
+    <ul class="nav nav-tabs my-3">
+      <li class="nav-item">
+        <h2>Accepted Projects</h2>
+      </li>
+      <li class="nav-item ms-auto">
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Sort
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <%= 'active' if params[:sort] == 'last_synced_at' %>" href="<%= url_for(sort: 'last_synced_at', order: 'desc') %>">Recently synced</a></li>
+            <li><a class="dropdown-item <%= 'active' if params[:sort] == 'score' %>" href="<%= url_for(sort: 'score', order: 'desc') %>">Ranking</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+  <%= render @projects %>
+  <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>  
+</div>

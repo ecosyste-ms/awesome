@@ -1,0 +1,37 @@
+<% if @project.dependencies.present? %>
+  <hr/>
+  <h2>Dependencies</h2>
+
+  <% @project.dependencies.each do |manifest| %>
+    <div class="card mb-3">
+      <div class="card-header">
+        <%= manifest['filepath'] %>
+        <span class='text-muted'>
+          <%= manifest['ecosystem'] %>
+        </span>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% if manifest['kind'] == 'lockfile' && manifest['dependencies'].length > 100 %>
+          <li class="list-group-item">
+            <%= pluralize(manifest['dependencies'].length, 'dependencies') %>
+          </li>
+        <% else %>
+          <% manifest['dependencies'].sort_by{|d| [d['kind'], d['package_name']]}.each do |dependency| %>
+            <li class="list-group-item">
+              <%= dependency['package_name'] %>
+              <i><%= dependency['requirements'] %></i>
+              <small class='text-muted'>
+              <% if dependency['kind'] != 'runtime' %>
+                <%= dependency['kind'] %>
+              <% end %>
+              <% if dependency['optional'] %>
+                (optional)
+              <% end %>
+              </small>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

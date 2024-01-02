@@ -1,0 +1,6 @@
+<%= simple_form_for @project do |f| %>
+  <%= f.input :url, label: 'project repository url', placeholder: 'eg: https://github.com/Unidata/siphon' %>
+  <%= f.input :name, placeholder:  'Name of project (optional)' %>
+  <%= f.input :description, placeholder: 'Description of project (optional)' %>
+  <%= f.button :submit, 'Propose project', class: 'btn-primary' %>
+<% end %>

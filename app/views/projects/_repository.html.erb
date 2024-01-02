@@ -1,0 +1,128 @@
+<% if @project.repository %>
+    <h2>
+      
+      <%= link_to 'Repository metadata', @project.repos_url, target: :_blank %>
+    </h2>
+
+    <p>
+      <%= @project.repository['description'] %>
+    </p>
+
+    <ul>
+      <li>
+        Host: <%= @project.repository['host']['name'] %>
+      </li>
+      <li>
+        URL: <%= link_to @project['url'], @project['url'] %>
+      </li>
+      <li>
+        Owner: <%= @project.repository['owner'] %>
+      </li>
+      <% if @project.repository['license'] %>
+      <li>
+        License: <%= @project.repository['license'] %>
+      </li>
+      <% end %>
+      <% if @project.repository['archived'] %>
+      <li>
+        Archived: <%= @project.repository['archived'] %>
+      </li>
+      <% end %>
+      <% if @project.repository['fork'] %>
+      <li>
+        Fork: <%= @project.repository['fork'] %> (<%= @project.repository['source_name'] %>)
+      </li>
+      <% end %>
+      <li>
+        Created: <%= @project.repository['created_at'] %> 
+        (<%= distance_of_time_in_words_to_now @project.repository['created_at'] %> ago)
+      </li>
+      <li>
+        Default Branch: <%= @project.repository['default_branch'] %>
+      </li>
+      <% if @project.repository['pushed_at'] %> 
+      <li>
+        Last Pushed: <%= @project.repository['pushed_at'] %> 
+        (<%= distance_of_time_in_words_to_now @project.repository['pushed_at'] %> ago)
+      </li>
+      <% end %>
+      <li>
+        Last Synced: <%= @project.repository['last_synced_at'] %> 
+        (<%= distance_of_time_in_words_to_now @project.repository['last_synced_at'] %> ago)
+        <% if @project.repository['latest_commit_sha'] %>
+          (<%= @project.repository['latest_commit_sha'] %>)
+        <% end %>
+      </li>
+      <% if @project.repository['topics'].any? %>
+      <li>
+        Topics: <%= @project.repository['topics'].join(', ') %>
+      </li>
+      <% end %>
+      <% if @project.repository['language'] %>
+      <li>
+        Language: <%= @project.repository['language'] %>
+      </li>
+      <% end %>
+      <% if @project.repository['homepage'] %>
+      <li>
+        Homepage: <%= link_to @project.repository['homepage'], @project.repository['homepage'] %>
+      </li>
+      <% end %>
+      <% if @project.repository['size'] %>
+      <li>
+        Size: <%= number_to_human_size @project.repository['size']*1000 %>
+      </li>
+      <% end %>
+      <li>
+        Stars: <%= number_with_delimiter @project.repository['stargazers_count'] %>
+      </li>
+      <% if  @project.repository['subscribers_count'] %>
+      <li>
+        Watchers: <%= number_with_delimiter @project.repository['subscribers_count'] %>
+      </li>
+      <% end %>
+      <li>
+        Forks: <%= number_with_delimiter @project.repository['forks_count'] %>
+      </li>
+      <li>
+        Open Issues: <%= number_with_delimiter @project.repository['open_issues_count'] %>
+      </li>
+      <% if @project.repository['metadata']  %>
+        <% if @project.repository['metadata']['files'] %>
+          <li>
+            Metadata Files:
+            <ul>
+              <% @project.repository['metadata']['files'].each do |k,v| %>
+                <% next if v.blank? %>
+                <li>
+                  <%= k.humanize %>: <%= v %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <% if @project.repository['metadata']['funding'] %>
+          <li>
+            Funding: 
+            <ul>
+              <% @project.repository['metadata']['funding'].each do |k,v| %>
+                <li>
+                  <%= k.humanize %>: <%= Array(v).join(', ') %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <% if @project.readme %>
+      <h2>
+        <%= link_to 'README', @project.readme_url, target: :_blank %>
+      </h2>
+
+      <pre class='card p-2'>
+        <%= simple_format @project.readme %>
+      </pre>
+    <% end %>
+  <% end %>

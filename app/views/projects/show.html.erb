@@ -1,0 +1,51 @@
+<% @meta_title = "#{@project}" %>
+
+<div class="container-md">
+  <h1>
+    <%= @project.to_s %><br/>
+  </h1>
+
+  <p>
+    <%= @project.description %> <br/>
+    <%= link_to @project.url, @project.url %>
+  </p>
+
+      
+  <% if @project.last_synced_at %>
+  
+    <% if @project.keywords.any? %>
+      <p>
+        <% @project.keywords.each do |keyword| %>
+          <span class="badge bg-light text-dark">
+            <%= keyword %>
+          </span>
+        <% end %>
+      </p>
+    <% end %>
+
+
+    <p class="card-subtitle mb-2 text-muted"><i><small>
+        Last synced: <%= distance_of_time_in_words_to_now @project.last_synced_at %> ago <br>
+        <%= link_to 'JSON representation', api_v1_project_path(@project) %>
+    </small></i></p>
+
+    <%= render 'repository' %>
+    <%= render 'citation' %>
+    <%= render 'owner' %>
+    <%= render 'events' %>
+    <%= render 'committers' %>
+    <%= render 'issues' %>
+    <%= render partial: 'packages', locals: {project: @project } %>
+    <%= render 'dependencies' %>
+
+    <p>
+      Score: <%= @project.score %>
+    </p>
+  <% else %>
+    <p>
+      This project has not been synced yet. Check back in a few minutes.
+      <meta http-equiv="refresh" content="10">
+    </p>
+  <% end %>
+
+</div>

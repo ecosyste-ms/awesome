@@ -1,0 +1,48 @@
+<% if @project.owner %>
+  <hr>
+  <h2>
+    <%= link_to 'Owner metadata', @project.owner_url, target: :_blank %>
+  </h2>
+
+  <ul>
+    <li>
+      Name: <%= @project.owner['name'] %>
+    </li>
+    <li>
+      Login: <%= @project.owner['login'] %>
+    </li>
+    <li>
+      Email: <%= @project.owner['email'] %>
+    </li>
+    <li>
+      Kind: <%= @project.owner['kind'] %>
+    </li>
+    <li>
+      Description: <%= @project.owner['description'] %>
+    </li>
+    <li>
+      Website: <%= @project.owner['website'] %>
+    </li>
+    <li>
+      Location: <%= @project.owner['location'] %>
+    </li>
+    <li>
+      Twitter: <%= @project.owner['twitter'] %>
+    </li>
+    <li>
+      Company: <%= @project.owner['company'] %>
+    </li>
+    <li>
+      Icon url: <%= @project.owner['icon_url'] %>
+    </li>
+    <li>
+      Repositories: <%= @project.owner['repositories_count'] %>
+    </li>
+    <li>
+      Last ynced at: <%= @project.owner['last_synced_at'] %>
+    </li>
+    <li>
+      Profile URL: <%= @project.owner['html_url'] %>
+    </li>
+  </ul>
+<% end %>

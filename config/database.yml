@@ -1,0 +1,22 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV.fetch("POSTGRES_USER") { '' } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { '' } %>
+  host:     <%= ENV.fetch("POSTGRES_HOST") { '' } %>
+  port:     <%= ENV.fetch("POSTGRES_PORT") { '' } %>
+  pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 20 } %>
+
+development:
+  <<: *default
+  database: awesome_development
+
+test:
+  <<: *default
+  database: awesome_test
+
+production:
+  <<: *default
+  database: awesome_production
+  url: <%= ENV['DATABASE_URL'] %>

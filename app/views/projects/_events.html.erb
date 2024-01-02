@@ -1,0 +1,23 @@
+<% if @project.events %>
+  <hr>
+  <h2>
+    GitHub Events
+  </h2>
+  
+  <h5>Total</h5>
+  <ul>
+    <% @project.events['total'].each do |k,v| %>
+      <li>
+        <%= k.underscore.humanize %>: <%= v %>
+      </li>
+    <% end %>
+  </ul>
+  <h5>Last Year</h5>
+  <ul>
+    <% @project.events['last_year'].each do |k,v| %>
+      <li>
+        <%= k.underscore.humanize %>: <%= v %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

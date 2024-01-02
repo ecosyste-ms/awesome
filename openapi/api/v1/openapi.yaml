@@ -1,0 +1,246 @@
+openapi: 3.0.1
+info:
+  title: "Ecosyste.ms: Awesome"
+  description: "An open API service for producing an overview of a list of open source projects."
+  contact:
+    name: Ecosyste.ms
+    email: support@ecosyste.ms
+    url: https://ecosyste.ms 
+  version: 1.0.0
+  license:
+    name: CC-BY-SA-4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+externalDocs:
+  description: GitHub Project
+  url: https://github.com/ecosyste-ms/awesome
+servers:
+- url: https://awesome.ecosyste.ms/api/v1
+paths:
+  /projects:
+    get:
+      description: get projects
+      operationId: getProjects
+      tags:
+        - projects
+      parameters:
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /projects/{id}:
+    get:
+      description: get a project by id
+      operationId: getProject
+      tags:
+        - projects
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: id of the project
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+  /projects/lookup:
+    get:
+      description: lookup project by url
+      operationId: lookupProject
+      tags:
+        - projects
+      parameters:
+        - name: url
+          in: query
+          description: url of the project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Project'
+  /projects/packages:
+    get:
+      description: get projects with packages
+      operationId: getProjectPackages
+      tags:
+        - projects
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /issues:
+    get:
+      description: get issues
+      operationId: getIssues
+      tags:
+        - issues
+      parameters:
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+        last_synced_at:
+          type: string
+          format: date-time
+        repository:
+          type: object
+        owner:
+          type: object
+        packages:
+          type: array
+          items:
+            type: object
+        commits:
+          type: object
+        issues:
+          type: object
+        events:
+          type: object
+        keywords:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: object
+        score:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        avatar_url:
+          type: string
+        language:
+          type: string
+        category:
+          type: string
+        sub_category:
+          type: string
+        monthly_downloads:
+          type: integer
+        readme:
+          type: string
+        funding_links:
+          type: array
+          items:
+            type: string
+        readme_doi_urls:
+          type: array
+          items:
+            type: string
+        works:
+          type: object
+    Issue:
+      type: object
+      properties:
+        uuid:
+          type: integer
+        number:
+          type: integer
+        node_id:
+          type: string
+        title:
+          type: string
+        user:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        assignees:
+          type: array
+          items:
+            type: string
+        comments_count:
+          type: integer
+        pull_request:
+          type: boolean
+        author_association:
+          type: string
+        state:
+          type: string
+        state_reason:
+          type: string
+        time_to_close:
+          type: integer
+        merged_at:
+          type: string
+          format: date-time
+        dependency_metadata:
+          type: object
+        locked:
+          type: boolean
+        comments:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        closed_at:
+          type: string
+          format: date-time
+        html_url:
+          type: string
+        url:
+          type: string

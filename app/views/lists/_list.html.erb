@@ -1,0 +1,30 @@
+<div class="card mb-3 list d-flex" id="list_<%= list.id %>">
+  <div class="card-body pb-1">
+    <div class="d-flex">
+      
+      <div class="flex-grow-1 ms-3 text-break">
+        <h5 class='card-title'>
+          <%= link_to list, list_path(list) %>
+        </h5>
+      
+        <p class="card-subtitle mb-2 text-muted">
+          <%= list.description %>
+        </p>
+        <p class="card-subtitle mb-2 text-muted">
+          <i><small>
+            <%= number_with_delimiter list.projects_count %> projects <br/>
+            <%= number_with_delimiter list.stars %> stars <br/>
+            <%= number_with_delimiter list.forks %> forks <br/>
+          </small></i>
+        </p>
+        <p class="card-subtitle mb-2 text-muted"><i><small>
+          Last updated: <%= list.last_updated_at.strftime("%d %b %Y") %>
+        </small></i></p>
+      </div>
+      <div class="flex-shrink-0">
+        <%# todo avatar url %>
+        <img src="" class="rounded" height='40' width='40' onerror="this.style.display='none'">
+      </div>  
+    </div>
+  </div>
+</div>

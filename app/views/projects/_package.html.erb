@@ -1,0 +1,126 @@
+<% if package %>
+<div class='card mb-3'>
+        <div class="card-body pb-1">
+          <div class="d-flex">
+            <div class="flex-grow-1 ms-3 text-break">
+              <h5 class='card-title'>
+                <%= link_to package['registry']['name'], package['registry']['url'] %>: <%= link_to package['name'], package['registry_url'] %>
+              </h5>
+
+              <p class="card-subtitle mb-2 text-muted">
+                <%= package['description'] %>
+              </p>
+
+              <ul>
+                <li>
+                  Homepage: <%= package['homepage'] %>
+                </li>
+                <% if package['keywords'].present? %>
+                <li>
+                  Keywords: <%= package['keywords'].join(', ') %>
+                </li>
+                <% end %>
+                <% if package['status'].present? %>
+                <li>
+                  Status: <%= package['status'] %>
+                </li>
+                <% end %>
+                <% if package['documentation_url'].present? %>
+                  <li>
+                    Documentation: <%= link_to package['documentation_url'], package['documentation_url'] %>
+                  </li>
+                <% end %>
+                <li>
+                  Licenses: <%= package['licenses'] %>
+                </li>
+                <% if package['keywords'].present? %>
+                <li>
+                  Keywords: <%= package['keywords'] %>
+                </li>
+                <% end %>
+                <li>
+                  Latest release: <%= package['latest_release_number'] %> 
+                  <% if package['latest_release_published_at'] %>
+                    <i>
+                      (published <%= distance_of_time_in_words_to_now package['latest_release_published_at'] %> ago)
+                    </i>
+                  <% end %>
+                </li>
+                <li>
+                  Last Synced: <%= package['last_synced_at'] %> 
+                  (<%= distance_of_time_in_words_to_now package['last_synced_at'] %> ago)
+                </li>
+                <li>
+                  Versions: <%= number_with_delimiter package['versions_count'] %>
+                </li>
+                <li>
+                  Dependent Packages: <%= link_to number_with_delimiter(package['dependent_packages_count']), package['dependent_packages_url'].gsub('/api/v1', ''), target: :_blank %>
+                </li>
+                <li>
+                  Dependent Repositories: <%= link_to number_with_delimiter(package['dependent_repos_count']), "https://repos.ecosyste.ms/usage/#{package['ecosystem']}/#{package['name']}", target: :_blank %>
+                </li>
+                <% if package['downloads'] %>
+                <li>
+                  Downloads: <%= number_with_delimiter(package['downloads']) %> <%= package['downloads_period'].try(:humanize).try(:gsub,'-', ' ') %> 
+                </li>
+                <% end %>
+                <% if package['docker_downloads_count'] %>
+                <li>
+                  Docker Downloads: <%= number_with_delimiter(package['docker_downloads_count']) %>
+                </li>
+                <% end %>
+                <li>
+                  Rankings:
+                  <ul>
+                    <% package['rankings'].sort_by{|k,v| v.nil? ? 100 : v }.each do |k,v| %>
+                      <% next if v.nil? %>
+                      <li>
+                        <%= k.humanize %>: <%= v.round(3) %>%
+                      </li>
+                    <% end%>
+                  </ul>
+                </li>
+                <% if package['maintainers'].any? %>
+                <li>
+                  Maintainers (<%= package['maintainers'].length %>)
+                  <ul>
+                    <% package['maintainers'].each do |maintainer| %>
+                      <li>
+                        <%= link_to (maintainer['login'] || maintainer['uuid']), maintainer['html_url'] %>
+                      </li>
+                    <% end%>
+                  </ul>
+                </li>
+                <% end%>
+                <% if package['metadata'] %>
+                  <% if package['metadata']['funding'] %>
+                    <li>
+                      Funding: 
+                      <ul>
+                        <% Array(package['metadata']['funding']).each do |link| %>
+                          <li>
+                            <%= Array(link).join(': ') %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </li>
+                  <% end %>
+                <% end %>
+                <% if package['advisories'].any? %>
+                  <li>
+                    Advisories:
+                    <ul>
+                      <% package['advisories'].each do |advisory| %>
+                        <li>
+                          <%= link_to advisory['title'], advisory['url'] %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+<% end %>

@@ -1,0 +1,39 @@
+<div class="card mb-3 project d-flex" id="project_<%= project.id %>">
+  <div class="card-body pb-1">
+    <div class="d-flex">
+      
+      <div class="flex-grow-1 ms-3 text-break">
+        <h5 class='card-title'>
+          <%= link_to project, project_path(project) %>
+        </h5>
+      
+        <p class="card-subtitle mb-2 text-muted">
+          <%= project.description %>
+        </p>
+
+        <% if project.keywords.any? %>
+          <p>
+            <% project.keywords.each do |keyword| %>
+              <span class="badge bg-light text-dark">
+                <%= link_to keyword, url_for(keyword: keyword) %>
+              </span>
+            <% end %>
+          </p>
+        <% end %>
+
+        <% if project.last_synced_at %>
+        <p class="card-subtitle mb-2 text-muted"><i><small>
+          <% if project.category %>
+            <%= project.category %> - <%= project.sub_category %> -
+          <% end %>
+          Last synced: <%= project.last_synced_at.strftime("%d %b %Y") %>
+          - Ranking: <%= project.score.round(1) %>
+        </small></i></p>
+        <% end %>
+      </div>
+      <div class="flex-shrink-0">
+        <img src="<%= project.avatar_url %>" class="rounded" height='40' width='40' onerror="this.style.display='none'">
+      </div>  
+    </div>
+  </div>
+</div>

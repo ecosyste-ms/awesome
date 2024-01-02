@@ -1,0 +1,23 @@
+<% @meta_title = "#{@list}" %>
+
+<div class="container-md">
+  <h1>
+    <%= @list.to_s %><br/>
+  </h1>
+
+  <p>
+    <%= @list.description %> <br/>
+    <%= link_to @list.url, @list.url %>
+  </p>
+
+  <ul>
+    <% @list.readme_links.each do |link| %>
+      <li>
+        <%= link_to link[:name], link[:url] %>
+        <% if link[:description].present? %>
+          - <%= link[:description] %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

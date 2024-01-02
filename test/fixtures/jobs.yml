@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sidekiq_id: MyString
+  status: MyString
+  url: MyString
+  ip: MyString
+  results: 
+
+two:
+  sidekiq_id: MyString
+  status: MyString
+  url: MyString
+  ip: MyString
+  results: 

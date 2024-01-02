@@ -1,0 +1,70 @@
+<% if @project.commits && @project.commits['last_synced_at'] %>
+    <hr>
+    <h2>
+      <%= link_to 'Committers metadata', @project.commits_url, target: :_blank %>
+    </h2>
+
+    <% if @project.commits['last_synced_at'] %>
+      <p class="card-subtitle mb-2 text-muted"><i><small>
+        Last synced: <%= distance_of_time_in_words_to_now @project.commits['last_synced_at'] %> ago
+    </small></i></p>
+    <% end %>
+    <% if @project.commits['total_commits'] %>
+      <div class='row'>
+        <div class='col-md-6'>
+          <p>
+            Total Commits: <%= number_with_delimiter @project.commits['total_commits'] %><br>
+            Total Committers: <%= number_with_delimiter @project.commits['total_committers'] %><br>
+            Avg Commits per committer: <%= number_with_delimiter @project.commits['mean_commits'].round(3) %><br>
+            Development Distribution Score (<a href='https://report.opensustain.tech/chapters/development-distribution-score.html' target="_blank">DDS</a>): <%= @project.commits['dds'].round(3) %><br/>
+          </p>
+        </div>
+        <div class='col-md-6'>
+          <% if @project.commits['past_year_total_commits'] %>
+            <p>
+              Commits in past year: <%= number_with_delimiter @project.commits['past_year_total_commits'] %><br>
+              Committers  in past year: <%= number_with_delimiter @project.commits['past_year_total_committers'] %><br>
+              Avg Commits per committer in past year: <%= number_with_delimiter @project.commits['past_year_mean_commits'].round(3) %><br>
+              Development Distribution Score (<a href='https://report.opensustain.tech/chapters/development-distribution-score.html' target="_blank">DDS</a>)  in past year: <%= @project.commits['past_year_dds'].round(3) %><br/>
+            </p>
+          <% end %>
+        </div>
+      </div>
+
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Commits</th>
+        </tr>
+      </thead>
+      <tbody>        
+        <% @project.commits['committers'].first(30).each do |committer| %>
+          <tr>
+            <td><%= link_to_unless committer['login'].blank?, committer['name'], "https://github.com/#{committer['login']}" %></td>
+            <td><%= obfusticate_email(committer['email']) %></td>
+            <td><%= committer['count'] %></td>
+          </tr>
+        <% end %>
+        <% if @project.commits['total_committers'] > 30 %>
+          <tr>
+            <td colspan='3'>
+              <i>
+              and <a href='<%= @project.commits_url %>'><%= @project.commits['total_committers'] - 30 %> more...</a>
+              </i>
+            </td>
+          </tr>
+        <%end %>
+      </tbody>
+    </table>
+
+    <h4>Committer domains:</h4>
+    <ul>
+      <% @project.commiter_domains.each do |k,v| %>
+        <li><%= link_to k, "http://#{k}", target: :_blank %>: <%= v %></li>
+      <% end %>
+    </ul>  
+    <% end %>
+
+  <% end %>
