@@ -41,5 +41,5 @@ Rails.application.routes.draw do
   get '/422', to: 'errors#unprocessable'
   get '/500', to: 'errors#internal'
 
-  root "projects#index"
+  root "lists#index"
 end

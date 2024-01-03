@@ -1,7 +1,8 @@
 class List < ApplicationRecord
   validates :url, presence: true
 
-  has_many :projects
+  has_many :list_projects
+  has_many :projects, through: :list_projects
 
   def to_s
     name
@@ -118,10 +119,11 @@ class List < ApplicationRecord
 
   def load_projects
     readme_links.each do |link|
-          
-      # find or create project
-      # create join between project and list
-      # join holds name, description, category, sub_category
+      
+      project = Project.find_or_create_by(url: link[:url])
+      project.sync_async
+      list_project = list_projects.find_or_create_by(project_id: project.id)
+      list_project.update(name: link[:name], description: link[:description], category: link[:category], sub_category: link[:sub_category])
       
     end
   end

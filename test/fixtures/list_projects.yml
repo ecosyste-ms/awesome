@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  list_id: 1
+  project_id: 1
+  name: MyString
+  description: MyString
+  category: MyString
+  sub_category: MyString
+
+two:
+  list_id: 1
+  project_id: 1
+  name: MyString
+  description: MyString
+  category: MyString
+  sub_category: MyString
