@@ -2,11 +2,11 @@ module ApplicationHelper
   include Pagy::Frontend
 
   def meta_title
-    [@meta_title, 'Open Sustainable Technology'].compact.join(' | ')
+    [@meta_title, 'Ecosyste.ms: Awesome'].compact.join(' | ')
   end
 
   def meta_description
-    @meta_description || 'A curated list of open technology projects to sustain a stable climate, energy supply, biodiversity and natural resources.'
+    @meta_description || 'An open API service indexing awesome lists of open source software.'
   end
 
   def obfusticate_email(email)
