@@ -36,6 +36,10 @@ class List < ApplicationRecord
     repository['forks_count']
   end
 
+  def sync_async
+    SyncListWorker.perform_async(id)
+  end
+
   def sync
     fetch_repository
     fetch_readme
