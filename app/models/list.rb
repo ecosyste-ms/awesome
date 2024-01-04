@@ -173,7 +173,7 @@ class List < ApplicationRecord
 
   def self.import_lists_from_topic
     topic = 'awesome-list'
-    url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}"
+    url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=1000"
 
     conn = Faraday.new(url: url) do |faraday|
       faraday.response :follow_redirects
