@@ -99,34 +99,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Project'
-  /issues:
-    get:
-      description: get issues
-      operationId: getIssues
-      tags:
-        - issues
-      parameters:
-        - name: page
-          in: query
-          description: pagination page number 
-          required: false
-          schema:
-            type: integer
-        - name: per_page
-          in: query
-          description: Number of records to return 
-          required: false
-          schema:
-            type: integer
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Issue'
 components:
   schemas:
     Project:
@@ -189,58 +161,4 @@ components:
             type: string
         works:
           type: object
-    Issue:
-      type: object
-      properties:
-        uuid:
-          type: integer
-        number:
-          type: integer
-        node_id:
-          type: string
-        title:
-          type: string
-        user:
-          type: string
-        labels:
-          type: array
-          items:
-            type: string
-        assignees:
-          type: array
-          items:
-            type: string
-        comments_count:
-          type: integer
-        pull_request:
-          type: boolean
-        author_association:
-          type: string
-        state:
-          type: string
-        state_reason:
-          type: string
-        time_to_close:
-          type: integer
-        merged_at:
-          type: string
-          format: date-time
-        dependency_metadata:
-          type: object
-        locked:
-          type: boolean
-        comments:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        closed_at:
-          type: string
-          format: date-time
-        html_url:
-          type: string
-        url:
-          type: string
+    
