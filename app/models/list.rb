@@ -12,6 +12,14 @@ class List < ApplicationRecord
     url.split('/').last
   end
 
+  def description
+    if repository.present?
+      repository['description']
+    elsif read_attribute(:description).present?
+      read_attribute(:description)
+    end
+  end
+
   def last_updated_at
     return updated_at unless repository.present?
     return updated_at unless repository['updated_at'].present?
