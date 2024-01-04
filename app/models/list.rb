@@ -160,13 +160,39 @@ class List < ApplicationRecord
       next if link[:url].include?(list.url)
       p link
       
-      # temp
       existing = List.find_by(url: link[:url])
       next if existing.present? && existing.projects_count && existing.projects_count > 0
 
       l = List.find_or_create_by(url: link[:url])
       l.name = link[:name]
       l.description = link[:description]
+      l.save
+      l.sync
+    end
+  end
+
+  def self.import_lists_from_topic
+    topic = 'awesome-list'
+    url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}"
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.response :follow_redirects
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.get
+    return unless response.success?
+    json = JSON.parse(response.body)
+
+    # TODO pagination
+
+    json['repositories'].each do |repo|
+      p repo
+
+      existing = List.find_by(url: repo['html_url'])
+      next if existing.present? && existing.projects_count && existing.projects_count > 0
+
+      l = List.find_or_create_by(url: repo['html_url'])
       l.save
       l.sync
     end
