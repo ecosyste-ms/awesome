@@ -4,6 +4,9 @@ class List < ApplicationRecord
   has_many :list_projects
   has_many :projects, through: :list_projects
 
+  scope :with_readme, -> { where.not(readme: nil) }
+  scope :with_repository, -> { where.not(repository: nil) }
+
   def to_s
     name
   end
@@ -44,6 +47,7 @@ class List < ApplicationRecord
     fetch_repository
     fetch_readme
     update(projects_count: readme_links.length, last_synced_at: Time.now)
+    ping
   end
 
   def repository_url
@@ -60,6 +64,21 @@ class List < ApplicationRecord
     repo_name = match[2]
   
     "https://github.com/#{username}/#{repo_name}"
+  end
+
+  def ping
+    ping_urls.each do |url|
+      Faraday.get(url) rescue nil
+    end
+  end
+
+  def ping_urls
+    [repos_ping_url].compact
+  end
+
+  def repos_ping_url
+    return unless repository.present?
+    "https://repos.ecosyste.ms/api/v1/hosts/#{repository['host']['name']}/repositories/#{repository['full_name']}/ping"
   end
 
   def repos_api_url
@@ -84,6 +103,21 @@ class List < ApplicationRecord
   rescue
     puts "Error fetching repository for #{repository_url}"
   end
+
+  def readme_url
+    return unless repository.present?
+    "#{repository['html_url']}/blob/#{repository['default_branch']}/#{readme_file_name}"
+  end
+
+  def blob_url(path)
+    return unless repository.present?
+    "#{repository['html_url']}/blob/#{repository['default_branch']}/#{path}"
+  end 
+
+  def raw_url(path)
+    return unless repository.present?
+    "#{repository['html_url']}/raw/#{repository['default_branch']}/#{path}"
+  end 
 
   def download_url
     return unless repository.present?
