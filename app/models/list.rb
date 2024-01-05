@@ -59,6 +59,7 @@ class List < ApplicationRecord
     fetch_repository
     fetch_readme
     update(projects_count: readme_links.length, last_synced_at: Time.now)
+    load_projects
     ping
   end
 
