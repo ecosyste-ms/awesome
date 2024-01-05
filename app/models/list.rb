@@ -180,12 +180,10 @@ class List < ApplicationRecord
 
   def load_projects
     readme_links.each do |link|
-      
       project = Project.find_or_create_by(url: link[:url])
-      project.sync_async
+      project.sync_async if project.last_synced_at.nil?
       list_project = list_projects.find_or_create_by(project_id: project.id)
       list_project.update(name: link[:name], description: link[:description], category: link[:category], sub_category: link[:sub_category])
-      
     end
   end
 
@@ -228,7 +226,7 @@ class List < ApplicationRecord
       l.name = link[:name]
       l.description = link[:description]
       l.save
-      l.sync
+      l.sync_async
     end
   end
 
@@ -247,14 +245,14 @@ class List < ApplicationRecord
     # TODO pagination
 
     json['repositories'].each do |repo|
-      p repo
+      p repo['html_url']
 
       existing = List.find_by(url: repo['html_url'])
       next if existing.present? && existing.projects_count && existing.projects_count > 0
 
       l = List.find_or_create_by(url: repo['html_url'])
       l.save
-      l.sync
+      l.sync_async
     end
   end
 end
