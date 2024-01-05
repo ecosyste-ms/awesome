@@ -1,5 +1,12 @@
 {
   "cron": [
-    
+    {
+      "command": "bundle exec rake lists:sync",
+      "schedule": "*/30 * * * *"
+    },
+    {
+      "command": "bundle exec rake lists:discover",
+      "schedule": "0 0 * * *"
+    }
   ]
 }
