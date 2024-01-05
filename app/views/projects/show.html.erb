@@ -10,7 +10,7 @@
     <%= link_to @project.url, @project.url %>
   </p>
 
-  <% if @project.matching_list %>
+  <% if @project.matching_list && @project.matching_list.readme.present? %>
     <p>
       List: <%= link_to @project.matching_list, list_path(@project.matching_list) %>
     </p>

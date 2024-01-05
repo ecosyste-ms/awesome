@@ -52,6 +52,12 @@ class Project < ApplicationRecord
     matching_list || list_keywords?
   end
 
+  def sync_list
+    return unless list_keywords? && matching_list.blank?
+    list = List.find_or_create_by(url: url)
+    list.sync_async
+  end
+
   def repository_url
     repo_url = github_pages_to_repo_url(url)
     return repo_url if repo_url.present?
@@ -79,6 +85,7 @@ class Project < ApplicationRecord
     combine_keywords
     fetch_readme
     update(last_synced_at: Time.now)
+    sync_list
     ping
   end
 
