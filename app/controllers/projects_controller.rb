@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @scope = Project.reviewed
+    @scope = Project.all
 
     if params[:keyword].present?
       @scope = @scope.keyword(params[:keyword])

@@ -2,8 +2,8 @@ require 'csv'
 
 class Project < ApplicationRecord
 
-  has_many :project_lists
-  has_many :lists, through: :project_lists
+  has_many :list_projects
+  has_many :lists, through: :list_projects
 
   validates :url, presence: true, uniqueness: { case_sensitive: false }
 
@@ -35,7 +35,7 @@ class Project < ApplicationRecord
   end
 
   def to_s
-    name.presence || url
+    url
   end
 
   def repository_url

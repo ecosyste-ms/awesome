@@ -1,9 +1,4 @@
 <% if @project.repository %>
-    <h2>
-      
-      <%= link_to 'Repository metadata', @project.repos_url, target: :_blank %>
-    </h2>
-
     <p>
       <%= @project.repository['description'] %>
     </p>
@@ -125,4 +120,4 @@
         <%= simple_format @project.readme %>
       </pre>
     <% end %>
-  <% end %>
+<% end %>
