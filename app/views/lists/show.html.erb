@@ -11,11 +11,20 @@
   </p>
 
   <ul>
+    <% list_projects = @list.list_projects.includes(:project) %>
     <% @list.readme_links.each do |link| %>
       <li>
-        <%= link_to link[:name], link[:url] %>
-        <% if link[:description].present? %>
-          - <%= link[:description] %>
+        <% list_project= list_projects.select{|l| l.name == link[:name] }.first %>
+        <% if list_project && list_project.project && list_project.project.repository.present? %>
+          <%= link_to list_project.name, project_path(list_project.project) %>
+          <% if list_project.description.present? %>
+            - <%= list_project.description %>
+          <% end %>
+        <% else %>
+          <%= link_to link[:name], link[:url] %>
+          <% if link[:description].present? %>
+            - <%= link[:description] %>
+          <% end %>
         <% end %>
       </li>
     <% end %>
