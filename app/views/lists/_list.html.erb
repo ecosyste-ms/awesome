@@ -10,6 +10,17 @@
         <p class="card-subtitle mb-2 text-muted">
           <%= list.description %>
         </p>
+
+        <% if list.topics.any? %>
+          <p>
+            <% list.topics.each do |topic| %>
+              <span class="badge bg-light text-dark">
+                <%= topic %>
+              </span>
+            <% end %>
+          </p>
+        <% end %>
+
         <p class="card-subtitle mb-2 text-muted">
           <i><small>
             <%= number_with_delimiter list.stars %> stars <br/>

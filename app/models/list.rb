@@ -39,6 +39,12 @@ class List < ApplicationRecord
     repository['forks_count']
   end
 
+  def topics
+    return [] unless repository.present?
+    return [] unless repository['topics'].present?
+    repository['topics']
+  end
+
   def sync_async
     SyncListWorker.perform_async(id)
   end
