@@ -111,6 +111,18 @@
       <% end %>
     </ul>
 
+    <h3>Lists</h3>
+    <ul>
+      <% @project.list_projects.includes(:list).each do |list_project| %>
+        <li>
+          <%= link_to list_project.list, list_path(list_project.list) %> - <%= list_project.name %>
+          <% if list_project.description %>
+           - <%= list_project.description %>
+          <% end %>    
+        </li>
+      <% end %>
+    </ul>
+
     <% if @project.readme %>
       <h2>
         <%= link_to 'README', @project.readme_url, target: :_blank %>

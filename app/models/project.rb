@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   has_many :list_projects
   has_many :lists, through: :list_projects
 
+  belongs_to :matching_list, foreign_key: :url, primary_key: :url, optional: true, class_name: 'List'
+
   validates :url, presence: true, uniqueness: { case_sensitive: false }
 
   scope :active, -> { where("(repository ->> 'archived') = ?", 'false') }
@@ -36,6 +38,18 @@ class Project < ApplicationRecord
 
   def to_s
     url
+  end
+
+  def matching_list
+    List.where(url: url).first
+  end
+
+  def list_keywords?
+    keywords.include?('awesome-list')
+  end
+
+  def list?
+    matching_list || list_keywords?
   end
 
   def repository_url

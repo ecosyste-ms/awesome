@@ -4,6 +4,8 @@ class List < ApplicationRecord
   has_many :list_projects
   has_many :projects, through: :list_projects
 
+  belongs_to :matching_project, foreign_key: :url, primary_key: :url, optional: true, class_name: 'Project'
+
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 

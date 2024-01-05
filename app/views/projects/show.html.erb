@@ -10,6 +10,12 @@
     <%= link_to @project.url, @project.url %>
   </p>
 
+  <% if @project.matching_list %>
+    <p>
+      List: <%= link_to @project.matching_list, list_path(@project.matching_list) %>
+    </p>
+  <% end %>
+
   <% if @project.last_synced_at %>
   
     <% if @project.keywords.any? %>
@@ -35,13 +41,4 @@
       <meta http-equiv="refresh" content="10">
     </p>
   <% end %>
-
-  <h3>Lists</h3>
-  <ul>
-    <% @project.list_projects.includes(:list).each do |list_project| %>
-      <li>
-        <%= link_to list_project.list, list_path(list_project.list) %> - <%= list_project.name %> - <%= list_project.description %>
-      </li>
-    <% end %>
-  </ul>
 </div>
