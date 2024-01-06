@@ -26,11 +26,11 @@ class List < ApplicationRecord
   end
 
   def self.topics
-    List.displayable.pluck(Arel.sql("repository -> 'topics'")).flatten.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+    List.displayable.pluck(Arel.sql("repository -> 'topics'")).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
   def project_topics
-    projects.pluck(Arel.sql("repository -> 'topics'")).flatten.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+    projects.pluck(Arel.sql("repository -> 'topics'")).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
   def description

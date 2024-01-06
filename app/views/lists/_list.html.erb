@@ -13,9 +13,18 @@
 
         <% if list.topics.any? %>
           <p>
-            <% list.topics.each do |topic| %>
+            <% list.topics.first(10).each do |topic| %>
               <span class="badge bg-light text-dark">
                 <%= link_to topic, lists_path(topic: topic), class: 'text-decoration-none link-dark' %>
+              </span>
+            <% end %>
+          </p>
+        <% elsif list.project_topics.any? %>
+
+          <p>
+            <% list.project_topics.first(5).each do |project_topic, count| %>
+              <span class="badge bg-light text-dark">
+                <%= project_topic %>
               </span>
             <% end %>
           </p>
