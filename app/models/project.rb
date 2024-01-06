@@ -48,12 +48,20 @@ class Project < ApplicationRecord
     keywords.include?('awesome-list')
   end
 
+  def awesome_url?
+    url.match?(/awesome/i)
+  end
+
   def list?
-    matching_list || list_keywords?
+    matching_list || list_keywords? || awesome_url?
+  end
+
+  def looks_like_list?
+    list_keywords? || awesome_url?
   end
 
   def sync_list
-    return unless list_keywords? && matching_list.blank?
+    return unless looks_like_list? && matching_list.blank?
     list = List.find_or_create_by(url: url)
     list.sync_async
   end
