@@ -88,6 +88,7 @@ class Project < ApplicationRecord
   end
 
   def sync
+    return if last_synced_at.present?
     check_url
     fetch_repository
     combine_keywords
