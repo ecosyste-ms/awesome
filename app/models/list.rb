@@ -27,6 +27,10 @@ class List < ApplicationRecord
     List.pluck(Arel.sql("repository -> 'topics'")).flatten.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
+  def project_topics
+    projects.pluck(Arel.sql("repository -> 'topics'")).flatten.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+  end
+
   def description
     if repository.present?
       repository['description']

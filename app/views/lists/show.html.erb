@@ -10,23 +10,44 @@
     <%= link_to @list.url, @list.url %>
   </p>
 
-  <ul>
-    <% list_projects = @list.list_projects.includes(:project) %>
-    <% @list.readme_links.each do |link| %>
-      <li>
-        <% list_project= list_projects.select{|l| l.name == link[:name] }.first %>
-        <% if list_project && list_project.project && list_project.project.repository.present? %>
-          <%= link_to list_project.name, project_path(list_project.project) %>
-          <% if list_project.description.present? %>
-            - <%= list_project.description %>
-          <% end %>
-        <% else %>
-          <%= link_to link[:name], link[:url] %>
-          <% if link[:description].present? %>
-            - <%= link[:description] %>
-          <% end %>
+  <div class='row'>
+    <div class='col-md-8'>
+      <ul>
+        <% list_projects = @list.list_projects.includes(:project) %>
+        <% @list.readme_links.each do |link| %>
+          <li>
+            <% list_project= list_projects.select{|l| l.name == link[:name] }.first %>
+            <% if list_project && list_project.project && list_project.project.repository.present? %>
+              <%= link_to list_project.name, project_path(list_project.project) %>
+              <% if list_project.description.present? %>
+                - <%= list_project.description %>
+              <% end %>
+            <% else %>
+              <%= link_to link[:name], link[:url] %>
+              <% if link[:description].present? %>
+                - <%= link[:description] %>
+              <% end %>
+            <% end %>
+          </li>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
+      </ul>
+    </div>
+    <div class='col-md-4'>
+      <div class='card mb-3'>
+        <div class="card-header">
+          Keywords
+        </div>
+        <div class="list-group list-group-flush">
+          <% @list.project_topics.first(100).each do |topic, count| %>
+            <% next if topic.blank? %>
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if topic == params[:topic]%>" href="<%= list_path(@list, topic: topic) %>">
+              <%= topic %>
+              <span class="badge bg-primary rounded-pill"><%= number_with_delimiter count%></span>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
 </div>
