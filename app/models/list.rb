@@ -23,6 +23,10 @@ class List < ApplicationRecord
     url.split('/').last
   end
 
+  def self.topics
+    List.pluck(Arel.sql("repository -> 'topics'")).flatten.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+  end
+
   def description
     if repository.present?
       repository['description']

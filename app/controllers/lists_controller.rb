@@ -2,6 +2,10 @@ class ListsController < ApplicationController
   def index
     scope = List.with_repository.with_readme.where.not(projects_count: nil).where('projects_count > 50')
 
+    if params[:topic].present?
+      scope = scope.where('repository ->> \'topics\' ILIKE ?', "%#{params[:topic]}%")
+    end
+
     if params[:sort].present? || params[:order].present?
       sort = params[:sort].presence || 'updated_at'
       if params[:order] == 'asc'
