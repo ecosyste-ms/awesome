@@ -17,7 +17,7 @@
           Keywords
         </div>
         <div class="list-group list-group-flush">
-          <% List.topics.first(150).each do |topic, count| %>
+          <% List.topics.first(500).each do |topic, count| %>
             <% next if topic.blank? %>
             <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if topic == params[:topic]%>" href="<%= lists_path(topic: topic) %>">
               <%= topic %>
