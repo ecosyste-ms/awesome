@@ -9,6 +9,8 @@ class List < ApplicationRecord
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
+  scope :displayable, -> { with_readme.where('projects_count >= 30') }
+
   def self.sync_least_recently_synced
     List.where(last_synced_at: nil).or(List.where("last_synced_at < ?", 1.day.ago)).order('last_synced_at asc nulls first').limit(500).each do |list|
       list.sync_async
@@ -24,7 +26,7 @@ class List < ApplicationRecord
   end
 
   def self.topics
-    List.pluck(Arel.sql("repository -> 'topics'")).flatten.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+    List.displayable.pluck(Arel.sql("repository -> 'topics'")).flatten.group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
   def project_topics

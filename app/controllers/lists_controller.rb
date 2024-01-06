@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   def index
-    scope = List.with_repository.with_readme.where.not(projects_count: nil).where('projects_count > 50')
+    scope = List.displayable
 
     if params[:topic].present?
       scope = scope.where('repository ->> \'topics\' ILIKE ?', "%#{params[:topic]}%")

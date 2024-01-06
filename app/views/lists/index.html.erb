@@ -1,5 +1,11 @@
 <div class="container-md">
-  <h2>Awesome Lists</h2>
+  <h2>
+    <%= number_with_delimiter @pagy.count %>
+    <% if params[:topic] %>
+      "<%= params[:topic] %>"
+    <% end %>
+    Awesome Lists
+  </h2>
   <div class="row">
     <div class="col-md-8">
       <%= render @lists %>
