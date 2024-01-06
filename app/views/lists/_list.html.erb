@@ -15,7 +15,7 @@
           <p>
             <% list.topics.each do |topic| %>
               <span class="badge bg-light text-dark">
-                <%= topic %>
+                <%= link_to topic, lists_path(topic: topic), class: 'text-decoration-none link-dark' %>
               </span>
             <% end %>
           </p>
