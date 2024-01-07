@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_02_201648) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_07_163331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_02_201648) do
     t.string "sub_category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_list_projects_on_list_id"
+    t.index ["project_id"], name: "index_list_projects_on_project_id"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -35,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_02_201648) do
     t.text "readme"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["url"], name: "index_lists_on_url", unique: true
   end
 
   create_table "projects", force: :cascade do |t|
@@ -45,6 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_02_201648) do
     t.datetime "last_synced_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["url"], name: "index_projects_on_url", unique: true
   end
 
 end
