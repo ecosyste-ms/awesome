@@ -2,7 +2,7 @@ require 'csv'
 
 class Project < ApplicationRecord
 
-  has_many :list_projects
+  has_many :list_projects, dependent: :destroy
   has_many :lists, through: :list_projects
 
   belongs_to :matching_list, foreign_key: :url, primary_key: :url, optional: true, class_name: 'List'

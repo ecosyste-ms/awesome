@@ -1,7 +1,7 @@
 class List < ApplicationRecord
   validates :url, presence: true
 
-  has_many :list_projects
+  has_many :list_projects, dependent: :destroy
   has_many :projects, through: :list_projects
 
   belongs_to :matching_project, foreign_key: :url, primary_key: :url, optional: true, class_name: 'Project'
