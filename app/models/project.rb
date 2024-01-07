@@ -67,7 +67,7 @@ class Project < ApplicationRecord
 
   def sync_list
     return unless looks_like_list? && matching_list.blank?
-    list = List.find_or_create_by(url: url)
+    list = List.find_or_create_by(url: url.chomp('/'))
     list.sync_async
   end
 
