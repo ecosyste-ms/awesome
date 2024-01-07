@@ -52,11 +52,16 @@ class Project < ApplicationRecord
     url.match?(/awesome/i)
   end
 
+  def on_github?
+    url.match?(/github\.com/i)
+  end
+
   def list?
     matching_list || list_keywords? || awesome_url?
   end
 
   def looks_like_list?
+    return false unless on_github?
     list_keywords? || awesome_url?
   end
 
