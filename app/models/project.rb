@@ -93,7 +93,7 @@ class Project < ApplicationRecord
   end
 
   def sync
-    return if last_synced_at.present?
+    return if last_synced_at.present? && last_synced_at > 1.day.ago
     check_url
     fetch_repository
     fetch_readme
