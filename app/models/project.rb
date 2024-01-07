@@ -124,7 +124,6 @@ class Project < ApplicationRecord
     keywords = []
     keywords += repository["topics"] if repository.present? && repository["topics"].present?
     self.keywords = keywords.uniq.reject(&:blank?)
-    self.save
   end
 
   def ping
