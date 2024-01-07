@@ -97,7 +97,7 @@ class Project < ApplicationRecord
     check_url
     fetch_repository
     fetch_readme
-    update(last_synced_at: Time.now)
+    update_column(:last_synced_at, Time.now)
     sync_list
     ping
   end
