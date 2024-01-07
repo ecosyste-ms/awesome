@@ -68,11 +68,30 @@ class List < ApplicationRecord
   end
 
   def sync
+    check_url
     fetch_repository
     fetch_readme
     update(projects_count: readme_links.length, last_synced_at: Time.now)
     load_projects
     ping
+  end
+
+  def check_url
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.response :follow_redirects
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.get
+    return unless response.success?
+    update!(url: response.env.url.to_s) 
+    # TODO avoid duplicates
+  rescue ActiveRecord::RecordInvalid => e
+    puts "Duplicate url #{url}"
+    puts e.class
+    destroy
+  rescue
+    puts "Error checking url for #{url}"
   end
 
   def repository_url
@@ -227,6 +246,8 @@ class List < ApplicationRecord
       next unless link[:url].present?
       next unless link[:url].start_with?('https://github.com/')
       next if link[:url].include?(list.url)
+      link[:url] = link[:url].chomp('/')
+
       p link
       
       existing = List.find_by(url: link[:url])
@@ -255,12 +276,13 @@ class List < ApplicationRecord
     # TODO pagination
 
     json['repositories'].each do |repo|
-      p repo['html_url']
+      url = repo['html_url'].chomp('/')
+      puts url
 
-      existing = List.find_by(url: repo['html_url'])
+      existing = List.find_by(url: url)
       next if existing.present? && existing.projects_count && existing.projects_count > 0
 
-      l = List.find_or_create_by(url: repo['html_url'])
+      l = List.find_or_create_by(url: url)
       l.save
       l.sync_async
     end
