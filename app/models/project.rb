@@ -91,7 +91,6 @@ class Project < ApplicationRecord
     return if last_synced_at.present?
     check_url
     fetch_repository
-    combine_keywords
     fetch_readme
     update(last_synced_at: Time.now)
     sync_list
@@ -120,12 +119,6 @@ class Project < ApplicationRecord
     destroy
   rescue
     puts "Error checking url for #{url}"
-  end
-
-  def combine_keywords
-    keywords = []
-    keywords += repository["topics"] if repository.present? && repository["topics"].present?
-    self.keywords = keywords.uniq.reject(&:blank?)
   end
 
   def ping
@@ -166,6 +159,7 @@ class Project < ApplicationRecord
     response = conn.get
     return unless response.success?
     self.repository = JSON.parse(response.body)
+    self.keywords = repository["topics"].uniq.reject(&:blank?) if repository.present? && repository["topics"].present?
     self.save
   rescue
     puts "Error fetching repository for #{repository_url}"
