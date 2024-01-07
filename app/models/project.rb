@@ -100,6 +100,8 @@ class Project < ApplicationRecord
     update_column(:last_synced_at, Time.now)
     sync_list
     ping
+  rescue ActiveRecord::ActiveRecordError => e
+    puts "Already deleted #{url}"
   end
 
   def sync_async
