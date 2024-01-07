@@ -103,6 +103,7 @@ class Project < ApplicationRecord
   end
 
   def check_url
+    url.chomp!('/')
     conn = Faraday.new(url: url) do |faraday|
       faraday.response :follow_redirects
       faraday.adapter Faraday.default_adapter
@@ -110,6 +111,7 @@ class Project < ApplicationRecord
 
     response = conn.get
     return unless response.success?
+
     update!(url: response.env.url.to_s) 
     # TODO avoid duplicates
   rescue ActiveRecord::RecordInvalid => e
