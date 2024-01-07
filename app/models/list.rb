@@ -74,6 +74,12 @@ class List < ApplicationRecord
     update(projects_count: readme_links.length, last_synced_at: Time.now)
     load_projects
     ping
+  rescue PG::UniqueViolation => e
+    puts "Duplicate url #{url}"
+    puts e.class
+    destroy
+  rescue
+    puts "Error syncing #{url}"
   end
 
   def check_url
