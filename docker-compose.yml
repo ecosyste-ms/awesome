@@ -12,13 +12,13 @@ services:
       - RAILS_ENV=development
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=development
-      - DATABASE_HOST=database.service.ost.internal
+      - DATABASE_HOST=database.service.awesome.internal
     networks:
       - internal
     depends_on:
-      - database.service.ost.internal
+      - database.service.awesome.internal
 
-  database.service.ost.internal:
+  database.service.awesome.internal:
     image: postgres:14.1-alpine
     volumes:
       - pg_data:/var/lib/postgresql/data
