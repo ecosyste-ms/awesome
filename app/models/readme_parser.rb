@@ -59,9 +59,32 @@ class ReadmeParser
         else
           description = nil
         end
-  
+
         links[current_category][current_sub_category] ||= []
         links[current_category][current_sub_category] << { name: link_text, url: link_url, description: description }
+      elsif line.start_with?('- ') && line.include?('[') && line.include?('](')
+        link_text_start = line.index('[') + 1
+        link_text_end = line.index(']')
+        link_text = line[link_text_start...link_text_end]
+
+        link_url_start = line.index('](') + 2
+        link_url_end = line.index(')', link_url_start)
+        link_url = line[link_url_start...link_url_end]
+
+        if link_url_end && line.index('-', link_url_end)
+          description_start = line.index('-', link_url_end) + 1
+          description = line[description_start..-1].strip
+        else
+          description = nil
+        end
+
+        links['Uncategorized'] ||= {}
+        links['Uncategorized']['Uncategorized'] ||= []
+        links['Uncategorized']['Uncategorized'] << { name: link_text, url: link_url, description: description }
+      
+
+      
+      
       end
     end
   
