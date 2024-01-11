@@ -29,8 +29,21 @@ class List < ApplicationRecord
     List.displayable.pluck(Arel.sql("repository -> 'topics'")).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
+  def self.ignorable_topics
+    ['hacktoberfest']
+  end
+
   def project_topics
-    projects.pluck(Arel.sql("repository -> 'topics'")).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+    projects.pluck(Arel.sql("repository -> 'topics'")).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reject{|k,v| List.ignorable_topics.include?(k) }.reverse
+  end
+
+  def shared_topics
+    project_topics.first(topics.length).to_h.keys & topics
+  end
+
+  def percentage_shared_topics
+    return nil if topics.length == 0
+    (shared_topics.length.to_f / topics.length.to_f * 100).round(2)
   end
 
   def description
