@@ -10,4 +10,13 @@ namespace :lists do
     List.import_lists_from_topic('awesome-list')
     List.import_lists_from_topic('awesome')  
   end
+
+  desc 'output markdown'
+  task :markdown => :environment do
+    List.displayable.order(Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last).all.each do |list|
+      next if list.description.blank?
+      next if list.name.include?('?')
+      puts "- [#{list.name}](#{list.url}) - #{list.description}#{list.description[-1] == '.' ? '' : '.'}"
+    end
+  end
 end
