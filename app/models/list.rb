@@ -54,6 +54,23 @@ class List < ApplicationRecord
     end
   end
 
+  def awesome_description
+    return if description.blank?
+    # add a period if there isn't one
+    d = description.dup
+    # remove whitespace from start and end
+    d.strip!
+    # add a period if there isn't one
+    d = description[-1] == '.' ? description : "#{description}."
+    # start with a capital letter
+    d[0] = d[0].capitalize
+    # Should not repeat "."  or "!" more than once 
+    d.gsub!(/([.!?])\1+/, '\1')
+    # remove extra urls (e.g. http://example.com)
+    d.gsub!(/https?:\/\/\S+/, '')
+    d
+  end
+
   def last_updated_at
     return updated_at unless repository.present?
     return updated_at unless repository['updated_at'].present?

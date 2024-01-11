@@ -16,7 +16,7 @@ namespace :lists do
     List.displayable.order(Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last).all.each do |list|
       next if list.description.blank?
       next if list.name.include?('?')
-      puts "- [#{list.name}](#{list.url}) - #{list.description}#{list.description[-1] == '.' ? '' : '.'}"
+      puts "- [#{list.name}](#{list.url}) - #{list.awesome_description}"
     end
   end
 end
