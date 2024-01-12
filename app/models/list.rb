@@ -68,6 +68,21 @@ class List < ApplicationRecord
     d.gsub!(/([.!?])\1+/, '\1')
     # remove extra urls (e.g. http://example.com)
     d.gsub!(/https?:\/\/\S+/, '')
+    # proper case for "GitHub"
+    d.gsub!(/github/, 'GitHub')
+    # proper case for "JavaScript"
+    d.gsub!(/javascript/, 'JavaScript')
+    # OSX should be macOS
+    d.gsub!(/OS X/, 'macOS')
+    d.gsub!(/Mac OS X/, 'macOS')
+    d.gsub!(/OSX/, 'macOS')
+    d.gsub!(/Mac macOS/, 'macOS')
+    # youtube should be YouTube
+    d.gsub!(/youtube/, 'YouTube')
+    # stackoverflow should be Stack Overflow
+    d.gsub!(/stackoverflow/, 'Stack Overflow')
+    # Nodejs should be Node.js
+    d.gsub!(/Nodejs/, 'Node.js')
     d
   end
 
