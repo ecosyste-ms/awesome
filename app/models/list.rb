@@ -73,6 +73,7 @@ class List < ApplicationRecord
     # proper case for "JavaScript"
     d.gsub!(/javascript/i, 'JavaScript')
     # OSX should be macOS
+    d.gsub!(/MacOS/, 'macOS')
     d.gsub!(/OS X/, 'macOS')
     d.gsub!(/Mac OS X/, 'macOS')
     d.gsub!(/OSX/, 'macOS')
