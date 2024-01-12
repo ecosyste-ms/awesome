@@ -33,7 +33,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :lists
+  resources :lists do
+    collection do
+      get :markdown, defaults: { format: :text }
+    end
+  end
   
   resources :exports, only: [:index], path: 'open-data'
 
