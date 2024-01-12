@@ -83,8 +83,10 @@ class List < ApplicationRecord
     d.gsub!(/stackoverflow/i, 'Stack Overflow')
     # Nodejs should be Node.js
     d.gsub!(/Nodejs/i, 'Node.js')
-    # remove mixed line endings
-    d.gsub!(/\r\n?/, "\n")
+    # remove all new lines
+    d.gsub!(/\n/, ' ')
+    # remove all carriage returns
+    d.gsub!(/\r/, ' ')
     d
   end
 
