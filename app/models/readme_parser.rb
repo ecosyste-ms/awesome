@@ -33,6 +33,7 @@ class ReadmeParser
     current_sub_category = nil
 
     @readme.each_line do |line|
+      line.strip!
       if line.start_with?('## ')
         category = line[3..-1].strip
         if ignored_categories.include?(category)

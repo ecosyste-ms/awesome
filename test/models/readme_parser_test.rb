@@ -42,7 +42,7 @@ class ReadmeParserTest < ActiveSupport::TestCase
   def test_readme_with_no_categories
     readme = <<-README
 - [Link 1](http://example.com/1) - Description 1
-- [Link 2](http://example.com/2) - Description 2
+  - [Link 2](http://example.com/2) - Description 2
     README
     parser = ReadmeParser.new(readme)
     expected_links = {
