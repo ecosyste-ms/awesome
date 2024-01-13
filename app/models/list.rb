@@ -47,7 +47,7 @@ class List < ApplicationRecord
   end
 
   def description
-    if repository.present?
+    if repository.present? && repository['description'].present?
       repository['description']
     elsif read_attribute(:description).present?
       read_attribute(:description)
