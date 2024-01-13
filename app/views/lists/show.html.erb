@@ -33,13 +33,30 @@
       </ul>
     </div>
     <div class='col-md-4'>
+      <% if @list.language_breakdown.any? %>
+        <div class='card mb-3'>
+          <div class="card-header">
+            Programming Languages
+          </div>
+          <div class="list-group list-group-flush">
+            <% @list.language_breakdown.first(10).each do |language, count| %>
+              <% next if language.blank? %>
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if language == params[:language]%>" href="<%= list_path(@list, language: language) %>">
+                <%= language %>
+                <span class="badge bg-primary rounded-pill"><%= number_with_delimiter count%></span>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
       <% if @list.project_topics.any? %>
         <div class='card mb-3'>
           <div class="card-header">
             Keywords
           </div>
           <div class="list-group list-group-flush">
-            <% @list.project_topics.first(100).each do |topic, count| %>
+            <% @list.project_topics.first(50).each do |topic, count| %>
               <% next if topic.blank? %>
               <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if topic == params[:topic]%>" href="<%= list_path(@list, topic: topic) %>">
                 <%= topic %>

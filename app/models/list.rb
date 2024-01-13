@@ -343,4 +343,18 @@ class List < ApplicationRecord
       l.sync_async
     end
   end
+
+  def language_breakdown
+    breakdown = projects.pluck(Arel.sql('repository ->> \'language\'')).reject(&:blank?)
+    breakdown.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+  end
+
+  def primary_language
+    # combine "TypeScript" and "JavaScript" into "JavaScript"
+    breakdown = language_breakdown.map{|k,v| k == 'TypeScript' ? ['JavaScript', v] : [k, v] }
+
+    # return nil unless one language is used by more than 50% of projects
+    return nil unless breakdown.first[1] > projects_count / 2
+    breakdown.first[0]
+  end 
 end
