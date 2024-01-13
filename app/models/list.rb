@@ -317,8 +317,8 @@ class List < ApplicationRecord
     end
   end
 
-  def self.import_lists_from_topic(page: 1, topic: 'awesome-list')
-    url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=1000?page=#{page}"
+  def self.import_lists_from_topic(page: 1, topic: 'awesome-list', per_page: 1000)
+    url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=#{per_page}?page=#{page}"
 
     conn = Faraday.new(url: url) do |faraday|
       faraday.response :follow_redirects
