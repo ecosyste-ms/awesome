@@ -357,7 +357,7 @@ class List < ApplicationRecord
     breakdown = language_breakdown.map{|k,v| k == 'TypeScript' ? ['JavaScript', v] : [k, v] }
 
     # return nil unless one language is used by more than 50% of projects
-    return nil unless breakdown.first[1] > projects_count / 2
+    return nil unless breakdown && breakdown.first && breakdown.first[1] > projects_count / 2
     breakdown.first[0]
   end 
 
