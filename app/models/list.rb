@@ -124,6 +124,8 @@ class List < ApplicationRecord
     check_url
     fetch_repository
     fetch_readme
+    set_primary_language
+    set_list_of_lists
     update(projects_count: readme_links.length, last_synced_at: Time.now)
     load_projects
     ping
@@ -352,20 +354,20 @@ class List < ApplicationRecord
     breakdown.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
-  def primary_language
+  def set_primary_language
     # combine "TypeScript" and "JavaScript" into "JavaScript"
     breakdown = language_breakdown.map{|k,v| k == 'TypeScript' ? ['JavaScript', v] : [k, v] }
 
     # return nil unless one language is used by more than 50% of projects
     return nil unless breakdown && breakdown.first && breakdown.first[1] > projects_count / 2
-    breakdown.first[0]
+    self.primary_language = breakdown.first[0]
   end 
 
-  def list_of_lists?
+  def set_list_of_lists
     # majority of projects are lists
     return false unless projects_count && projects_count > 0
     matching_lists_count = List.where(url: projects.pluck(:url)).count
     
-    matching_lists_count > projects_count / 2
+    self.list_of_lists = matching_lists_count > projects_count / 2
   end
 end

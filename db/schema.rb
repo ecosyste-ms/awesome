@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_07_163331) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_15_204504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_07_163331) do
     t.text "readme"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "primary_language"
+    t.boolean "list_of_lists", default: false
     t.index ["url"], name: "index_lists_on_url", unique: true
   end
 
