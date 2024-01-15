@@ -360,4 +360,12 @@ class List < ApplicationRecord
     return nil unless breakdown.first[1] > projects_count / 2
     breakdown.first[0]
   end 
+
+  def list_of_lists?
+    # majority of projects are lists
+    return false unless projects_count && projects_count > 0
+    matching_lists_count = List.where(url: projects.pluck(:url)).count
+    
+    matching_lists_count > projects_count / 2
+  end
 end
