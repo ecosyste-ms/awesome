@@ -117,7 +117,7 @@
         <li>
           <%= link_to list_project.list, list_path(list_project.list) %> - <%= list_project.name %>
           <% if list_project.description %>
-           - <%= list_project.description %>
+           - <%= list_project.description %> (<%= list_project.category%><%= list_project.sub_category.present? ? " / #{list_project.sub_category}" : '' %>)
           <% end %>    
         </li>
       <% end %>
