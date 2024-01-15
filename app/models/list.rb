@@ -6,10 +6,15 @@ class List < ApplicationRecord
 
   belongs_to :matching_project, foreign_key: :url, primary_key: :url, optional: true, class_name: 'Project'
 
+  scope :active, -> { where("(repository ->> 'archived') = ?", 'false') }
+  scope :archived, -> { where("(repository ->> 'archived') = ?", 'true') }
+  scope :fork, -> { where("(repository ->> 'fork') = ?", 'true') }
+  scope :source, -> { where("(repository ->> 'fork') = ?", 'false') }
+
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
-  scope :displayable, -> { with_readme.where('projects_count >= 30').not_awesome_stars }
+  scope :displayable, -> { source.active.with_readme.where('projects_count >= 30').not_awesome_stars }
   scope :not_awesome_stars, -> { where.not('url LIKE ?', '%awesome-stars%') }
   
   scope :with_primary_language, -> { where.not(primary_language: nil) }
