@@ -4,6 +4,9 @@
     <% if params[:topic] %>
       "<%= params[:topic] %>"
     <% end %>
+    <% if params[:language] %>
+      "<%= params[:language] %>"
+    <% end %>
     Awesome Lists
   </h2>
   <div class="row">
@@ -12,6 +15,22 @@
       <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>  
     </div>
     <div class="col-md-4">
+
+      <div class='card mb-3'>
+        <div class="card-header">
+          Programming Languages
+        </div>
+        <div class="list-group list-group-flush">
+          <% List.with_primary_language.group(:primary_language).count.sort_by{|k,v| -v }.each do |language, count| %>
+            <% next if language.blank? %>
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if language == params[:language]%>" href="<%= lists_path(language: language) %>">
+              <%= language %>
+              <span class="badge bg-primary rounded-pill"><%= number_with_delimiter count%></span>
+            </a>
+          <% end %>
+        </div>
+      </div>
+
       <div class='card mb-3'>
         <div class="card-header">
           Keywords
@@ -26,6 +45,7 @@
           <% end %>
         </div>
       </div>
+
     </div>
   </div>
 </div>

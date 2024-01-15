@@ -6,6 +6,10 @@ class ListsController < ApplicationController
       scope = scope.where('repository ->> \'topics\' ILIKE ?', "%#{params[:topic]}%")
     end
 
+    if params[:language].present?
+      scope = scope.primary_language(params[:language])
+    end
+
     if params[:sort].present? || params[:order].present?
       sort = params[:sort].presence || 'updated_at'
       if params[:order] == 'asc'

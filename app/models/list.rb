@@ -11,8 +11,12 @@ class List < ApplicationRecord
 
   scope :displayable, -> { with_readme.where('projects_count >= 30').not_awesome_stars }
   scope :not_awesome_stars, -> { where.not('url LIKE ?', '%awesome-stars%') }
+  
+  scope :with_primary_language, -> { where.not(primary_language: nil) }
+  scope :list_of_lists, -> { where(list_of_lists: true) }
 
   scope :topic, -> (topic) { where('repository ->> \'topics\' ILIKE ?', "%#{topic}%") }
+  scope :primary_language, -> (language) { where(primary_language: language) }
 
   def self.sync_least_recently_synced
     List.where(last_synced_at: nil).or(List.where("last_synced_at < ?", 1.day.ago)).order('last_synced_at asc nulls first').limit(500).each do |list|
