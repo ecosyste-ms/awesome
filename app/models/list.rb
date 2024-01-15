@@ -12,6 +12,8 @@ class List < ApplicationRecord
   scope :displayable, -> { with_readme.where('projects_count >= 30').not_awesome_stars }
   scope :not_awesome_stars, -> { where.not('url LIKE ?', '%awesome-stars%') }
 
+  scope :topic, -> (topic) { where('repository ->> \'topics\' ILIKE ?', "%#{topic}%") }
+
   def self.sync_least_recently_synced
     List.where(last_synced_at: nil).or(List.where("last_synced_at < ?", 1.day.ago)).order('last_synced_at asc nulls first').limit(500).each do |list|
       list.sync_async
