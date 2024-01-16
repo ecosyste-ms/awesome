@@ -21,7 +21,7 @@
           Programming Languages
         </div>
         <div class="list-group list-group-flush">
-          <% List.with_primary_language.group(:primary_language).count.sort_by{|k,v| -v }.each do |language, count| %>
+          <% List.displayable.with_primary_language.group(:primary_language).count.sort_by{|k,v| -v }.each do |language, count| %>
             <% next if language.blank? %>
             <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if language == params[:language]%>" href="<%= lists_path(language: language) %>">
               <%= language %>
