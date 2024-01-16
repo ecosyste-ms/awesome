@@ -98,6 +98,7 @@ GEM
       language_list (~> 1.2.1)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
+    cld3 (3.6.0)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     counter_culture (3.5.1)
@@ -144,6 +145,7 @@ GEM
     irb (1.11.1)
       rdoc
       reline (>= 0.4.2)
+    iso-639 (0.3.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -345,6 +347,7 @@ DEPENDENCIES
   bootsnap
   bootstrap
   cff
+  cld3
   counter_culture
   debug
   dotenv-rails
@@ -354,6 +357,7 @@ DEPENDENCIES
   faraday-typhoeus
   google-protobuf
   groupdate
+  iso-639
   jbuilder
   jquery-rails
   mocha
