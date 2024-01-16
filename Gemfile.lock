@@ -98,7 +98,7 @@ GEM
       language_list (~> 1.2.1)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
-    concurrent-ruby (1.2.2)
+    concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     counter_culture (3.5.1)
       activerecord (>= 4.2)
