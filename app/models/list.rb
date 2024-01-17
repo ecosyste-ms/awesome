@@ -377,7 +377,7 @@ class List < ApplicationRecord
     return false unless projects_count && projects_count > 0
     matching_lists_count = List.where(url: projects.pluck(:url)).count
     
-    self.list_of_lists = matching_lists_count > projects_count / 2
+    self.list_of_lists = matching_lists_count > projects_count / 2 && matching_lists_count > 100
   end
 
   def find_spoken_language
