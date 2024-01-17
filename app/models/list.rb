@@ -382,6 +382,7 @@ class List < ApplicationRecord
 
   def find_spoken_language
     return unless description.present?
+    return unless description.length > 20
     # remove emojis
     formatted_description = self.description.gsub(/[\u{1F600}-\u{1F6FF}]/, '')
     # remove markdown emoji
