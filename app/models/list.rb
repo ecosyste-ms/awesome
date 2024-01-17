@@ -364,12 +364,13 @@ class List < ApplicationRecord
   end
 
   def set_primary_language
+    return unless primarily_oss_repositories?
     # combine "TypeScript" and "JavaScript" into "JavaScript"
     breakdown = language_breakdown.map{|k,v| k == 'TypeScript' ? ['JavaScript', v] : [k, v] }
 
     # return nil unless one language is used by more than 50% of projects
     # TODO should consider projects_count as projects with a language, not all links
-    return nil unless breakdown && breakdown.first && breakdown.first[1] > projects_with_language_count / 2
+    return nil unless breakdown && breakdown.first && breakdown.first[1] > projects_with_language_count / 2 && breakdown.first[1] > 30
     self.primary_language = breakdown.first[0]
   end 
 
@@ -383,6 +384,13 @@ class List < ApplicationRecord
     matching_lists_count = List.where(url: projects.pluck(:url)).count
     
     self.list_of_lists = matching_lists_count > projects_count / 2 && matching_lists_count > 150
+  end
+
+  def primarily_oss_repositories?
+    return false unless projects_count && projects_count > 0
+    projects_with_repository_count = projects.with_repository.count
+    return false unless projects_with_repository_count > 0
+    projects_with_repository_count > projects_count / 2
   end
 
   def find_spoken_language
