@@ -29,7 +29,8 @@ class ListsController < ApplicationController
   end
 
   def markdown
-    @lists = List.displayable.order(Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last, 'url asc').all.select{|l| l.description.present? && !l.name.include?('?') && !l.topics.include?('starred') }
+    @list_of_lists = List.displayable.where(list_of_lists: true).order(Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last, 'url asc').all.select{|l| l.description.present? && !l.name.include?('?') && !l.topics.include?('starred') }
+    @other_lists = List.displayable.where(list_of_lists: false).order(Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last, 'url asc').all.select{|l| l.description.present? && !l.name.include?('?') && !l.topics.include?('starred') }
     render layout: false, content_type: 'text/plain'
   end
 end
