@@ -7,6 +7,10 @@ Last generated: <%= Time.now.strftime("%Y-%m-%d") %>, <%= @list_of_lists.length 
 
 ## Contents
 - [Lists of Lists](#lists-of-lists)
+- [Programming Language Lists](#programming-language-lists)
+<% @other_lists.map(&:primary_language).uniq.compact.each do |lang| %>
+  - [<%= lang %> Lists](#<%= lang.downcase.gsub(' ','-') %>-lists)
+<% end%>
 - [Other Lists](#other-lists)
 
 ## Lists of Lists
@@ -15,8 +19,16 @@ Last generated: <%= Time.now.strftime("%Y-%m-%d") %>, <%= @list_of_lists.length 
 <%= "- [#{list.name}](#{list.url}) - #{list.awesome_description}" %>
 <% end %>
 
+## Programming Language Lists
+<% @other_lists.map(&:primary_language).uniq.compact.each do |lang| %>
+### <%= lang %> Lists
+<% @other_lists.select{|l| l.primary_language == lang}.each do |list| %>
+<%= "- [#{list.name}](#{list.url}) - #{list.awesome_description}" %>
+<% end%>
+
+<% end%>
 ## Other Lists
 
-<% @other_lists.each do |list| %>
+<% @other_lists.select{|l| l.primary_language.blank?}.each do |list| %>
 <%= "- [#{list.name}](#{list.url}) - #{list.awesome_description}" %>
 <% end %>
