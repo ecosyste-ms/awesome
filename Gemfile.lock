@@ -191,7 +191,7 @@ GEM
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     numerizer (0.1.1)
-    pagy (6.4.2)
+    pagy (6.4.3)
     pg (1.5.4)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
