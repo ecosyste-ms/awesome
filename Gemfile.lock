@@ -93,7 +93,7 @@ GEM
       concurrent-ruby (~> 1.0, >= 1.0.5)
       redis (>= 1.0, < 6)
     builder (3.2.4)
-    cff (1.1.0)
+    cff (1.2.0)
       json_schema (~> 0.20.4)
       language_list (~> 1.2.1)
     chronic_duration (0.10.6)
