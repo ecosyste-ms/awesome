@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_15_204504) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_24_164515) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "plpgsql"
 
   create_table "list_projects", force: :cascade do |t|
@@ -28,7 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_15_204504) do
   end
 
   create_table "lists", force: :cascade do |t|
-    t.string "url"
+    t.citext "url"
     t.string "name"
     t.string "description"
     t.integer "projects_count"
