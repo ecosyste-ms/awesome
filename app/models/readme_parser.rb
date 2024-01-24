@@ -62,7 +62,7 @@ class ReadmeParser
         end
 
         links[current_category][current_sub_category] ||= []
-        links[current_category][current_sub_category] << { name: link_text, url: link_url, description: description }
+        links[current_category][current_sub_category] << { name: link_text.strip, url: link_url.strip, description: description.strip }
       elsif line.start_with?('- ') && line.include?('[') && line.include?('](')
         link_text_start = line.index('[') + 1
         link_text_end = line.index(']')
@@ -81,7 +81,7 @@ class ReadmeParser
 
         links['Uncategorized'] ||= {}
         links['Uncategorized']['Uncategorized'] ||= []
-        links['Uncategorized']['Uncategorized'] << { name: link_text, url: link_url, description: description }
+        links['Uncategorized']['Uncategorized'] << { name: link_text.strip, url: link_url.strip, description: description.strip }
       
 
       
