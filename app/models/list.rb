@@ -1,5 +1,5 @@
 class List < ApplicationRecord
-  validates :url, presence: true
+  validates :url, presence: true, format: { without: /\A.*\/\z/, message: "should not end with a slash" }
 
   has_many :list_projects, dependent: :destroy
   has_many :projects, through: :list_projects
