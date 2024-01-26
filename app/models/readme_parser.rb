@@ -35,7 +35,7 @@ class ReadmeParser
     @readme.each_line do |line|
       line.strip!
       if line.start_with?('## ')
-        category = line[3..-1].strip
+        category = line[3..-1].try(:strip)
         if ignored_categories.include?(category)
           current_category = nil
         else
@@ -43,7 +43,7 @@ class ReadmeParser
           links[current_category] ||= {}
         end
       elsif current_category && line.start_with?('### ')
-        current_sub_category = line[4..-1].strip
+        current_sub_category = line[4..-1].try(:strip)
         links[current_category][current_sub_category] ||= []
       elsif current_category && line.include?('[') && line.include?('](')
         link_text_start = line.index('[') + 1
@@ -56,13 +56,13 @@ class ReadmeParser
   
         if link_url_end && line.index('-', link_url_end)
           description_start = line.index('-', link_url_end) + 1
-          description = line[description_start..-1].strip
+          description = line[description_start..-1].try(:strip)
         else
           description = nil
         end
 
         links[current_category][current_sub_category] ||= []
-        links[current_category][current_sub_category] << { name: link_text.strip, url: link_url.strip, description: description.strip }
+        links[current_category][current_sub_category] << { name: link_text.try(:strip), url: link_url.try(:strip), description: description.try(:strip) }
       elsif line.start_with?('- ') && line.include?('[') && line.include?('](')
         link_text_start = line.index('[') + 1
         link_text_end = line.index(']')
@@ -74,14 +74,14 @@ class ReadmeParser
 
         if link_url_end && line.index('-', link_url_end)
           description_start = line.index('-', link_url_end) + 1
-          description = line[description_start..-1].strip
+          description = line[description_start..-1].try(:strip)
         else
           description = nil
         end
 
         links['Uncategorized'] ||= {}
         links['Uncategorized']['Uncategorized'] ||= []
-        links['Uncategorized']['Uncategorized'] << { name: link_text.strip, url: link_url.strip, description: description.strip }
+        links['Uncategorized']['Uncategorized'] << { name: link_text.try(:strip), url: link_url.try(:strip), description: description.try(:strip) }
       
 
       
