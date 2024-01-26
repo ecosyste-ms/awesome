@@ -11,6 +11,10 @@ class List < ApplicationRecord
   scope :fork, -> { where("(repository ->> 'fork') = ?", 'true') }
   scope :source, -> { where("(repository ->> 'fork') = ?", 'false') }
 
+  scope :template, -> { where("(repository ->> 'template') = ?", 'true') }
+  scope :not_from_template, -> { where("length(repository ->> 'template_full_name') = 0") }
+  scope :from_template, -> { where("length(repository ->> 'template_full_name') > 0") }
+
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
@@ -35,6 +39,26 @@ class List < ApplicationRecord
 
   def name
     url.split('/').last
+  end
+
+  def displayable?
+    !fork? && !archived? && has_many_projects? && not_awesome_stars?
+  end
+
+  def fork?
+    repository.present? && repository['fork'] == true
+  end
+
+  def archived?
+    repository.present? && repository['archived'] == true
+  end
+
+  def has_many_projects?
+    projects_count && projects_count > 29
+  end
+
+  def not_awesome_stars?
+    !url.include?('awesome-stars')
   end
 
   def self.topics
