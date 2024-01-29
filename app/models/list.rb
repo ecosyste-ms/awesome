@@ -275,18 +275,20 @@ class List < ApplicationRecord
   end
 
   def fetch_readme
-    return unless readme_file_name.present?
-    return unless download_url.present?
-    conn = Faraday.new(url: archive_url(readme_file_name)) do |faraday|
-      faraday.response :follow_redirects
-      faraday.adapter Faraday.default_adapter
-    end
-    response = conn.get
-    return unless response.success?
-    json = JSON.parse(response.body)
+    if readme_file_name.blank? || download_url.blank?
+      fetch_readme_fallback
+    else
+      conn = Faraday.new(url: archive_url(readme_file_name)) do |faraday|
+        faraday.response :follow_redirects
+        faraday.adapter Faraday.default_adapter
+      end
+      response = conn.get
+      return unless response.success?
+      json = JSON.parse(response.body)
 
-    self.readme = json['contents']
-    self.save
+      self.readme = json['contents']
+      self.save
+    end
   rescue
     puts "Error fetching readme for #{repository_url}"
     fetch_readme_fallback
