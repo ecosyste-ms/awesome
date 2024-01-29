@@ -289,6 +289,22 @@ class List < ApplicationRecord
     self.save
   rescue
     puts "Error fetching readme for #{repository_url}"
+    fetch_readme_fallback
+  end
+
+  def fetch_readme_fallback
+    file_name = readme_file_name.presence || 'README.md'
+    conn = Faraday.new(url: raw_url(file_name)) do |faraday|
+      faraday.response :follow_redirects
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.get
+    return unless response.success?
+    self.readme = response.body
+    self.save
+  rescue
+    puts "Error fetching readme for #{repository_url}"
   end
 
   def readme_url
