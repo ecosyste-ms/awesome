@@ -48,7 +48,7 @@ class List < ApplicationRecord
   end
 
   def is_displayable?
-    !fork? && !archived? && has_many_projects? && not_awesome_stars?
+    !fork? && !archived? && has_many_projects? && not_awesome_stars? && description.present? && !name.include?('?') && !topics.include?('starred')
   end
 
   def fork?
