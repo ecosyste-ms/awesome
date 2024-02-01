@@ -18,7 +18,7 @@ class List < ApplicationRecord
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
-  scope :displayable, -> { source.active.with_readme.where('projects_count >= 30').not_awesome_stars }
+  scope :displayable, -> { where(displayable: true) }
   scope :not_awesome_stars, -> { where.not('url LIKE ?', '%awesome-stars%') }
   
   scope :with_primary_language, -> { where.not(primary_language: nil) }
@@ -26,6 +26,8 @@ class List < ApplicationRecord
 
   scope :topic, -> (topic) { where('repository ->> \'topics\' ILIKE ?', "%#{topic}%") }
   scope :primary_language, -> (language) { where(primary_language: language) }
+
+  before_save :set_displayable
 
   def self.sync_least_recently_synced
     List.where(last_synced_at: nil).or(List.where("last_synced_at < ?", 1.day.ago)).order('last_synced_at asc nulls first').limit(500).each do |list|
@@ -41,7 +43,11 @@ class List < ApplicationRecord
     url.split('/').last
   end
 
-  def displayable?
+  def set_displayable
+    self.displayable = is_displayable?
+  end
+
+  def is_displayable?
     !fork? && !archived? && has_many_projects? && not_awesome_stars?
   end
 
