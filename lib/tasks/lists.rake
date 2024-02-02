@@ -7,8 +7,8 @@ namespace :lists do
   desc 'discover lists'
   task :discover => :environment do
     List.import_lists_from_sindresorhus
-    List.import_lists_from_topic('awesome-list')
-    List.import_lists_from_topic('awesome')  
+    List.import_lists_from_topic(topic: 'awesome-list')
+    List.import_lists_from_topic(topic: 'awesome')  
   end
 
   desc 'output markdown'
