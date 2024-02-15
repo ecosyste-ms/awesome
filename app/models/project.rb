@@ -305,6 +305,10 @@ class Project < ApplicationRecord
         "https://otechie.com/#{v}"
       when "patreon"
         "https://patreon.com/#{v}"
+      when "polar"
+        "https://polar.sh/#{v}"
+      else
+        v
       end
     end.flatten.compact
   end
@@ -322,7 +326,7 @@ class Project < ApplicationRecord
 
   def funding_domains
     ['opencollective.com', 'ko-fi.com', 'liberapay.com', 'patreon.com', 'otechie.com', 'issuehunt.io', 
-    'communitybridge.org', 'tidelift.com', 'buymeacoffee.com', 'paypal.com', 'paypal.me','givebutter.com']
+    'communitybridge.org', 'tidelift.com', 'buymeacoffee.com', 'paypal.com', 'paypal.me','givebutter.com', 'polar.sh']
   end
 
   def readme_funding_links
