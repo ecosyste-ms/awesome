@@ -253,7 +253,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.1.0)
-    rb_sys (0.9.88)
+    rb_sys (0.9.89)
     rdoc (6.6.2)
       psych (>= 4.0.0)
     redis-client (0.20.0)
