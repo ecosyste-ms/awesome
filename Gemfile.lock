@@ -77,7 +77,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    appsignal (3.6.0)
+    appsignal (3.6.1)
       rack
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
@@ -191,7 +191,7 @@ GEM
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     numerizer (0.1.1)
-    pagy (7.0.8)
+    pagy (7.0.9)
     pg (1.5.6)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
@@ -209,7 +209,7 @@ GEM
       rack (>= 1.0, < 4)
     rack-attack-rate-limit (1.1.0)
       rack
-    rack-cors (2.0.1)
+    rack-cors (2.0.2)
       rack (>= 2.0.0)
     rack-session (2.0.0)
       rack (>= 3.0.0)
@@ -255,7 +255,7 @@ GEM
     rb_sys (0.9.90)
     rdoc (6.6.2)
       psych (>= 4.0.0)
-    redis-client (0.20.0)
+    redis-client (0.21.0)
       connection_pool
     reline (0.4.3)
       io-console (~> 0.5)
