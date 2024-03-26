@@ -77,7 +77,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    appsignal (3.6.3)
+    appsignal (3.6.4)
       rack
     autoprefixer-rails (10.4.16.0)
       execjs (~> 2)
@@ -261,7 +261,7 @@ GEM
       psych (>= 4.0.0)
     redis-client (0.21.1)
       connection_pool
-    reline (0.4.3)
+    reline (0.5.0)
       io-console (~> 0.5)
     rexml (3.2.6)
     rswag-api (2.13.0)
