@@ -170,7 +170,7 @@ GEM
     marcel (1.0.4)
     mini_mime (1.1.5)
     minitest (5.22.3)
-    mocha (2.1.0)
+    mocha (2.2.0)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.7.2)
     mutex_m (0.2.0)
@@ -186,16 +186,16 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.1)
-    nokogiri (1.16.3-aarch64-linux)
+    nokogiri (1.16.4-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.16.3-arm-linux)
+    nokogiri (1.16.4-arm-linux)
       racc (~> 1.4)
-    nokogiri (1.16.3-arm64-darwin)
+    nokogiri (1.16.4-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.3-x86_64-linux)
+    nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     numerizer (0.1.1)
-    pagy (8.0.2)
+    pagy (8.1.2)
     pg (1.5.6)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
@@ -256,12 +256,12 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.2.1)
-    rb_sys (0.9.91)
+    rb_sys (0.9.94)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
     redis-client (0.21.1)
       connection_pool
-    reline (0.5.0)
+    reline (0.5.1)
       io-console (~> 0.5)
     rexml (3.2.6)
     rswag-api (2.13.0)
@@ -392,4 +392,4 @@ RUBY VERSION
    ruby 3.3.0p0
 
 BUNDLED WITH
-   2.5.7
+   2.5.8
