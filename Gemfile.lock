@@ -150,7 +150,7 @@ GEM
       rdoc
       reline (>= 0.4.2)
     iso-639 (0.3.6)
-    jbuilder (2.11.5)
+    jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jquery-rails (4.6.0)
