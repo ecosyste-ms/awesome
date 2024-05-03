@@ -109,9 +109,9 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
-    dotenv (3.1.0)
-    dotenv-rails (3.1.0)
-      dotenv (= 3.1.0)
+    dotenv (3.1.1)
+    dotenv-rails (3.1.1)
+      dotenv (= 3.1.1)
       railties (>= 6.1)
     drb (2.2.1)
     erubi (1.12.0)
@@ -146,8 +146,8 @@ GEM
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
-    irb (1.12.0)
-      rdoc
+    irb (1.13.0)
+      rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     iso-639 (0.3.6)
     jbuilder (2.12.0)
@@ -261,7 +261,7 @@ GEM
       psych (>= 4.0.0)
     redis-client (0.22.1)
       connection_pool
-    reline (0.5.4)
+    reline (0.5.5)
       io-console (~> 0.5)
     rexml (3.2.6)
     rswag-api (2.13.0)
@@ -392,4 +392,4 @@ RUBY VERSION
    ruby 3.3.0p0
 
 BUNDLED WITH
-   2.5.9
+   2.5.10
