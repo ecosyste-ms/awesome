@@ -129,7 +129,11 @@ GEM
     faraday-typhoeus (1.1.0)
       faraday (~> 2.0)
       typhoeus (~> 1.4)
-    ffi (1.16.3)
+    ffi (1.17.0-aarch64-linux-musl)
+    ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
     google-protobuf (4.27.0)
@@ -180,7 +184,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
-    net-imap (0.4.11)
+    net-imap (0.4.12)
       date
       net-protocol
     net-pop (0.1.2)
@@ -199,7 +203,7 @@ GEM
     nokogiri (1.16.5-x86_64-linux)
       racc (~> 1.4)
     numerizer (0.1.1)
-    pagy (8.4.0)
+    pagy (8.4.1)
     pg (1.5.6)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
