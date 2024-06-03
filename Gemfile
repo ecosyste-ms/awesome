@@ -38,6 +38,7 @@ gem 'tokenizers'
 gem 'appsignal'
 gem 'cld3'
 gem 'iso-639'
+gem 'csv'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

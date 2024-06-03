@@ -105,6 +105,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -360,6 +361,7 @@ DEPENDENCIES
   cff
   cld3
   counter_culture
+  csv
   debug
   dotenv-rails
   faraday
