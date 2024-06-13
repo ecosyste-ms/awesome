@@ -270,7 +270,7 @@ GEM
       psych (>= 4.0.0)
     redis-client (0.22.2)
       connection_pool
-    reline (0.5.8)
+    reline (0.5.9)
       io-console (~> 0.5)
     rexml (3.3.0)
       strscan
