@@ -215,8 +215,8 @@ GEM
     pg (1.5.6)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
-    pghero (3.5.0)
-      activerecord (>= 6)
+    pghero (3.6.0)
+      activerecord (>= 6.1)
     popper_js (2.11.8)
     psych (5.1.2)
       stringio
