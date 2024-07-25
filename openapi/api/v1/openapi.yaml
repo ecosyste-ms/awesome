@@ -305,5 +305,14 @@ components:
           type: boolean
         displayable:
           type: boolean
+        categories:
+          type: array
+          items:
+            type: string
+        sub_categories:
+          type: array
+          items:
+            type: string
         projects_url:
           type: string
+        

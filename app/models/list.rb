@@ -457,4 +457,12 @@ class List < ApplicationRecord
     lang = cld3.find_language(formatted_description)
     ISO_639.find_by_code(lang.language.to_s).try(:[],3).try(:split, ';').try(:first) if lang.probability > 0.99
   end
+
+  def categories
+    list_projects.pluck(:category).uniq.compact
+  end
+
+  def sub_categories
+    list_projects.pluck(:sub_category).uniq.compact
+  end
 end
