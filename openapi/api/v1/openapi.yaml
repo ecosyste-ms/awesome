@@ -64,6 +64,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
+  /projects/{id}/lists:
+    get:
+      description: get lists of a project
+      operationId: getProjectLists
+      tags:
+        - projects
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: id of the project
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/List'
   /projects/lookup:
     get:
       description: lookup project by url
@@ -99,6 +121,96 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Project'
+  /lists:
+    get:
+      description: get lists
+      operationId: getLists
+      tags:
+        - lists
+      parameters:
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/List'
+  /lists/{id}:
+    get:
+      description: get a list by id
+      operationId: getList
+      tags:
+        - lists
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: id of the list
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+  /lists/{id}/projects:
+    get:
+      description: get projects of a list
+      operationId: getListProjects
+      tags:
+        - lists
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: id of the list
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /lists/lookup:
+    get:
+      description: lookup list by url
+      operationId: lookupList
+      tags:
+        - lists
+      parameters:
+        - name: url
+          in: query
+          description: url of the list
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/List'
 components:
   schemas:
     Project:
@@ -161,4 +273,37 @@ components:
             type: string
         works:
           type: object
-    
+    List:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        projects_count:
+          type: integer
+        last_synced_at:
+          type: string
+          format: date-time
+        repository:
+          type: object
+        readme:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        primary_language:
+          type: string
+        list_of_lists:
+          type: boolean
+        displayable:
+          type: boolean
+        projects_url:
+          type: string

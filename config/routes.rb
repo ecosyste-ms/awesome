@@ -16,7 +16,14 @@ Rails.application.routes.draw do
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do
       resources :jobs
+      resources :lists, constraints: { id: /.*/ }, only: [:index, :show] do
+        resources :projects, constraints: { id: /.*/ }, only: [:index]
+        collection do
+          get :lookup
+        end
+      end
       resources :projects, constraints: { id: /.*/ }, only: [:index, :show] do
+        resources :lists, constraints: { id: /.*/ }, only: [:index]
         collection do
           get :lookup
         end
