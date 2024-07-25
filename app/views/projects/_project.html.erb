@@ -28,7 +28,9 @@
         <% end %>
       </div>
       <div class="flex-shrink-0">
-        <img src="<%= project.avatar_url %>" class="rounded" height='40' width='40' onerror="this.style.display='none'">
+        <a href='<%= projects_path(owner: project.owner_name) %>'>
+          <img src="<%= project.avatar_url %>" class="rounded" height='40' width='40' onerror="this.style.display='none'">
+        </a>
       </div>  
     </div>
   </div>
