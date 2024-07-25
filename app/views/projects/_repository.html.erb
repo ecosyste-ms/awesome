@@ -102,6 +102,7 @@
     <h3>Lists</h3>
     <ul>
       <% @project.list_projects.includes(:list).each do |list_project| %>
+        <% next unless list_project.list.is_displayable? %>
         <li>
           <%= link_to list_project.list, list_path(list_project.list) %> - <%= list_project.name %>
           <% if list_project.description %>
