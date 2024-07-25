@@ -27,6 +27,8 @@ class List < ApplicationRecord
   scope :topic, -> (topic) { where('repository ->> \'topics\' ILIKE ?', "%#{topic}%") }
   scope :primary_language, -> (language) { where(primary_language: language) }
 
+  scope :search, -> (query) { where('url ILIKE ? OR repository ->> \'description\' ILIKE ?', "%#{query}%", "%#{query}%") }
+
   before_save :set_displayable
 
   def self.sync_least_recently_synced

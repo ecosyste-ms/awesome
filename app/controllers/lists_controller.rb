@@ -10,6 +10,10 @@ class ListsController < ApplicationController
       scope = scope.primary_language(params[:language])
     end
 
+    if params[:query].present?
+      scope = scope.search(params[:query])
+    end
+
     if params[:sort].present? || params[:order].present?
       sort = params[:sort].presence || 'updated_at'
       if params[:order] == 'asc'

@@ -7,6 +7,9 @@
     <% if params[:language] %>
       "<%= params[:language] %>"
     <% end %>
+    <% if params[:query] %>
+      "<%= params[:query] %>"
+    <% end %>
     Awesome Lists
   </h2>
   <div class="row">
@@ -16,17 +19,16 @@
     </div>
     <div class="col-md-4">
 
-      <div class='card mb-3'>
+      <div class="card mb-3">
         <div class="card-header">
-          Programming Languages
+          Search
         </div>
-        <div class="list-group list-group-flush">
-          <% List.displayable.with_primary_language.group(:primary_language).count.sort_by{|k,v| -v }.each do |language, count| %>
-            <% next if language.blank? %>
-            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if language == params[:language]%>" href="<%= lists_path(language: language) %>">
-              <%= language %>
-              <span class="badge bg-primary rounded-pill"><%= number_with_delimiter count%></span>
-            </a>
+        <div class="card-body">
+          <%= form_with(url: lists_path, method: :get, local: true) do |form| %>
+            <div class="input-group">
+              <%= form.text_field :query, class: "form-control", placeholder: "Search..." %>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
           <% end %>
         </div>
       </div>
