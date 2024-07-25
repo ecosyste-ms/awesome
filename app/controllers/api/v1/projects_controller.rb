@@ -1,6 +1,12 @@
 class Api::V1::ProjectsController < Api::V1::ApplicationController
   def index
-    @projects = Project.all.where.not(last_synced_at: nil)
+    if params[:list_id].present?
+      @list = List.find(params[:list_id])
+      @projects = @list.projects.where.not(last_synced_at: nil)
+    else
+      @projects = Project.all.where.not(last_synced_at: nil)
+    end
+    
     @pagy, @projects = pagy(@projects)
   end
 
