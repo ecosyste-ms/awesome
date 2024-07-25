@@ -1,8 +1,21 @@
+<% @meta_title = "Projects in Awesome Lists #{'tagged with '+params[:keyword] if params[:keyword].present?} #{'by '+params[:owner] if params[:owner].present?}" %>
+
 <div class="container-md">
 
     <ul class="nav nav-tabs my-3">
       <li class="nav-item">
-        <h2>Accepted Projects</h2>
+        <h2>
+          Projects in Awesome Lists
+          <% if params[:keyword].present? %>
+            tagged with <%= params[:keyword] %>
+          <% end %>
+          <% if params[:owner].present? %>
+            by <%= params[:owner] %>
+          <% end %>
+          <% if params[:language].present? %>
+            in <%= params[:language] %>
+          <% end %>
+        </h2>
       </li>
       <li class="nav-item ms-auto">
         <div class="dropdown">
