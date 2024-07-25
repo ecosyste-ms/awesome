@@ -124,7 +124,7 @@ GEM
       logger
     faraday-follow_redirects (0.3.0)
       faraday (>= 1, < 3)
-    faraday-net_http (3.1.0)
+    faraday-net_http (3.1.1)
       net-http
     faraday-retry (2.2.1)
       faraday (~> 2.0)
