@@ -527,7 +527,7 @@ class List < ApplicationRecord
     csv
   end
 
-  def self.topics
+  def self.github_topics
     url = 'https://explore-feed.github.com/feed.json'
     conn = Faraday.new(url: url) do |faraday|
       faraday.response :follow_redirects
