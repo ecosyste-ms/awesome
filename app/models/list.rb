@@ -464,8 +464,16 @@ class List < ApplicationRecord
     list_projects.pluck(:category).uniq.compact
   end
 
+  def category_counts
+    list_projects.group(:category).count.sort_by{|k,v| v}.reverse
+  end
+
   def sub_categories
     list_projects.pluck(:sub_category).uniq.compact
+  end
+
+  def sub_category_counts
+    list_projects.group(:sub_category).count.sort_by{|k,v| v}.reverse
   end
 
   IGNORED_CATEGORIES = ['license', 'other', 'miscellaneous', 'misc', 'related', "other awesome lists", "related lists", 'contributing',
