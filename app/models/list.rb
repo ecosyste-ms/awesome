@@ -467,4 +467,62 @@ class List < ApplicationRecord
   def sub_categories
     list_projects.pluck(:sub_category).uniq.compact
   end
+
+  IGNORED_CATEGORIES = ['license', 'other', 'miscellaneous', 'misc', 'related', "other awesome lists", "related lists", 'contributing',
+                        'footnotes', "table of contents", 'others']
+
+  def self.categories
+    List.displayable
+      .map(&:categories)
+      .flatten
+      .compact
+      .map(&:downcase)
+      .reject { |category| IGNORED_CATEGORIES.include?(category) }
+      .group_by(&:itself)
+      .transform_values(&:count)
+      .sort_by { |_, v| v }
+      .reverse
+  end
+
+  def self.sub_categories
+    List.displayable
+      .map(&:sub_categories)
+      .flatten
+      .compact
+      .map(&:downcase)
+      .reject { |category| IGNORED_CATEGORIES.include?(category) }
+      .group_by(&:itself)
+      .transform_values(&:count)
+      .sort_by { |_, v| v }
+      .reverse
+  end  
+
+  def self.combined_categories
+    categories = List.categories.to_h
+    sub_categories = List.sub_categories.to_h
+
+    combined = categories.merge(sub_categories) do |key, oldval, newval|
+      oldval + newval
+    end
+  end
+
+  def self.count_category_usage(category)
+    ListProject.where('category ILIKE ? OR sub_category ILIKE ?', category, category).count
+  end
+
+  def self.category_summary
+    combined_categories.first(100).map do |category, count|
+      { category: category, count: count, usage: count_category_usage(category) }
+    end
+  end
+
+  def self.category_summary_csv
+    csv = CSV.generate do |csv|
+      csv << ['Category', 'Count', 'Usage']
+      category_summary.each do |category|
+        csv << [category[:category], category[:count], category[:usage]]
+      end
+    end
+    csv
+  end
 end
