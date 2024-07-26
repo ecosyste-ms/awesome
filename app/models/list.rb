@@ -526,4 +526,38 @@ class List < ApplicationRecord
     end
     csv
   end
+
+  def self.topics
+    url = 'https://explore-feed.github.com/feed.json'
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.response :follow_redirects
+      faraday.adapter Faraday.default_adapter
+    end
+
+    response = conn.get
+    return unless response.success?
+    json = JSON.parse(response.body)
+    json['topics'].map! do |topic|
+      sleep 1
+      url = topic['url']
+      puts "fetching #{url}"
+      resp = conn.get(url)
+      next unless resp.success?
+      html = Nokogiri::HTML(resp.body)
+      selector = '.h3.color-fg-muted'
+      text = html.css(selector).text
+
+      count = text.match(/(\d{1,3}(?:,\d{3})*|\d+)/).to_s.gsub(',', '').to_i
+
+      topic['count'] = count
+      topic
+    end
+
+    csv = CSV.generate do |csv|
+      csv << ['Topic', 'Display Name', 'Short Description', 'URL', 'Count', 'Created By', 'logo', 'released', 'wikipedial url', 'related topics', 'aliases']
+      json['topics'].each do |topic|
+        csv << [topic['topic_name'], topic['display_name'], topic['short_description'], topic['url'], topic['count'], topic['created_by'], topic['logo'], topic['released'], topic['wikipedia_url'], topic['related'].join(','), topic['aliases'].join(',')]
+      end
+    end
+  end
 end
