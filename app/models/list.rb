@@ -469,7 +469,8 @@ class List < ApplicationRecord
   end
 
   IGNORED_CATEGORIES = ['license', 'other', 'miscellaneous', 'misc', 'related', "other awesome lists", "related lists", 'contributing',
-                        'footnotes', "table of contents", 'others']
+                        'footnotes', "table of contents", 'others', 'uncategorized', 'projects', 'software', 'other lists', 'general',
+                        'official resources', 'other resources']
 
   def self.categories
     List.displayable
