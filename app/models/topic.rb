@@ -18,7 +18,7 @@ class Topic < ApplicationRecord
                              Elm Erlang OCaml Lisp Groovy Nim F# Crystal Fortran ClojureScript Haxe
                              Dart Julia MATLAB Razor SQL VBScript COBOL Solidity SAS Markdown Lua Lean
                              Tcl Logo Smalltalk Ada ActionScript PostScript Racket ECMAScript Less Emacs VBA TeX Sass] +
-                             ['Visual Basic', 'Common Lisp', 'The Julia Language', 'Clojure', 'PureScript']
+                             ['Visual Basic', 'Common Lisp', 'The Julia Language', 'Clojure', 'PureScript', 'Squeak/Smalltalk']
 
   EXCLUDED_TOPICS = ['iOS', 'Command-line interface', 'JSON', 'Database', 'Artificial Intelligence', 'Bot',
                      'Game Development', 'macOS', 'npm', 'dotfiles', 'Authentication', 'Chat Bot', 'COVID-19',
@@ -26,7 +26,8 @@ class Topic < ApplicationRecord
                     'DevOps', 'Cryptography', 'Material Design', 'SVG', 'OAuth 2.0', 'RSS', 'Remote Procedure Call (RPC)',
                     'Quantum Computing', 'Malware', 'Firefox extension', 'pip', 'Pixel Art', 'friendly interactive shell',
                     'Jamstack', 'Oracle Database', 'Node.js', 'Git', 'Apache Cassandra', 'Steganography', 'Simple DirectMedia Layer',
-                    'Climate change', 'Mazes', 'eBPF', 'UEFI', 'FIRST', 'Batch file', 'Creative Commons License']
+                    'Climate change', 'Mazes', 'eBPF', 'UEFI', 'FIRST', 'Batch file', 'Creative Commons License',
+                    'Open Access', 'Christianity', 'Finite Element Method (FEM)', 'The Gene Ontology Consortium']
   EXCLUDED_COMPANIES = ['GitHub', 'Amazon Web Services', 'Discord', 'Azure', 'Heroku', 'Telegram', 'Android Studio',
                          'Twitter', 'Linux', 'Debian', 'Instagram', 'Slack', 'Docker','Netlify', 'Ubuntu',
                       'Facebook', 'Microsoft', 'Apple', 'Firefox', 'Twitch', 'Reddit', 'Cloudflare', 'HackerRank',
@@ -34,9 +35,10 @@ class Topic < ApplicationRecord
                       'Visual Studio Code', 'sql-server', 'Postman', 'Visual Studio', 'Coursera', 'Homebrew', 'Netflix',
                     'Unreal Engine', 'Sublime Text', 'Azure DevOps', 'Ansible', 'Maven', 'Notion',
                     'Nvidia', 'BigQuery', 'Binance', 'Fedora','Android', '.NET', 'TikTok', 'Edge', 'Stack Overflow', 'tvOS',
-                    'EPITECH', 'CodeChef', 'Medium', 'Algolia', 'Mozilla', 'MyAnimeList', 'ITMO', 'DuckDuckGo', 'Apple Music']
+                    'EPITECH', 'CodeChef', 'Medium', 'Algolia', 'Mozilla', 'MyAnimeList', 'ITMO', 'DuckDuckGo', 'Apple Music',
+                  'Blogger']
   EXCLUDED_GAMES = ['Minecraft', 'Minecraft Mod', 'Minecraft Server', 'League of Legends', "Garry's Mod", 'VALORANT',
-                    'Geometry Dash', 'Elite Dangerous', 'Guild Wars 2', 'Space Station 13', 'Riot Games' ]
+                    'Geometry Dash', 'Elite Dangerous', 'Guild Wars 2', 'Space Station 13', 'Riot Games', 'FlightGear' ]
 
   def to_param
     slug
