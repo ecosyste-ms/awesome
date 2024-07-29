@@ -31,12 +31,8 @@
             <%= number_with_delimiter topic.github_count %> repositories <br/>
           </small></i>
         </p>
-        <p class="card-subtitle mb-2 text-muted"><i><small>
-          Last updated: <%= topic.updated_at.strftime("%d %b %Y") %>
-        </small></i></p>
       </div>
       <div class="flex-shrink-0">
-        <%# todo avatar url %>
         <img src="<%= topic.logo_url %>" class="rounded" height='40' width='40' onerror="this.style.display='none'">
       </div>  
     </div>
