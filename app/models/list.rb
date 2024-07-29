@@ -562,9 +562,9 @@ class List < ApplicationRecord
     end
 
     csv = CSV.generate do |csv|
-      csv << ['Topic', 'Display Name', 'Short Description', 'URL', 'Count', 'Created By', 'logo', 'released', 'wikipedial url', 'related topics', 'aliases']
+      csv << ['Topic', 'Display Name', 'Short Description', 'URL', 'Count', 'Created By', 'logo', 'released', 'wikipedial url', 'related topics', 'aliases', 'github_url']
       json['topics'].each do |topic|
-        csv << [topic['topic_name'], topic['display_name'], topic['short_description'], topic['url'], topic['count'], topic['created_by'], topic['logo'], topic['released'], topic['wikipedia_url'], topic['related'].join(','), topic['aliases'].join(',')]
+        csv << [topic['topic_name'], topic['display_name'], topic['short_description'], topic['url'], topic['count'], topic['created_by'], topic['logo'], topic['released'], topic['wikipedia_url'], topic['related'].join(','), topic['aliases'].join(','), topic['github_url']]
       end
     end
   end
