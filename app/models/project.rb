@@ -7,7 +7,7 @@ class Project < ApplicationRecord
 
   belongs_to :matching_list, foreign_key: :url, primary_key: :url, optional: true, class_name: 'List'
 
-  validates :url, presence: true, uniqueness: { case_sensitive: false }
+  validates :url, presence: true, uniqueness: true
 
   scope :active, -> { where("(repository ->> 'archived') = ?", 'false') }
   scope :archived, -> { where("(repository ->> 'archived') = ?", 'true') }
