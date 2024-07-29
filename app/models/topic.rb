@@ -5,6 +5,39 @@ class Topic < ApplicationRecord
   scope :with_logo, -> { where.not(logo_url: nil) }
   scope :with_wikipedia, -> { where.not(wikipedia_url: nil) }
 
+  scope :without_wikipedia, -> { where(wikipedia_url: nil) }
+
+  scope :not_language, -> { where.not(name: PROGRAMMING_LANGUAGES) }
+
+  scope :other_excluded, -> { where.not(name: (EXCLUDED_TOPICS + EXCLUDED_COMPANIES + EXCLUDED_GAMES)) }
+
+  scope :not_google, -> { where('name not ilike ?', '%google%') }
+
+  PROGRAMMING_LANGUAGES = %w[Ruby JavaScript Python Java PHP C C++ C# D Swift Objective-C Go Kotlin
+                             TypeScript Scala R Rust Perl Shell HTML CSS Bash Haskell Elixir Assembly
+                             Elm Erlang OCaml Lisp Groovy Nim F# Crystal Fortran ClojureScript Haxe
+                             Dart Julia MATLAB Razor SQL VBScript COBOL Solidity SAS Markdown Lua Lean
+                             Tcl Logo Smalltalk Ada ActionScript PostScript Racket ECMAScript Less Emacs VBA TeX Sass] +
+                             ['Visual Basic', 'Common Lisp', 'The Julia Language', 'Clojure', 'PureScript']
+
+  EXCLUDED_TOPICS = ['iOS', 'Command-line interface', 'JSON', 'Database', 'Artificial Intelligence', 'Bot',
+                     'Game Development', 'macOS', 'npm', 'dotfiles', 'Authentication', 'Chat Bot', 'COVID-19',
+                    'Terminal', 'Video', 'LeetCode', 'Ajax', 'PWA','Mathematics', 'Crawler', 'Blockchain',
+                    'DevOps', 'Cryptography', 'Material Design', 'SVG', 'OAuth 2.0', 'RSS', 'Remote Procedure Call (RPC)',
+                    'Quantum Computing', 'Malware', 'Firefox extension', 'pip', 'Pixel Art', 'friendly interactive shell',
+                    'Jamstack', 'Oracle Database', 'Node.js', 'Git', 'Apache Cassandra', 'Steganography', 'Simple DirectMedia Layer',
+                    'Climate change', 'Mazes', 'eBPF', 'UEFI', 'FIRST', 'Batch file', 'Creative Commons License']
+  EXCLUDED_COMPANIES = ['GitHub', 'Amazon Web Services', 'Discord', 'Azure', 'Heroku', 'Telegram', 'Android Studio',
+                         'Twitter', 'Linux', 'Debian', 'Instagram', 'Slack', 'Docker','Netlify', 'Ubuntu',
+                      'Facebook', 'Microsoft', 'Apple', 'Firefox', 'Twitch', 'Reddit', 'Cloudflare', 'HackerRank',
+                      'Arch Linux', 'Steam', 'Atom', 'GitLab', 'Chromium', 'Sketch', 'NASA', 'Gmail',
+                      'Visual Studio Code', 'sql-server', 'Postman', 'Visual Studio', 'Coursera', 'Homebrew', 'Netflix',
+                    'Unreal Engine', 'Sublime Text', 'Azure DevOps', 'Ansible', 'Maven', 'Notion',
+                    'Nvidia', 'BigQuery', 'Binance', 'Fedora','Android', '.NET', 'TikTok', 'Edge', 'Stack Overflow', 'tvOS',
+                    'EPITECH', 'CodeChef', 'Medium', 'Algolia', 'Mozilla', 'MyAnimeList', 'ITMO', 'DuckDuckGo', 'Apple Music']
+  EXCLUDED_GAMES = ['Minecraft', 'Minecraft Mod', 'Minecraft Server', 'League of Legends', "Garry's Mod", 'VALORANT',
+                    'Geometry Dash', 'Elite Dangerous', 'Guild Wars 2', 'Space Station 13', 'Riot Games' ]
+
   def to_param
     slug
   end

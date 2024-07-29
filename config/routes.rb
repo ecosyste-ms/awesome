@@ -46,7 +46,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :topics, only: [:index, :show]
+  resources :topics, only: [:index, :show] do
+    collection do
+      get :suggestions
+    end
+  end
   
   resources :exports, only: [:index], path: 'open-data'
 

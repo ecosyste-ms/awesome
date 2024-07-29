@@ -7,6 +7,11 @@ class TopicsController < ApplicationController
     @pagy, @topics = pagy(scope)
   end
 
+  def suggestions
+    scope = Topic.where('github_count > 99').order(github_count: :desc).not_language.with_wikipedia.with_logo.not_google.other_excluded
+    @pagy, @topics = pagy(scope)
+  end
+
   def show
     @topic = Topic.find_by!(slug: params[:id])
     scope = @topic.projects.order_by_stars.not_awesome_list

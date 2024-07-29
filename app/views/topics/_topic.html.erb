@@ -28,7 +28,12 @@
 
         <p class="card-subtitle mb-2 text-muted">
           <i><small>
-            <%= number_with_delimiter topic.github_count %> repositories <br/>
+            <%= number_with_delimiter topic.github_count %> repositories
+            <% if topic.wikipedia_url.present? %>
+            - <a href="<%= topic.wikipedia_url %>" target="_blank" class="card-link">
+              <%= topic.wikipedia_url.gsub('https://', '') %>
+            </a>
+        <% end %>
           </small></i>
         </p>
       </div>
