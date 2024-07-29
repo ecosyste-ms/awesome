@@ -7,7 +7,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
       @projects = Project.all.where.not(last_synced_at: nil)
     end
     
-    @pagy, @projects = pagy(@projects)
+    @pagy, @projects = pagy_countless(@projects)
   end
 
   def show

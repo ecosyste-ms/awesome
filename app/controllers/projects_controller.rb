@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
       @scope = @scope.order('last_synced_at DESC nulls last')
     end
 
-    @pagy, @projects = pagy(@scope)
+    @pagy, @projects = pagy_countless(@scope)
   end
 
   def lookup
