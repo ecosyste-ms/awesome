@@ -4,6 +4,9 @@ class Topic < ApplicationRecord
 
   scope :with_logo, -> { where.not(logo_url: nil) }
   scope :with_wikipedia, -> { where.not(wikipedia_url: nil) }
+  scope :with_github_url, -> { where.not(github_url: nil) }
+
+  scope :suggestable, -> { where('github_url is not null or (wikipedia_url is not null and logo_url is not null)') }
 
   scope :without_wikipedia, -> { where(wikipedia_url: nil) }
 
@@ -54,6 +57,20 @@ class Topic < ApplicationRecord
 
   def lists
     List.topic(slug)
+  end
+
+  def fallback_logo_url
+    logo_url.presence || github_logo_url
+  end
+
+  def github_owner_url
+    return unless github_url.present?
+    github_url.split('/')[0..3].join('/')
+  end
+
+  def github_logo_url
+    return unless github_owner_url.present?
+    github_owner_url + '.png'
   end
 
   def self.load_from_github

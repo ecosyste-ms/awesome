@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def suggestions
-    scope = Topic.where('github_count > 99').order(github_count: :desc).not_language.with_wikipedia.with_logo.not_google.other_excluded
+    scope = Topic.where('github_count > 99').order(github_count: :desc).not_language.suggestable.not_google.other_excluded
     @pagy, @topics = pagy(scope)
   end
 
