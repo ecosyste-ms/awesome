@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   def index
-    scope = Topic.where('github_count > 0').order(github_count: :desc)
+    scope = Topic.where('github_count > 99').order(github_count: :desc)
 
     scope = scope.search(params[:query]) if params[:query].present?
 
