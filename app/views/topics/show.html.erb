@@ -5,10 +5,37 @@
     <%= @topic.to_s %><br/>
   </h1>
 
-  <p>
-    <%= @topic.short_description %> <br/>
-    <%= link_to @topic.url, @topic.url %>
-  </p>
+  <div class="float-end ms-3 mb-3">
+    <img src="<%= @topic.logo_url %>" class="rounded" height='80' width='80' onerror="this.style.display='none'">
+  </div>  
+
+  <%== @topic.content %>
+
+  <ul>
+    <li>
+      GitHub: <%= link_to @topic.url, @topic.url %>
+    </li>
+    <% if @topic.wikipedia_url.present? %>
+      <li>
+        Wikipedia: <%= link_to @topic.wikipedia_url, @topic.wikipedia_url %>
+      </li>
+    <% end %>
+    <% if @topic.github_url.present? %>
+      <li>
+        Repo: <%= link_to @topic.github_url, @topic.github_url %>
+      </li>
+    <% end %>
+    <% if @topic.created_by.present? %>
+      <li>
+        Created by: <%= @topic.created_by %>
+      </li>
+    <% end %>
+    <% if @topic.released.present? %>
+      <li>
+        Released: <%= @topic.released %>
+      </li>
+    <% end %>
+  </ul>
 
   <div class='row'>
     <div class='col-md-8'>
