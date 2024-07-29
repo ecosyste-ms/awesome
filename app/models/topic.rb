@@ -2,6 +2,9 @@ class Topic < ApplicationRecord
 
   scope :search, ->(query) { where('name ILIKE ? or short_description ILIKE ?', "%#{query}%", "%#{query}%") }
 
+  scope :with_logo, -> { where.not(logo_url: nil) }
+  scope :with_wikipedia, -> { where.not(wikipedia_url: nil) }
+
   def to_param
     slug
   end
