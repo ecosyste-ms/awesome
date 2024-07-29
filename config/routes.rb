@@ -45,6 +45,8 @@ Rails.application.routes.draw do
       get :markdown, defaults: { format: :text }
     end
   end
+
+  resources :topics, only: [:index, :show]
   
   resources :exports, only: [:index], path: 'open-data'
 

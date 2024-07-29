@@ -1,0 +1,44 @@
+<div class="card mb-3 topic d-flex" id="topic_<%= topic.id %>">
+  <div class="card-body pb-1">
+    <div class="d-flex">
+      
+      <div class="flex-grow-1 ms-3 text-break">
+        <h5 class='card-title'>
+          <%= link_to topic, topic_path(topic) %>
+        </h5>
+      
+        <p class="card-subtitle mb-2 text-muted">
+          <%= topic.short_description %>
+        </p>
+
+        <% if topic.related_topics.any? %>
+          <p>
+            <% topic.aliases.first(20).each do |topic| %>
+              <span class="badge bg-light text-dark">
+                <%= link_to topic, topics_path(topic: topic), class: 'text-decoration-none link-dark' %>
+              </span>
+            <% end %>
+            <% topic.related_topics.first(20).each do |topic| %>
+              <span class="badge bg-light text-dark">
+                <%= link_to topic, topics_path(topic: topic), class: 'text-decoration-none link-dark' %>
+              </span>
+            <% end %>
+          </p>
+        <% end %>
+
+        <p class="card-subtitle mb-2 text-muted">
+          <i><small>
+            <%= number_with_delimiter topic.github_count %> repositories <br/>
+          </small></i>
+        </p>
+        <p class="card-subtitle mb-2 text-muted"><i><small>
+          Last updated: <%= topic.updated_at.strftime("%d %b %Y") %>
+        </small></i></p>
+      </div>
+      <div class="flex-shrink-0">
+        <%# todo avatar url %>
+        <img src="<%= topic.logo_url %>" class="rounded" height='40' width='40' onerror="this.style.display='none'">
+      </div>  
+    </div>
+  </div>
+</div>

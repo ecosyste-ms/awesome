@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_01_164146) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_29_130523) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -53,6 +53,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_164146) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["url"], name: "index_projects_on_url", unique: true
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "slug"
+    t.string "name"
+    t.string "short_description"
+    t.string "url"
+    t.integer "github_count"
+    t.string "created_by"
+    t.string "logo_url"
+    t.string "released"
+    t.string "wikipedia_url"
+    t.string "related_topics", default: [], array: true
+    t.string "aliases", default: [], array: true
+    t.string "github_url"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

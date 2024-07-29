@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slug: MyString
+  name: MyString
+  short_description: MyString
+  url: MyString
+  github_count: 1
+  created_by: MyString
+  logo_url: MyString
+  released: MyString
+  wikipedia_url: MyString
+  related_topics: MyString
+  aliases: MyString
+  github_url: MyString
+
+two:
+  slug: MyString
+  name: MyString
+  short_description: MyString
+  url: MyString
+  github_count: 1
+  created_by: MyString
+  logo_url: MyString
+  released: MyString
+  wikipedia_url: MyString
+  related_topics: MyString
+  aliases: MyString
+  github_url: MyString
