@@ -14,6 +14,10 @@ class Topic < ApplicationRecord
     Project.keyword(slug)
   end
 
+  def lists
+    List.topic(slug)
+  end
+
   def self.load_from_github
     url = 'https://explore-feed.github.com/feed.json'
     conn = Faraday.new(url: url) do |faraday|

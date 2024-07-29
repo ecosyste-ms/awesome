@@ -10,6 +10,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find_by!(slug: params[:id])
     scope = @topic.projects.order_by_stars
+    @lists = @topic.lists.limit(50).order_by_stars.displayable
     @pagy, @projects = pagy_countless(scope)
   end
 end

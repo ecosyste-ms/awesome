@@ -16,6 +16,22 @@
       <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>  
     </div>
 
+    <div class='col-md-4'>
+      <div class='card mb-3'>
+        <div class="card-header">
+          <%= @topic %> Awesome Lists
+        </div>
+        <div class="list-group list-group-flush">
+          <% @lists.first(50).each do |list| %>
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="<%= list_path(list) %>">
+              <%= list %>
+              <span class="badge bg-primary rounded-pill"><%= number_with_delimiter list.projects_count%></span>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 

@@ -29,6 +29,8 @@ class List < ApplicationRecord
 
   scope :search, -> (query) { where('url ILIKE ? OR repository ->> \'description\' ILIKE ?', "%#{query}%", "%#{query}%") }
 
+  scope :order_by_stars, -> { order(@sort = Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last)  }
+
   before_save :set_displayable
 
   def self.sync_least_recently_synced

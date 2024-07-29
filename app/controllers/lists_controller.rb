@@ -22,7 +22,7 @@ class ListsController < ApplicationController
         scope = scope.order(Arel.sql(sort).desc.nulls_last)
       end
     else
-      scope = scope.order(@sort = Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last)
+      scope = scope.order_by_stars
     end
 
     @pagy, @lists = pagy_countless(scope)
