@@ -9,7 +9,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find_by!(slug: params[:id])
-    scope = @topic.projects
+    scope = @topic.projects.order_by_stars
     @pagy, @projects = pagy_countless(scope)
   end
 end
