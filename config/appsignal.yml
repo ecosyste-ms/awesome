@@ -4,3 +4,12 @@ production:
     - ActionController::RoutingError
     - ActiveRecord::QueryCanceled
     - Rack::Timeout::RequestTimeoutException
+    - Faraday::ConnectionFailed 
+    - PackageURL::InvalidPackageURL
+    - Faraday::SSLError
+    - Rack::Timeout::RequestExpiryError
+    - Faraday::TimeoutError
+    - Oj::ParseError
+    - Pagy::VariableError
+    - Pagy::OverflowError 
+    - ActiveRecord::StatementInvalid
