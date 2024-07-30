@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @scope = Project.all
+    @scope = Project.not_awesome_list.where.not(last_synced_at: nil).with_repository
 
     if params[:keyword].present?
       @scope = @scope.keyword(params[:keyword])
@@ -18,10 +18,15 @@ class ProjectsController < ApplicationController
       @scope = @scope.language(params[:language])
     end
 
-    if params[:sort]
-      @scope = @scope.order("#{params[:sort]} #{params[:order]}")
+    if params[:sort].present? || params[:order].present?
+      sort = params[:sort].presence || 'updated_at'
+      if params[:order] == 'asc'
+        @scope = @scope.order(Arel.sql(sort).asc.nulls_last)
+      else
+        @scope = @scope.order(Arel.sql(sort).desc.nulls_last)
+      end
     else
-      @scope = @scope.order('last_synced_at DESC nulls last')
+      @scope = @scope.order_by_stars
     end
 
     @pagy, @projects = pagy_countless(@scope)

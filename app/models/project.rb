@@ -18,7 +18,7 @@ class Project < ApplicationRecord
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
-  scope :order_by_stars, -> { order(stars: :desc) }
+  scope :order_by_stars, -> { order('stars desc nulls last') }
 
   scope :not_awesome_list, -> { where(list: false) }
 
