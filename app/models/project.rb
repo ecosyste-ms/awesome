@@ -18,9 +18,20 @@ class Project < ApplicationRecord
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
-  scope :order_by_stars, -> { order(Arel.sql("(projects.repository ->> 'stargazers_count')::text::integer").desc.nulls_last) }
+  scope :order_by_stars, -> { order(stars: :desc) }
 
-  scope :not_awesome_list, -> { joins("LEFT JOIN lists ON lists.url = projects.url").where("lists.id is null") }
+  scope :not_awesome_list, -> { where(list: false) }
+
+  before_save :set_is_list?
+  before_save :set_stars
+
+  def set_is_list?
+    self.list = matching_list.present?
+  end
+
+  def set_stars
+    self.stars = repository.dig('stargazers_count') if repository.present?
+  end
 
   def self.sync_least_recently_synced
     Project.where(last_synced_at: nil).or(Project.where("last_synced_at < ?", 1.day.ago)).order('last_synced_at asc nulls first').limit(500).each do |project|
