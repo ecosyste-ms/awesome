@@ -34,13 +34,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :projects, constraints: { id: /.*/ } do
+  resources :projects, constraints: { id: /.*/ }, defaults: {format: :html} do
     collection do
       post :lookup
     end
   end
 
-  resources :lists, constraints: { id: /.*/ }  do
+  resources :lists, constraints: { id: /.*/ }, defaults: {format: :html}  do
     collection do
       get :markdown, defaults: { format: :text }
     end
