@@ -103,7 +103,7 @@ class List < ApplicationRecord
   end
 
   def project_topics
-    projects.pluck(:keywords).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reject{|k,v| List.ignorable_topics.include?(k) }.reverse
+    @project_topics ||= projects.pluck(:keywords).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reject{|k,v| List.ignorable_topics.include?(k) }.reverse
   end
 
   def shared_topics
@@ -434,8 +434,7 @@ class List < ApplicationRecord
   end
 
   def language_breakdown
-    breakdown = projects.pluck(Arel.sql('repository ->> \'language\'')).reject(&:blank?)
-    breakdown.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+    @language_breakdown ||= projects.pluck(Arel.sql('repository ->> \'language\'')).reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
   def set_primary_language
@@ -490,7 +489,7 @@ class List < ApplicationRecord
   end
 
   def category_counts
-    list_projects.group(:category).count.sort_by{|k,v| v}.reverse
+    @category_counts ||= list_projects.group(:category).count.sort_by{|k,v| v}.reverse
   end
 
   def sub_categories
@@ -498,7 +497,7 @@ class List < ApplicationRecord
   end
 
   def sub_category_counts
-    list_projects.group(:sub_category).count.sort_by{|k,v| v}.reverse
+    @sub_category_counts ||= list_projects.group(:sub_category).count.sort_by{|k,v| v}.reverse
   end
 
   IGNORED_CATEGORIES = ['license', 'other', 'miscellaneous', 'misc', 'related', "other awesome lists", "related lists", 'contributing',
