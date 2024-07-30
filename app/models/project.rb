@@ -49,7 +49,7 @@ class Project < ApplicationRecord
   def to_param
     slug
   end
-
+  
   def self.sync_least_recently_synced
     Project.where(last_synced_at: nil).or(Project.where("last_synced_at < ?", 1.day.ago)).order('last_synced_at asc nulls first').limit(500).each do |project|
       project.sync_async
@@ -70,10 +70,6 @@ class Project < ApplicationRecord
 
   def to_s
     url
-  end
-
-  def matching_list
-    List.where(url: url).first
   end
 
   def list_keywords?
