@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_30_154138) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_30_155443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_stat_statements"
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_154138) do
     t.datetime "updated_at", null: false
     t.boolean "list", default: false
     t.integer "stars", default: 0
+    t.string "owner"
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
     t.index ["stars"], name: "index_projects_on_stars"
     t.index ["url"], name: "index_projects_on_url", unique: true

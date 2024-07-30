@@ -13,7 +13,7 @@ class Project < ApplicationRecord
   scope :archived, -> { where("(repository ->> 'archived') = ?", 'true') }
 
   scope :language, ->(language) { where("(repository ->> 'language') = ?", language) }
-  scope :owner, ->(owner) { where("(repository ->> 'owner') = ?", owner) }
+  scope :owner, ->(owner) { where(owner: owner) }
   scope :keyword, ->(keyword) { where("keywords @> ARRAY[?]::varchar[]", keyword) }
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
@@ -25,6 +25,7 @@ class Project < ApplicationRecord
   before_save :set_is_list?
   before_save :set_stars
   before_save :transform_url_to_https
+  before_save :set_owner
 
   def set_is_list?
     self.list = matching_list.present?
@@ -36,6 +37,10 @@ class Project < ApplicationRecord
 
   def transform_url_to_https
     self.url = url.gsub(/^http:/, 'https:') if url.present?
+  end
+
+  def set_owner
+    self.owner = repository.dig('owner') if repository.present?
   end
 
   def self.find_by_slug!(slug)
