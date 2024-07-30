@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :lists do
+  resources :lists, constraints: { id: /.*/ }  do
     collection do
       get :markdown, defaults: { format: :text }
     end

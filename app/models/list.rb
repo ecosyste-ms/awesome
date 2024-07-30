@@ -31,6 +31,18 @@ class List < ApplicationRecord
 
   scope :order_by_stars, -> { order(Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last)  }
 
+  def self.find_by_slug!(slug)
+    find_by!(url: "https://github.com/#{slug.downcase}")
+  end
+
+  def slug
+    url.gsub('https://github.com/', '').downcase
+  end
+
+  def to_param
+    slug
+  end
+
   before_save :set_displayable
 
   def self.sync_least_recently_synced

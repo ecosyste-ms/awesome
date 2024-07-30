@@ -29,7 +29,12 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    if params[:id].to_i.to_s == params[:id]
+      @list = List.find(params[:id])
+      redirect_to @list, status: :moved_permanently
+    else
+      @list = List.find_by_slug!(params[:id])
+    end
   end
 
   def markdown
