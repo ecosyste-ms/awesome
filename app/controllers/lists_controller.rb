@@ -3,7 +3,7 @@ class ListsController < ApplicationController
     scope = List.displayable
 
     if params[:topic].present?
-      scope = scope.where('repository ->> \'topics\' ILIKE ?', "%#{params[:topic]}%")
+      scope = scope.topic(params[:topic])
     end
 
     if params[:language].present?

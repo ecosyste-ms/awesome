@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_30_122417) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_30_124127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_stat_statements"
@@ -42,6 +42,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_122417) do
     t.string "primary_language"
     t.boolean "list_of_lists", default: false
     t.boolean "displayable", default: false
+    t.string "keywords", default: [], array: true
+    t.integer "stars", default: 0
     t.index ["url"], name: "index_lists_on_url", unique: true
   end
 

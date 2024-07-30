@@ -24,12 +24,23 @@ class List < ApplicationRecord
   scope :with_primary_language, -> { where.not(primary_language: nil) }
   scope :list_of_lists, -> { where(list_of_lists: true) }
 
-  scope :topic, -> (topic) { where('repository ->> \'topics\' ILIKE ?', "%#{topic}%") }
+  scope :topic, -> (keyword) { where("keywords @> ARRAY[?]::varchar[]", keyword) }
   scope :primary_language, -> (language) { where(primary_language: language) }
 
   scope :search, -> (query) { where('url ILIKE ? OR repository ->> \'description\' ILIKE ?', "%#{query}%", "%#{query}%") }
 
-  scope :order_by_stars, -> { order(Arel.sql("(repository ->> 'stargazers_count')::text::integer").desc.nulls_last)  }
+  scope :order_by_stars, -> { order(stars: :desc)  }
+
+  before_save :set_stars
+  before_save :set_keywords
+
+  def set_stars
+    self.stars = repository['stargazers_count'] if repository.present? && repository['stargazers_count'].present?
+  end
+
+  def set_keywords
+    self.keywords = repository['topics'] if repository.present? && repository['topics'].present?
+  end
 
   def self.find_by_slug!(slug)
     find_by!(url: "https://github.com/#{slug.downcase}")
@@ -84,7 +95,7 @@ class List < ApplicationRecord
   end
 
   def self.topics
-    List.displayable.pluck(Arel.sql("repository -> 'topics'")).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
+    List.displayable.pluck(:keywords).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reverse
   end
 
   def self.ignorable_topics
@@ -92,7 +103,7 @@ class List < ApplicationRecord
   end
 
   def project_topics
-    projects.pluck(Arel.sql("repository -> 'topics'")).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reject{|k,v| List.ignorable_topics.include?(k) }.reverse
+    projects.pluck(:keywords).flatten.reject(&:blank?).group_by(&:itself).transform_values(&:count).sort_by{|k,v| v}.reject{|k,v| List.ignorable_topics.include?(k) }.reverse
   end
 
   def shared_topics

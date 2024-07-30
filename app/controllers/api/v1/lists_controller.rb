@@ -7,7 +7,7 @@ class Api::V1::ListsController < Api::V1::ApplicationController
     end
 
     if params[:topic].present?
-      scope = scope.where('repository ->> \'topics\' ILIKE ?', "%#{params[:topic]}%")
+      scope = scope.topic(params[:topic])
     end
 
     if params[:language].present?
@@ -22,7 +22,7 @@ class Api::V1::ListsController < Api::V1::ApplicationController
         scope = scope.order(Arel.sql(sort).desc.nulls_last)
       end
     else
-      scope = scope.order(@sort = Arel.sql("(lists.repository ->> 'stargazers_count')::text::integer").desc.nulls_last)
+      scope = scope.order_by_stars
     end
 
     @pagy, @lists = pagy_countless(scope)
