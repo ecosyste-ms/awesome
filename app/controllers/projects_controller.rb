@@ -1,6 +1,11 @@
 class ProjectsController < ApplicationController
   def show
-    @project = Project.find(params[:id])
+    if params[:id].to_i.to_s == params[:id]
+      @project = Project.find(params[:id])
+      redirect_to @project, status: :moved_permanently
+    else
+      @project = Project.find_by_slug!(params[:id])
+    end
   end
 
   def index

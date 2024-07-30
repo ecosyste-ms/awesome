@@ -24,6 +24,7 @@ class Project < ApplicationRecord
 
   before_save :set_is_list?
   before_save :set_stars
+  before_save :transform_url_to_https
 
   def set_is_list?
     self.list = matching_list.present?
@@ -31,6 +32,22 @@ class Project < ApplicationRecord
 
   def set_stars
     self.stars = repository.dig('stargazers_count') if repository.present?
+  end
+
+  def transform_url_to_https
+    self.url = url.gsub(/^http:/, 'https:') if url.present?
+  end
+
+  def self.find_by_slug!(slug)
+    find_by!(url: "https://#{slug.downcase}")
+  end
+
+  def slug
+    url.gsub('https://', '').downcase
+  end
+
+  def to_param
+    slug
   end
 
   def self.sync_least_recently_synced
