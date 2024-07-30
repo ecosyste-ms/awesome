@@ -32,7 +32,7 @@ class Project < ApplicationRecord
   end
 
   def set_stars
-    self.stars = repository.dig('stargazers_count') if repository.present?
+    self.stars = repository.present? ? (repository.dig('stargazers_count') || 0) : 0
   end
 
   def transform_url_to_https
