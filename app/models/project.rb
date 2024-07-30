@@ -39,11 +39,11 @@ class Project < ApplicationRecord
   end
 
   def self.find_by_slug!(slug)
-    find_by!(url: "https://#{slug.downcase}")
+    find_by!(url: "https://#{slug}")
   end
 
   def slug
-    url.gsub('https://', '').downcase
+    url.gsub('https://', '')
   end
 
   def to_param
