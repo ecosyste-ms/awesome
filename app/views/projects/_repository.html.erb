@@ -99,7 +99,7 @@
       <% end %>
     </ul>
 
-    <h3>Lists</h3>
+    <h3>Awesome Lists containing this project</h3>
     <ul>
       <% @project.list_projects.includes(:list).each do |list_project| %>
         <% next unless list_project.list.try(:is_displayable?) %>
