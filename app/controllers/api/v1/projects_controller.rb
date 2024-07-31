@@ -1,7 +1,12 @@
 class Api::V1::ProjectsController < Api::V1::ApplicationController
   def index
     if params[:list_id].present?
-      @list = List.find(params[:list_id])
+      if params[:list_id].to_i.to_s == params[:list_id]
+        @list = List.find(params[:list_id])
+        redirect_to api_v1_list_projects_url(@list), status: :moved_permanently
+      else
+        @list = List.find_by_slug!(params[:list_id])
+      end
       @projects = @list.projects.where.not(last_synced_at: nil)
     else
       @projects = Project.all.where.not(last_synced_at: nil)
@@ -11,7 +16,12 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    if params[:id].to_i.to_s == params[:id]
+      @project = Project.find(params[:id])
+      redirect_to @project, status: :moved_permanently
+    else
+      @project = Project.find_by_slug!(params[:id])
+    end
   end
 
   def lookup

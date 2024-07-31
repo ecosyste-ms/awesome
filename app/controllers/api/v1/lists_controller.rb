@@ -3,7 +3,14 @@ class Api::V1::ListsController < Api::V1::ApplicationController
     scope = List.displayable
 
     if params[:project_id].present?
-      scope = scope.joins(:projects).where(projects: { id: params[:project_id] })
+      if params[:project_id].to_i.to_s == params[:project_id]
+        @project = Project.find(params[:project_id])
+        redirect_to api_v1_project_lists_url(@project), status: :moved_permanently
+      else
+        @project = Project.find_by_slug!(params[:project_id])
+      end
+
+      scope = scope.joins(:projects).where(projects: { id: @project.id })
     end
 
     if params[:topic].present?
@@ -29,7 +36,12 @@ class Api::V1::ListsController < Api::V1::ApplicationController
   end
 
   def show
-    @list = List.find(params[:id])
+    if params[:id].to_i.to_s == params[:id]
+      @list = List.find(params[:id])
+      redirect_to api_v1_list_url(@list), status: :moved_permanently
+    else
+      @list = List.find_by_slug!(params[:id])
+    end
   end
 
   def lookup
