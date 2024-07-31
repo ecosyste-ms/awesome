@@ -10,6 +10,11 @@
     <%= link_to @list.url, @list.url %>
   </p>
 
+  <p class="card-subtitle mb-2 text-muted"><i><small>
+        Last synced: <%= distance_of_time_in_words_to_now @list.last_synced_at %> ago <br>
+        <%= link_to 'JSON representation', api_v1_list_path(@list) %>
+    </small></i></p>
+
   <div class='row'>
     <div class='col-md-8'>
       <ul>
