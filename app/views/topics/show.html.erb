@@ -35,6 +35,12 @@
         Released: <%= @topic.released %>
       </li>
     <% end %>
+    <li>
+      Last updated: <%= @topic.updated_at %>
+    </li>
+    <li>
+      <%= link_to 'JSON Representation', api_v1_topic_path(@topic) %>
+    </li>
   </ul>
 
   <div class='row'>
