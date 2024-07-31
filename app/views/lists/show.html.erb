@@ -14,22 +14,53 @@
     <div class='col-md-8'>
       <ul>
         <% list_projects = @list.list_projects.includes(:project) %>
-        <% @list.readme_links.each do |link| %>
+
+        <% list_projects.group_by(&:category).each do |category, list_projects| %>
+          <% next if category == 'License' %>
           <li>
-            <% list_project= list_projects.select{|l| l.name == link[:name] }.first %>
-            <% if list_project && list_project.project && list_project.project.repository.present? %>
-              <%= link_to list_project.name, project_path(list_project.project) %>
-              <% if list_project.description.present? %>
-                - <%= list_project.description %>
-              <% end %>
+            <h2 id='category-<%= category %>'><%= category %></h2>
+            <% sub_categories = list_projects.group_by(&:sub_category) %>
+            <% if sub_categories.keys.compact.any? %>
+              <ul>
+                <% sub_categories.each do |sub_category, sub_list_projects| %>
+                  <li>
+                    <h3 id='subcategory-<%= sub_category %>'><%= sub_category %></h3>
+                    <ul>
+                      <% sub_list_projects.each do |list_project| %>
+                        <li>
+                          <% if list_project && list_project.project && list_project.project.repository.present? %>
+                            <%= link_to list_project.name, project_path(list_project.project) %>
+                          <% else %>
+                            <%= link_to list_project.name, list_project.url, target: :blank %>
+                          <% end %>
+                          <% if list_project.description.present? %>
+                            - <%= list_project.description %>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
+              </ul>
             <% else %>
-              <%= link_to link[:name], link[:url] %>
-              <% if link[:description].present? %>
-                - <%= link[:description] %>
-              <% end %>
+              <ul>
+                <% list_projects.each do |list_project| %>
+                  <li>
+                    <% if list_project && list_project.project %>
+                      <%= link_to list_project.name, project_path(list_project.project) %>
+                    <% else %>
+                      <%= link_to list_project.name, list_project.url %>
+                    <% end %>
+                    <% if list_project.description.present? %>
+                      - <%= list_project.description %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
             <% end %>
           </li>
         <% end %>
+
       </ul>
     </div>
     <div class='col-md-4'>
@@ -58,7 +89,7 @@
           <div class="list-group list-group-flush">
             <% @list.category_counts.each do |category, count| %>
               <% next if category.blank? %>
-              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if category == params[:category]%>" href="<%= list_path(@list, category: category) %>">
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="#category-<%= category %>">
                 <%= category %>
                 <span class="badge bg-primary rounded-pill"><%= number_with_delimiter count%></span>
               </a>
@@ -75,7 +106,7 @@
           <div class="list-group list-group-flush">
             <% @list.sub_category_counts.each do |category, count| %>
               <% next if category.blank? %>
-              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <%= 'active' if category == params[:sub_category]%>" href="<%= list_path(@list, sub_category: category) %>">
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="#subcategory-<%= category %>">
                 <%= category %>
                 <span class="badge bg-primary rounded-pill"><%= number_with_delimiter count%></span>
               </a>
