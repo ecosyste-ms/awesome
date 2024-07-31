@@ -11,6 +11,10 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     else
       @projects = Project.all.where.not(last_synced_at: nil)
     end
+
+    if params[:keyword].present?
+      @projects = @projects.keyword(params[:keyword])
+    end
     
     @pagy, @projects = pagy_countless(@projects)
   end

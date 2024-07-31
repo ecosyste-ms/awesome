@@ -211,6 +211,54 @@ paths:
             application/json:
               schema:
                   $ref: '#/components/schemas/List'
+  /topics:
+    get:
+      description: get topics
+      operationId: getTopics
+      tags:
+        - topics
+      parameters:
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topic'
+  /topics/{id}:
+    get:
+      description: get a topic by slug
+      operationId: getTopic
+      tags:
+        - topics
+      parameters:
+        - in: path
+          name: slug
+          schema:
+            type: integer
+          required: true
+          description: slug of the topic
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
 components:
   schemas:
     Project:
@@ -315,4 +363,44 @@ components:
             type: string
         projects_url:
           type: string
-        
+    Topic:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        name:
+          type: string
+        short_description:
+          type: string 
+        url:
+          type: string
+        github_count:
+          type: integer
+        created_by:
+          type: string
+        logo_url:
+          type: string
+        released:
+          type: string
+        wikipedia_url:
+          type: string
+        related_topics:
+          type: array
+          items:
+            type: string
+        aliases:
+          type: array
+          items:
+            type: string
+        github_url:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
