@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 
       resources :topics, only: [:index, :show]
 
+      resources :list_projects, only: [:index]
+
       resources :lists, constraints: { id: /.*/ }, only: [:index, :show] do
+        resources :list_projects, only: [:index]
         resources :projects, constraints: { id: /.*/ }, only: [:index]
         collection do
           get :lookup

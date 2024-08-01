@@ -77,6 +77,18 @@ paths:
             type: integer
           required: true
           description: id of the project
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
       responses:
         200:
           description: OK
@@ -112,6 +124,19 @@ paths:
       operationId: getProjectPackages
       tags:
         - projects
+      parameters:
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
       responses:
         200:
           description: OK
@@ -182,6 +207,18 @@ paths:
             type: integer
           required: true
           description: id of the list
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
       responses:
         200:
           description: OK
@@ -191,6 +228,52 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Project'
+  /lists/{id}/list_projects:
+    get:
+      description: get list projects of a list
+      operationId: getListListProjects
+      tags:
+        - lists
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: id of the list
+        - name: category
+          in: query
+          description: category of the list project
+          required: false
+          schema:
+            type: string
+        - name: sub_category
+          in: query
+          description: sub category of the list project
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: pagination page number 
+          required: false
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of records to return 
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListProject'
   /lists/lookup:
     get:
       description: lookup list by url
@@ -239,7 +322,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Topic'
-  /topics/{id}:
+  /topics/{slug}:
     get:
       description: get a topic by slug
       operationId: getTopic
@@ -404,3 +487,29 @@ components:
         updated_at:
           type: string
           format: date-time
+    ListProject:
+      type: object
+      properties:
+        id:
+          type: integer
+        list_id:
+          type: integer
+        project_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        sub_category:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        project:
+          type: object
+          $ref: '#/components/schemas/Project'

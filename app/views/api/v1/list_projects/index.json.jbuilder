@@ -1,0 +1,1 @@
+json.array! @list_projects, partial: 'api/v1/list_projects/list_project', as: :list_project
