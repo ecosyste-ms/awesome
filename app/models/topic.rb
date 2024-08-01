@@ -57,7 +57,11 @@ class Topic < ApplicationRecord
   end
 
   def lists
-    List.topic(slug)
+    List.topic(slug).displayable
+  end
+
+  def categories
+    lists.map(&:category_counts).flatten(1).group_by(&:first).map{|k,v| [k, v.sum(&:last)]}.sort_by(&:last).reverse
   end
 
   def fallback_logo_url
