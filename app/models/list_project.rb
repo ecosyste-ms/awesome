@@ -11,6 +11,6 @@ class ListProject < ApplicationRecord
   end
 
   def find_url
-    list.readme_links.first{|link| link[:name] == name}[:url]
+    list.readme_links.first{|link| link[:name] == name}.try(:[], :url)
   end
 end
