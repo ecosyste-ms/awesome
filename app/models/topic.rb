@@ -30,7 +30,8 @@ class Topic < ApplicationRecord
                     'Quantum Computing', 'Malware', 'Firefox extension', 'pip', 'Pixel Art', 'friendly interactive shell',
                     'Jamstack', 'Oracle Database', 'Node.js', 'Git', 'Apache Cassandra', 'Steganography', 'Simple DirectMedia Layer',
                     'Climate change', 'Mazes', 'eBPF', 'UEFI', 'FIRST', 'Batch file', 'Creative Commons License',
-                    'Open Access', 'Christianity', 'Finite Element Method (FEM)', 'The Gene Ontology Consortium']
+                    'Open Access', 'Christianity', 'Finite Element Method (FEM)', 'The Gene Ontology Consortium',
+                    'Document Object Model (DOM)']
   EXCLUDED_COMPANIES = ['GitHub', 'Amazon Web Services', 'Discord', 'Azure', 'Heroku', 'Telegram', 'Android Studio',
                          'Twitter', 'Linux', 'Debian', 'Instagram', 'Slack', 'Docker','Netlify', 'Ubuntu',
                       'Facebook', 'Microsoft', 'Apple', 'Firefox', 'Twitch', 'Reddit', 'Cloudflare', 'HackerRank',
