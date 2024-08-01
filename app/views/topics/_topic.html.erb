@@ -33,7 +33,12 @@
             - <a href="<%= topic.wikipedia_url %>" target="_blank" class="card-link">
               <%= topic.wikipedia_url.gsub('https://', '') %>
             </a>
-        <% end %>
+          <% end %>
+          <% if topic.github_url.present? %>
+            - <a href="<%= topic.github_url %>" target="_blank" >
+              <%= topic.github_url.gsub('https://', '') %>
+            </a>
+          <% end %>
           </small></i>
         </p>
       </div>
