@@ -4,7 +4,7 @@ class Topic < ApplicationRecord
 
   scope :with_logo, -> { where.not(logo_url: nil) }
   scope :with_wikipedia, -> { where.not(wikipedia_url: nil) }
-  scope :with_github_url, -> { where.not(github_url: nil) }
+  scope :with_github_url, -> { where.not(github_url: [nil,'']) }
 
   scope :suggestable, -> { where('github_url is not null or (wikipedia_url is not null and logo_url is not null)') }
 
