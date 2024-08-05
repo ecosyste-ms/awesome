@@ -17,6 +17,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     end
     
     @pagy, @projects = pagy_countless(@projects)
+    fresh_when(@projects, public: true)
   end
 
   def show
@@ -25,6 +26,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
       redirect_to @project, status: :moved_permanently
     else
       @project = Project.find_by_slug!(params[:id])
+      fresh_when(@project, public: true)
     end
   end
 

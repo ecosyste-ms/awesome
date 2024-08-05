@@ -26,6 +26,7 @@ class ListsController < ApplicationController
     end
 
     @pagy, @lists = pagy_countless(scope)
+    fresh_when(@lists, public: true)
   end
 
   def show
@@ -34,6 +35,7 @@ class ListsController < ApplicationController
       redirect_to @list, status: :moved_permanently
     else
       @list = List.find_by_slug!(params[:id])
+      fresh_when(@list, public: true)
     end
   end
 

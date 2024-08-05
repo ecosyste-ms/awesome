@@ -5,10 +5,12 @@ class Api::V1::TopicsController < Api::V1::ApplicationController
     scope = scope.search(params[:query]) if params[:query].present?
 
     @pagy, @topics = pagy(scope)
+    fresh_when(@topics, public: true)
   end
 
   def show
     @topic = Topic.find_by!(slug: params[:id])
+    fresh_when(@topic, public: true)
   end
 
 end

@@ -33,6 +33,7 @@ class Api::V1::ListsController < Api::V1::ApplicationController
     end
 
     @pagy, @lists = pagy_countless(scope)
+    fresh_when(@lists, public: true)
   end
 
   def show
@@ -41,6 +42,7 @@ class Api::V1::ListsController < Api::V1::ApplicationController
       redirect_to api_v1_list_url(@list), status: :moved_permanently
     else
       @list = List.find_by_slug!(params[:id])
+      fresh_when(@list, public: true)
     end
   end
 

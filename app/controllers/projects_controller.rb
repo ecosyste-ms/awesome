@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
       redirect_to @project, status: :moved_permanently
     else
       @project = Project.find_by_slug!(params[:id])
+      fresh_when(@project, public: true)
     end
   end
 
@@ -35,6 +36,7 @@ class ProjectsController < ApplicationController
     end
 
     @pagy, @projects = pagy_countless(@scope)
+    fresh_when(@projects, public: true)
   end
 
   def lookup
