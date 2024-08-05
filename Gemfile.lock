@@ -152,7 +152,7 @@ GEM
       rake (>= 13)
     groupdate (6.4.0)
       activesupport (>= 6.1)
-    hashdiff (1.1.0)
+    hashdiff (1.1.1)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
