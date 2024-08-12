@@ -20,7 +20,7 @@ RUN apk add --update \
  && rm -rf /var/cache/apk/* 
 
 # Will invalidate cache as soon as the Gemfile changes
-COPY Gemfile Gemfile.lock $APP_ROOT/
+COPY Gemfile Gemfile.lock .ruby-version $APP_ROOT/
 
 RUN bundle config --global frozen 1 \
  && bundle config set without 'test' \
