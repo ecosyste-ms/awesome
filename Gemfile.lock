@@ -292,7 +292,7 @@ GEM
       sprockets-rails
       tilt
     shoulda-context (2.0.0)
-    shoulda-matchers (6.3.0)
+    shoulda-matchers (6.3.1)
       activesupport (>= 5.2.0)
     sidekiq (7.3.0)
       concurrent-ruby (< 2)
