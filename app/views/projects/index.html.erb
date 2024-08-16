@@ -1,34 +1,41 @@
 <% @meta_title = "Projects in Awesome Lists #{'tagged with '+params[:keyword] if params[:keyword].present?} #{'by '+params[:owner] if params[:owner].present?}" %>
+<% @meta_description = "A curated list of projects in awesome lists #{'tagged with '+params[:keyword] if params[:keyword].present?} #{'by '+params[:owner] if params[:owner].present?} #{'in '+params[:language] if params[:language].present?}." %>
 
 <div class="container-md">
 
-    <ul class="nav nav-tabs my-3">
-      <li class="nav-item">
-        <h2>
-          Projects in Awesome Lists
-          <% if params[:keyword].present? %>
-            tagged with <%= params[:keyword] %>
-          <% end %>
-          <% if params[:owner].present? %>
-            by <%= params[:owner] %>
-          <% end %>
-          <% if params[:language].present? %>
-            in <%= params[:language] %>
-          <% end %>
-        </h2>
-      </li>
-      <li class="nav-item ms-auto">
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Sort
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item <%= 'active' if params[:sort] == 'last_synced_at' %>" href="<%= url_for(sort: 'last_synced_at', order: 'desc') %>">Recently synced</a></li>
-            <li><a class="dropdown-item <%= 'active' if params[:sort] == 'stars' %>" href="<%= url_for(sort: 'stars', order: 'desc') %>">Stars</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+  <h2>
+    Projects in Awesome Lists
+    <% if params[:keyword].present? %>
+      tagged with <%= params[:keyword] %>
+    <% end %>
+    <% if params[:owner].present? %>
+      by <%= params[:owner] %>
+    <% end %>
+    <% if params[:language].present? %>
+      in <%= params[:language] %>
+    <% end %>
+  </h2>
+
+  <p class='lead'>
+    <%= @meta_description %>
+  </p>
+
+  <ul class="nav nav-tabs my-3">
+    <li class="nav-item">
+
+    </li>
+    <li class="nav-item ms-auto">
+      <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Sort
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item <%= 'active' if params[:sort] == 'last_synced_at' %>" href="<%= url_for(sort: 'last_synced_at', order: 'desc') %>">Recently synced</a></li>
+          <li><a class="dropdown-item <%= 'active' if params[:sort] == 'stars' %>" href="<%= url_for(sort: 'stars', order: 'desc') %>">Stars</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 
   <%= render @projects %>
   <%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %>  
