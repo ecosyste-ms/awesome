@@ -180,7 +180,7 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
-    minitest (5.25.0)
+    minitest (5.25.1)
     mocha (2.4.5)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.7.2)
@@ -292,7 +292,7 @@ GEM
       sprockets-rails
       tilt
     shoulda-context (2.0.0)
-    shoulda-matchers (6.3.1)
+    shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
     sidekiq (7.3.1)
       concurrent-ruby (< 2)
