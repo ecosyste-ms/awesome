@@ -35,6 +35,24 @@
         Released: <%= @topic.released %>
       </li>
     <% end %>
+    <% if @topic.related_topics.present? %>
+      <li>
+        Related Topics: <% @topic.related_topics.each do |topic| %>
+          <% if t = Topic.find_by_slug(topic) %>
+            <%= link_to topic, topic_path(topic) %>,
+          <% else %>
+            <%= link_to topic, "https://github.com/topics/#{topic}", target: :_blank %>,
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+    <% if @topic.aliases.present? %>
+      <li>
+        Aliases: <% @topic.aliases.each do |topic| %>
+          <%= link_to topic, "https://github.com/topics/#{topic}", target: :_blank %>,
+        <% end %>
+      </li>
+    <% end %>
     <li>
       Last updated: <%= @topic.updated_at %>
     </li>
