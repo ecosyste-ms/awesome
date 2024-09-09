@@ -201,6 +201,7 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     numerizer (0.1.1)
+    ostruct (0.6.0)
     pagy (9.0.9)
     pg (1.5.8)
     pg_query (5.1.0)
@@ -373,6 +374,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   mocha
+  ostruct
   pagy
   pg (~> 1.5)
   pg_query
@@ -400,7 +402,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.3.4p0
+   ruby 3.3.5p0
 
 BUNDLED WITH
    2.5.18
