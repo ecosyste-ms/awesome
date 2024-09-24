@@ -404,6 +404,14 @@ components:
             type: string
         works:
           type: object
+        categories:
+          type: array
+          items:
+            type: string
+        sub_categories:
+          type: array
+          items:
+            type: string
     List:
       type: object
       properties:

@@ -404,4 +404,12 @@ class Project < ApplicationRecord
       end
     end.compact
   end
+
+  def categories
+    list_projects.pluck(&:category).uniq.reject(&:empty?)
+  end
+
+  def sub_categories
+    list_projects.pluck(&:sub_category).uniq.reject(&:empty?)
+  end
 end
