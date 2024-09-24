@@ -15,6 +15,8 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     if params[:keyword].present?
       @projects = @projects.keyword(params[:keyword])
     end
+
+    @projects = @projects.includes(:list_projects)
     
     @pagy, @projects = pagy_countless(@projects)
     fresh_when(@projects, public: true)
