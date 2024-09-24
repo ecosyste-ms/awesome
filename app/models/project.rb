@@ -406,10 +406,10 @@ class Project < ApplicationRecord
   end
 
   def categories
-    list_projects.pluck(&:category).uniq.reject(&:empty?)
+    list_projects.pluck(:category).uniq.reject(&:empty?)
   end
 
   def sub_categories
-    list_projects.pluck(&:sub_category).uniq.reject(&:empty?)
+    list_projects.pluck(:sub_category).uniq.reject(&:empty?)
   end
 end
