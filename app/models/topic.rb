@@ -113,8 +113,8 @@ class Topic < ApplicationRecord
         logo_url: topic['logo'],
         released: topic['released'],
         wikipedia_url: topic['wikipedia_url'],
-        related_topics: topic['related'].split(',').map(&:strip),
-        aliases: topic['aliases'].split(',').map(&:strip),
+        related_topics: topic['related'],
+        aliases: topic['aliases'],
         github_url: topic['github_url'],
         content: topic['content']
       )
