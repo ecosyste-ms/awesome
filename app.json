@@ -11,6 +11,10 @@
     {
       "command": "bundle exec rake lists:discover",
       "schedule": "0 0 * * *"
+    },
+    {
+      "command": "bundle exec rake topics:load_from_github",
+      "schedule": "0 0 * * *"
     }
   ]
 }
