@@ -182,7 +182,7 @@ GEM
     minitest (5.25.1)
     mocha (2.4.5)
       ruby2_keywords (>= 0.0.5)
-    msgpack (1.7.2)
+    msgpack (1.7.3)
     net-http (0.4.1)
       uri
     net-imap (0.4.16)
