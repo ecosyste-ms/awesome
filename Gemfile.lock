@@ -207,7 +207,7 @@ GEM
     numerizer (0.1.1)
     ostruct (0.6.0)
     pagy (9.1.0)
-    pg (1.5.8)
+    pg (1.5.9)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
     pghero (3.6.1)
