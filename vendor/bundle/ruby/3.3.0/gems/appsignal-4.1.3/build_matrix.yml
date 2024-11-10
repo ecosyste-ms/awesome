@@ -1,0 +1,186 @@
+github:
+  name: Ruby gem CI
+  "on":
+    push:
+      branches: ["main", "develop"]
+    pull_request:
+      types: [opened, reopened, synchronize]
+    schedule:
+      - cron: "0 0 * * 1-5"
+
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: ${{ !contains(github.ref, 'main')}}
+
+  jobs:
+    lint-git:
+      name: "Git linter (Lintje)"
+      runs-on: ubuntu-latest
+      if: ${{ github.event_name != 'schedule' }}
+      steps:
+        - uses: actions/checkout@v4
+          with:
+            fetch-depth: 0 # Fetch depth is required
+        - name: "Run Git linter"
+          uses: lintje/action@v0.11
+
+    lint-style:
+      name: "Ruby style linter (RuboCop)"
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: ruby/setup-ruby@v1
+          with:
+            ruby-version: "3.3"
+            bundler-cache: true
+        - name: "Run RuboCop"
+          run: bundle exec rubocop
+
+    validation:
+      name: "Validation of CI"
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: ruby/setup-ruby@v1
+          with:
+            ruby-version: "3.3"
+            bundler-cache: true
+        - run: rake build_matrix:github:validate
+
+    integration_tests:
+      name: "Diagnose integration tests"
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+          with:
+            submodules: true
+        - uses: ruby/setup-ruby@v1
+          with:
+            ruby-version: "3.3"
+            bundler-cache: true
+        - name: "Install gem extension"
+          run: rake extension:install
+        - name: "Bundle install"
+          run: bundle install
+          working-directory: "spec/integration/diagnose"
+        - name: "Run diagnose integration tests"
+          run: bundle exec rspec
+          working-directory: "spec/integration/diagnose"
+          env:
+            LANGUAGE: ruby
+
+matrix:
+  env: # Shared for all jobs in the build matrix
+    RAILS_ENV: "test"
+    JRUBY_OPTS: ""
+    COV: "1"
+
+  gemsets: # By default all gems are tested
+    none:
+      - "no_dependencies"
+    minimal:
+      - "no_dependencies"
+      - "rails-6.0"
+      - "rails-6.1"
+      - "rails-7.0"
+      - "rails-7.1"
+      - "rails-7.2"
+
+  ruby:
+    - ruby: "3.3.4"
+    - ruby: "3.2.5"
+    - ruby: "3.1.6"
+    - ruby: "3.0.7"
+    - ruby: "2.7.8"
+    - ruby: "jruby-9.4.7.0"
+      gems: "minimal"
+  gems:
+    - gem: "no_dependencies"
+    - gem: "capistrano2"
+    - gem: "capistrano3"
+    - gem: "dry-monitor"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+    - gem: "grape"
+    - gem: "hanami-2.0"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+    - gem: "hanami-2.1"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+    - gem: "http5"
+    - gem: "padrino"
+    - gem: "psych-3"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+          - "2.7.8"
+    - gem: "psych-4"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+          - "2.7.8"
+    - gem: "que-1"
+    - gem: "que-2"
+    - gem: "rails-6.0"
+      only:
+        ruby:
+          - "3.0.7"
+          - "2.7.8"
+          - "jruby-9.4.7.0"
+    - gem: "rails-6.1"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+          - "2.7.8"
+          - "jruby-9.4.7.0"
+    - gem: "rails-7.0"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+          - "2.7.8"
+          - "jruby-9.4.7.0"
+    - gem: "rails-7.1"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "3.0.7"
+          - "jruby-9.4.7.0"
+    - gem: "rails-7.2"
+      only:
+        ruby:
+          - "3.3.4"
+          - "3.2.5"
+          - "3.1.6"
+          - "jruby-9.4.7.0"
+    - gem: "sequel"
+    - gem: "sinatra"
+    - gem: "webmachine2"
+    - gem: "redis-4"
+    - gem: "redis-5"

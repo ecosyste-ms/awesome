@@ -1,0 +1,38 @@
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/appsignal-4.1.3/ext
+/opt/hostedtoolcache/Ruby/3.3.5/x64/bin/ruby extconf.rb
+checking for -lpthread... yes
+checking for pthread_create()... yes
+checking for -ldl... yes
+checking for dlopen()... yes
+checking for dlclose()... yes
+checking for dlsym()... yes
+checking for appsignal_start() in -lappsignal... yes
+checking for appsignal-agent in /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/appsignal-4.1.3/ext... yes
+creating Makefile
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/appsignal-4.1.3/ext
+make DESTDIR\= sitearchdir\=./.gem.20241108-2370-4rbi7j sitelibdir\=./.gem.20241108-2370-4rbi7j clean
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/appsignal-4.1.3/ext
+make DESTDIR\= sitearchdir\=./.gem.20241108-2370-4rbi7j sitelibdir\=./.gem.20241108-2370-4rbi7j
+compiling appsignal_extension.c
+appsignal_extension.c: In function ‘install_allocation_event_hook’:
+appsignal_extension.c:824:14: warning: old-style function definition [-Wold-style-definition]
+  824 | static VALUE install_allocation_event_hook() {
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+appsignal_extension.c: In function ‘running_in_container’:
+appsignal_extension.c:837:14: warning: old-style function definition [-Wold-style-definition]
+  837 | static VALUE running_in_container() {
+      |              ^~~~~~~~~~~~~~~~~~~~
+appsignal_extension.c: At top level:
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+linking shared-object appsignal_extension.so
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/appsignal-4.1.3/ext
+make DESTDIR\= sitearchdir\=./.gem.20241108-2370-4rbi7j sitelibdir\=./.gem.20241108-2370-4rbi7j install
+/usr/bin/install -c -m 0755 appsignal_extension.so ./.gem.20241108-2370-4rbi7j
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/appsignal-4.1.3/ext
+make DESTDIR\= sitearchdir\=./.gem.20241108-2370-4rbi7j sitelibdir\=./.gem.20241108-2370-4rbi7j clean

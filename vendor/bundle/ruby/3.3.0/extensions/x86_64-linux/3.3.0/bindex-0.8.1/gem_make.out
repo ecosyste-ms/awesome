@@ -1,0 +1,18 @@
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/bindex-0.8.1/ext/skiptrace
+/opt/hostedtoolcache/Ruby/3.3.5/x64/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-8j0osc sitelibdir\=./.gem.20240909-2407-8j0osc clean
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-8j0osc sitelibdir\=./.gem.20240909-2407-8j0osc
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-8j0osc sitelibdir\=./.gem.20240909-2407-8j0osc install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20240909-2407-8j0osc/skiptrace/internal
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-8j0osc sitelibdir\=./.gem.20240909-2407-8j0osc clean

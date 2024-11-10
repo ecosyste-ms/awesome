@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+
+require File.expand_path("base.rb", __dir__)
+
+def local_build?
+  File.exist?(ext_path("appsignal-agent")) &&
+    (
+      File.exist?(ext_path("libappsignal.dylib")) ||
+      File.exist?(ext_path("libappsignal.so"))
+    ) &&
+    File.exist?(ext_path("appsignal.h"))
+end
+
+task :default do
+  fail_install_on_purpose_in_test!
+
+  library_type = "dynamic"
+  report["language"]["implementation"] = "jruby"
+  report["language"]["implementation_version"] = JRUBY_VERSION
+  report["build"]["library_type"] = library_type
+  next unless check_architecture
+
+  if local_build?
+    report["build"]["source"] = "local"
+  else
+    archive = download_archive(library_type)
+    next unless archive
+    next unless verify_archive(archive, library_type)
+
+    unarchive(archive)
+  end
+
+  # Have the extension loader raise the error if it encountes a problem
+  ENV["_APPSIGNAL_EXTENSION_INSTALL"] = "true"
+  # Load the extension to test if all functions can be "attached" with FFI
+  require File.expand_path("../lib/appsignal/extension/jruby.rb", __dir__)
+
+  successful_installation
+rescue StandardError, LoadError => e
+  fail_installation_with_error(e)
+ensure
+  create_dummy_makefile unless installation_succeeded?
+  write_report
+end
