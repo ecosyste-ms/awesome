@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
+require "appsignal/cli"
+
+begin
+  Appsignal::CLI.run
+rescue => e
+  raise e if $DEBUG
+
+  warn e.message
+  warn e.backtrace.join("\n")
+  exit 1
+end

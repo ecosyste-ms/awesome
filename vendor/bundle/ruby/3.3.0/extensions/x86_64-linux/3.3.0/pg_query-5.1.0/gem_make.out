@@ -1,0 +1,711 @@
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query
+/opt/hostedtoolcache/Ruby/3.3.5/x64/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-4mur12 sitelibdir\=./.gem.20240909-2407-4mur12 clean
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-4mur12 sitelibdir\=./.gem.20240909-2407-4mur12
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query.c:2:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query.c: In function ‘pg_query_enter_memory_context’:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query.c:78:15: warning: old-style function definition [-Wold-style-definition]
+   78 | MemoryContext pg_query_enter_memory_context()
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query.c: At top level:
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query.pb-c.c
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_deparse.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_deparse.c:2:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_fingerprint.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_fingerprint.c:4:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_json_plpgsql.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_json_plpgsql.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_json_plpgsql.c:2:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_normalize.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_normalize.c:2:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_outfuncs_json.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_outfuncs_json.c:3:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_outfuncs_protobuf.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_outfuncs_protobuf.c:3:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_parse.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_parse.c:2:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_parse_plpgsql.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_parse_plpgsql.c:4:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_readfuncs_protobuf.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_readfuncs.h:6,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_readfuncs_protobuf.c:1:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c: In function ‘raise_ruby_parse_error’:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c:34:6: warning: function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+   34 | void raise_ruby_parse_error(PgQueryProtobufParseResult result)
+      |      ^~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c: In function ‘raise_ruby_deparse_error’:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c:52:6: warning: function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+   52 | void raise_ruby_deparse_error(PgQueryDeparseResult result)
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c: In function ‘raise_ruby_normalize_error’:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c:70:6: warning: function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+   70 | void raise_ruby_normalize_error(PgQueryNormalizeResult result)
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c: In function ‘raise_ruby_fingerprint_error’:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c:88:6: warning: function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+   88 | void raise_ruby_fingerprint_error(PgQueryFingerprintResult result)
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c: In function ‘raise_ruby_scan_error’:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c:106:6: warning: function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+  106 | void raise_ruby_scan_error(PgQueryScanResult result)
+      |      ^~~~~~~~~~~~~~~~~~~~~
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_ruby.c: At top level:
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_scan.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_scan.c:2:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_split.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_internal.h:4,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/pg_query_split.c:2:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/postgres_deparse.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/postgres_deparse.c:1:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/protobuf-c.c
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_catalog_namespace.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_catalog_namespace.c:27:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_catalog_pg_proc.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_catalog_pg_proc.c:21:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_commands_define.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_commands_define.c:39:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_bitmapset.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_bitmapset.c:29:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_copyfuncs.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_copyfuncs.c:26:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_equalfuncs.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_equalfuncs.c:31:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_extensible.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_extensible.c:27:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_list.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_list.c:43:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_makefuncs.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_makefuncs.c:38:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_nodeFuncs.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_nodeFuncs.c:23:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_nodes.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_nodes.c:25:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_value.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_nodes_value.c:25:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_parser_gram.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from gram.y:46:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_parser_parser.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_parser_parser.c:34:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_parser_scan.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from scan.c:32:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_parser_scansup.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_parser_scansup.c:24:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_storage_ipc_ipc.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_storage_ipc_ipc.c:27:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_tcop_postgres.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_tcop_postgres.c:33:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_activity_pgstat_database.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_activity_pgstat_database.c:24:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_datum.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_datum.c:51:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_expandeddatum.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_expandeddatum.c:23:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_format_type.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_format_type.c:22:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_numutils.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_numutils.c:22:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_ruleutils.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_adt_ruleutils.c:23:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_error_assert.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_error_assert.c:21:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_error_elog.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_error_elog.c:108:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_fmgr_fmgr.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_fmgr_fmgr.c:22:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_init_globals.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_init_globals.c:29:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mb_mbutils.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mb_mbutils.c:59:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_misc_guc_tables.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_misc_guc_tables.c:29:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_alignedalloc.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_alignedalloc.c:28:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_aset.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_aset.c:66:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_generation.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_generation.c:56:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_mcxt.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_mcxt.c:67:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_slab.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_backend_utils_mmgr_slab.c:87:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_encnames.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_encnames.c:19:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_hashfn.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_hashfn.c:30:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_keywords.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_keywords.c:22:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_kwlookup.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_kwlookup.c:22:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_psprintf.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_psprintf.c:26:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_stringinfo.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_stringinfo.c:34:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_wchar.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_common_wchar.c:97:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_comp.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_comp.c:52:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_funcs.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_funcs.c:62:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_gram.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from pl_gram.y:16:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_handler.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_handler.c:23:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_scanner.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/postgres.h:45,
+                 from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_pl_plpgsql_src_pl_scanner.c:50:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_pg_bitutils.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_pg_bitutils.c:25:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_pgstrcasecmp.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_pgstrcasecmp.c:34:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_qsort.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_qsort.c:11:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_snprintf.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_snprintf.c:62:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_strerror.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_strerror.c:23:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_strlcpy.c
+In file included from /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/src_port_strlcpy.c:41:
+/home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/include/postgres/c.h:141:5: warning: "__clang_major__" is not defined, evaluates to 0 [-Wundef]
+  141 | #if __clang_major__ >= 7 || __GNUC__ >= 8
+      |     ^~~~~~~~~~~~~~~
+cc1: note: unrecognized command-line option ‘-Wno-unknown-warning-option’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-self-assign’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-parentheses-equality’ may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option ‘-Wno-constant-logical-operand’ may have been intended to silence earlier diagnostics
+compiling /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query/xxhash.c
+linking shared-object pg_query/pg_query.so
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-4mur12 sitelibdir\=./.gem.20240909-2407-4mur12 install
+/usr/bin/install -c -m 0755 pg_query.so ./.gem.20240909-2407-4mur12/pg_query
+
+current directory: /home/runner/work/awesome/awesome/vendor/bundle/ruby/3.3.0/gems/pg_query-5.1.0/ext/pg_query
+make DESTDIR\= sitearchdir\=./.gem.20240909-2407-4mur12 sitelibdir\=./.gem.20240909-2407-4mur12 clean

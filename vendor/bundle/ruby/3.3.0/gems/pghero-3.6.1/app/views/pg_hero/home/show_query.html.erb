@@ -1,0 +1,110 @@
+<div class="content">
+  <pre><code class="query-code"><%= @query %></code></pre>
+  <%= javascript_tag nonce: true do %>
+    highlightQueries()
+  <% end %>
+
+  <% if @explain_enabled && @explainable_query %>
+    <p>
+      <%= button_to "Explain", explain_path, params: {query: @explainable_query}, form: {target: "_blank"}, class: "btn btn-info" %>
+    </p>
+  <% end %>
+
+  <% if @origins && @origins.keys.select { |k| k.length > 0 }.any? %>
+    <table class="origins-table">
+      <thead>
+        <tr>
+          <th colspan="2">
+            <div class="push-right">Approx. Time</div>
+            Origin
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @origins.sort_by { |o, c| [-c, o.to_s] }.each do |origin, count| %>
+          <tr>
+            <td class="origin">
+              <% if origin.length > 0 %>
+                <%= origin %>
+              <% else %>
+                <span class="text-muted">Unknown</span>
+              <% end %>
+            </td>
+            <td class="origin-pct">
+              <% pct = (100.0 * count / @total_count).round %>
+              <% if pct == 0 %>
+                &lt; 1%
+              <% else %>
+                <%= pct %>%
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <!-- chart -->
+  <% if @chart_data %>
+    <h1>Total Time <small>ms</small></h1>
+    <div id="chart-1" class="chart">Loading...</div>
+    <%= javascript_tag nonce: true do %>
+      new Chartkick.LineChart("chart-1", <%= pghero_js_value(@chart_data) %>, {colors: ["#5bc0de"], legend: false, library: {plugins: {tooltip: {intersect: false, mode: "index"}}}})
+    <% end %>
+
+    <h1>Average Time <small>ms</small></h1>
+    <div id="chart-2" class="chart">Loading...</div>
+    <%= javascript_tag nonce: true do %>
+      new Chartkick.LineChart("chart-2", <%= pghero_js_value(@chart2_data) %>, {colors: ["#5bc0de"], legend: false, library: {plugins: {tooltip: {intersect: false, mode: "index"}}}})
+    <% end %>
+
+    <h1>Calls</h1>
+    <div id="chart-3" class="chart">Loading...</div>
+    <%= javascript_tag nonce: true do %>
+      new Chartkick.LineChart("chart-3", <%= pghero_js_value(@chart3_data) %>, {colors: ["#5bc0de"], legend: false, library: {plugins: {tooltip: {intersect: false, mode: "index"}}}})
+    <% end %>
+  <% else %>
+    <p>
+      Enable
+      <%= link_to "historical query stats", "https://github.com/ankane/pghero", target: "_blank" %>
+      to see more details
+    </p>
+  <% end %>
+
+  <!-- table info -->
+  <% if @tables.any? %>
+    <h1>Tables</h1>
+    <table>
+      <thead>
+        <tr>
+          <th class="width-25">Name</th>
+          <th class="width-25">Rows</th>
+          <th>Indexes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tables.each do |table| %>
+          <tr>
+            <td><%= table %></td>
+            <td><%= number_with_delimiter(@row_counts[table]) if @row_counts[table] %></td>
+            <td>
+              <% if @indexes_timeout %>
+                Not available
+              <% else %>
+                <ul>
+                  <% @indexes_by_table[table].to_a.sort_by { |i| [i[:primary] ? 0 : 1, i[:columns]] }.each do |i3| %>
+                    <li>
+                      <%= i3[:columns].join(", ") %><% if i3[:using] != "btree" %>
+                      <%= i3[:using].to_s.upcase %><% end %>
+                      <% if i3[:primary] %> PRIMARY<% elsif i3[:unique] %> UNIQUE<% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
