@@ -10,13 +10,10 @@ permissions:
   pull-requests: write
 
 jobs:
-  upgrade:
+  upgrade-ruby:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run Ruby Upgrade Action
-        uses: andrew/ruby-upgrade-action@main
+      - uses: actions/checkout@v4
+      - uses: andrew/ruby-upgrade-action@main
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
