@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :jobs
 
-      resources :topics, only: [:index, :show]
+      resources :topics, only: [:index, :show] do
+        collection do
+          get :suggestions
+        end
+      end
 
       resources :lists, constraints: { id: /.*/ }, only: [:index, :show] do
         resources :list_projects, only: [:index]
