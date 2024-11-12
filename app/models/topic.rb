@@ -31,7 +31,8 @@ class Topic < ApplicationRecord
                     'Jamstack', 'Oracle Database', 'Node.js', 'Git', 'Apache Cassandra', 'Steganography', 'Simple DirectMedia Layer',
                     'Climate change', 'Mazes', 'eBPF', 'UEFI', 'FIRST', 'Batch file', 'Creative Commons License',
                     'Open Access', 'Christianity', 'Finite Element Method (FEM)', 'The Gene Ontology Consortium',
-                    'Document Object Model (DOM)', 'Awesome Lists']
+                    'Document Object Model (DOM)', 'Awesome Lists', 'Windows', 'Discord.JS', 'Chrome', 'End-to-End Encryption',
+                    'Windows UI Library (WinUI)', 'Discord Bots (Extensions)']
   EXCLUDED_COMPANIES = ['GitHub', 'Amazon Web Services', 'Discord', 'Azure', 'Heroku', 'Telegram', 'Android Studio',
                          'Twitter', 'Linux', 'Debian', 'Instagram', 'Slack', 'Docker','Netlify', 'Ubuntu',
                       'Facebook', 'Microsoft', 'Apple', 'Firefox', 'Twitch', 'Reddit', 'Cloudflare', 'HackerRank',
@@ -40,9 +41,10 @@ class Topic < ApplicationRecord
                     'Unreal Engine', 'Sublime Text', 'Azure DevOps', 'Ansible', 'Maven', 'Notion',
                     'Nvidia', 'BigQuery', 'Binance', 'Fedora','Android', '.NET', 'TikTok', 'Edge', 'Stack Overflow', 'tvOS',
                     'EPITECH', 'CodeChef', 'Medium', 'Algolia', 'Mozilla', 'MyAnimeList', 'ITMO', 'DuckDuckGo', 'Apple Music',
-                  'Blogger', 'Spotify']
+                  'Blogger', 'Spotify', 'YouTube', 'WhatsApp', 'Auth0', 'Contentful', 'SoundCloud', 'ZEIT', 'FIRST Tech Challenge']
   EXCLUDED_GAMES = ['Minecraft', 'Minecraft Mod', 'Minecraft Server', 'League of Legends', "Garry's Mod", 'VALORANT',
-                    'Geometry Dash', 'Elite Dangerous', 'Guild Wars 2', 'Space Station 13', 'Riot Games', 'FlightGear' ]
+                    'Geometry Dash', 'Elite Dangerous', 'Guild Wars 2', 'Space Station 13', 'Riot Games', 'FlightGear', 'Bukkit',
+                   'Js13kGames', 'Minecraft Forge', 'Factorio', 'Minetest', 'Ludum Dare', 'PocketMine-MP', 'ComputerCraft']
 
   def to_param
     slug

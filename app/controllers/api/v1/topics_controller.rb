@@ -14,7 +14,7 @@ class Api::V1::TopicsController < Api::V1::ApplicationController
   end
 
   def suggestions
-    scope = Topic.where('github_count > 9').order(github_count: :desc).not_language.suggestable.not_google.other_excluded.with_github_url
+    scope = Topic.where('github_count > 99').order(github_count: :desc).not_language.suggestable.not_google.other_excluded.with_github_url
     @pagy, @topics = pagy(scope)
     render :index
   end
