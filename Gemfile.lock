@@ -273,7 +273,7 @@ GEM
       psych (>= 4.0.0)
     redis-client (0.22.2)
       connection_pool
-    reline (0.5.11)
+    reline (0.5.12)
       io-console (~> 0.5)
     rexml (3.3.9)
     rswag-api (2.16.0)
