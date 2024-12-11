@@ -272,7 +272,7 @@ GEM
     rb_sys (0.9.103)
     rdoc (6.8.1)
       psych (>= 4.0.0)
-    redis-client (0.22.2)
+    redis-client (0.23.0)
       connection_pool
     reline (0.5.12)
       io-console (~> 0.5)
