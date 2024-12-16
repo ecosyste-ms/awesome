@@ -276,7 +276,7 @@ GEM
       connection_pool
     reline (0.5.12)
       io-console (~> 0.5)
-    rexml (3.3.9)
+    rexml (3.4.0)
     rswag-api (2.16.0)
       activesupport (>= 5.2, < 8.1)
       railties (>= 5.2, < 8.1)
