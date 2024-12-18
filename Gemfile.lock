@@ -74,7 +74,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    appsignal (4.2.1)
+    appsignal (4.2.3)
       logger
       rack
     autoprefixer-rails (10.4.19.0)
@@ -109,9 +109,9 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
-    dotenv (3.1.6)
-    dotenv-rails (3.1.6)
-      dotenv (= 3.1.6)
+    dotenv (3.1.7)
+    dotenv-rails (3.1.7)
+      dotenv (= 3.1.7)
       railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
@@ -156,7 +156,7 @@ GEM
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     io-console (0.8.0)
-    irb (1.14.2)
+    irb (1.14.3)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     iso-639 (0.3.8)
@@ -188,7 +188,7 @@ GEM
     msgpack (1.7.5)
     net-http (0.6.0)
       uri
-    net-imap (0.5.1)
+    net-imap (0.5.2)
       date
       net-protocol
     net-pop (0.1.2)
@@ -215,7 +215,7 @@ GEM
     pghero (3.6.1)
       activerecord (>= 6.1)
     popper_js (2.11.8)
-    psych (5.2.1)
+    psych (5.2.2)
       date
       stringio
     public_suffix (6.0.1)
@@ -270,11 +270,11 @@ GEM
       zeitwerk (~> 2.6)
     rake (13.2.1)
     rb_sys (0.9.103)
-    rdoc (6.9.0)
+    rdoc (6.10.0)
       psych (>= 4.0.0)
     redis-client (0.23.0)
       connection_pool
-    reline (0.5.12)
+    reline (0.6.0)
       io-console (~> 0.5)
     rexml (3.4.0)
     rswag-api (2.16.0)
@@ -296,7 +296,7 @@ GEM
     shoulda-context (2.0.0)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.3.6)
+    sidekiq (7.3.7)
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
@@ -409,4 +409,4 @@ RUBY VERSION
    ruby 3.3.6p108
 
 BUNDLED WITH
-   2.5.23
+   2.6.1
