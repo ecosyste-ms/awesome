@@ -33,6 +33,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   end
 
   def lookup
+    raise ActionController::BadRequest.new('URL is required') unless params[:url].present?
     @project = Project.find_by(url: params[:url].downcase)
     if @project.nil?
       @project = Project.create(url: params[:url].downcase)
