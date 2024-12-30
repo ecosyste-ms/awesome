@@ -10,6 +10,7 @@ require 'sidekiq/testing'
 Sidekiq::Testing.fake!
 
 class ActiveSupport::TestCase
+  include FactoryBot::Syntax::Methods
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
       with.test_framework :minitest

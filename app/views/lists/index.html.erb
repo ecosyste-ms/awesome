@@ -1,6 +1,10 @@
 <% @meta_title = "Awesome #{params[:topic]} #{params[:language]} #{params[:query]} Lists" %>
 <% @meta_description = "A curated list of awesome lists for every topic, language and framework." %>
 
+<% content_for :head do %>
+  <%= tag(:link, rel: "alternate", type: "application/rss+xml", title: "Awesome Lists RSS Feed", href: lists_url(format: :rss)) %>
+<% end %>
+
 <div class="container-md">
   <h2>
     <%= number_with_delimiter @pagy.count %>

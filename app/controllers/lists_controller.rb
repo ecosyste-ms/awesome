@@ -25,8 +25,18 @@ class ListsController < ApplicationController
       scope = scope.order_by_stars
     end
 
-    @pagy, @lists = pagy_countless(scope)
-    fresh_when(@lists, public: true)
+    respond_to do |format|
+      format.html do
+        @pagy, @lists = pagy_countless(scope)
+        fresh_when(@lists, public: true)
+      end
+      format.rss do
+        scope = scope.order(created_at: :desc)
+        @pagy, @lists = pagy(scope, items: 100)
+        fresh_when(@lists, public: true)
+        render layout: false
+      end
+    end
   end
 
   def show
