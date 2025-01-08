@@ -13,3 +13,4 @@ production:
     - Pagy::VariableError
     - Pagy::OverflowError 
     - ActiveRecord::StatementInvalid
+    - ActionController::BadRequest

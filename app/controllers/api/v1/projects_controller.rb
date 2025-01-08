@@ -36,9 +36,14 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     raise ActionController::BadRequest.new('URL is required') unless params[:url].present?
     @project = Project.find_by(url: params[:url].downcase)
     if @project.nil?
-      @project = Project.create(url: params[:url].downcase)
-      @project.sync_async
+      begin
+        @project = Project.create(url: params[:url].downcase)
+        @project.sync_async
+      rescue ActiveRecord::RecordNotUnique
+        @project = Project.find_by(url: params[:url].downcase)
+      end
     end
+    raise ActionController::NotFound.new('Project not found') if @project.nil?
     @project.sync_async if @project.last_synced_at.nil? || @project.last_synced_at < 1.day.ago
     fresh_when(@project, public: true)
   end
