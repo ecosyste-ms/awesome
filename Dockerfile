@@ -1,7 +1,7 @@
 FROM ruby:3.4.1-alpine
 
-ENV APP_ROOT /usr/src/app
-ENV DATABASE_PORT 5432
+ENV APP_ROOT=/usr/src/app
+ENV DATABASE_PORT=5432
 WORKDIR $APP_ROOT
 
 # * Setup system
