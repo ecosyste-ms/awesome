@@ -279,7 +279,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.2.1)
-    rb_sys (0.9.107)
+    rb_sys (0.9.108)
     rdoc (6.10.0)
       psych (>= 4.0.0)
     redis-client (0.23.1)
@@ -530,7 +530,7 @@ CHECKSUMS
   rails-html-sanitizer (1.6.2) sha256=35fce2ca8242da8775c83b6ba9c1bcaad6751d9eb73c1abaa8403475ab89a560
   railties (8.0.1) sha256=8f653c6b1b0721b553045bd0deda1f22074b9ddc2209526e6f7285fcf607ac51
   rake (13.2.1) sha256=46cb38dae65d7d74b6020a4ac9d48afed8eb8149c040eccf0523bec91907059d
-  rb_sys (0.9.107) sha256=f1a2fb89c3320e8b8075dbf3353c66b1f0e3fab17ac834579bb1fe56c49f40f6
+  rb_sys (0.9.108) sha256=014b9ca71bf84f61e79c8b1111c0aec8851571205486c4b83d22ab1bfb7101d4
   rdoc (6.10.0) sha256=db665021883ac9df3ba29cdf71aece960749888db1bf9615b4a584cfa3fa3eda
   redis-client (0.23.1) sha256=da8c8d327e41ac0a5f5fa6916539dfc4675997a968791a5acb44df9c710e8cf5
   reline (0.6.0) sha256=57620375dcbe56ec09bac7192bfb7460c716bbf0054dc94345ecaa5438e539d2
