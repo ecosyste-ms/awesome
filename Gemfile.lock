@@ -280,7 +280,7 @@ GEM
       zeitwerk (~> 2.6)
     rake (13.2.1)
     rb_sys (0.9.107)
-    rdoc (6.10.0)
+    rdoc (6.11.0)
       psych (>= 4.0.0)
     redis-client (0.23.1)
       connection_pool
@@ -531,7 +531,7 @@ CHECKSUMS
   railties (8.0.1) sha256=8f653c6b1b0721b553045bd0deda1f22074b9ddc2209526e6f7285fcf607ac51
   rake (13.2.1) sha256=46cb38dae65d7d74b6020a4ac9d48afed8eb8149c040eccf0523bec91907059d
   rb_sys (0.9.107) sha256=f1a2fb89c3320e8b8075dbf3353c66b1f0e3fab17ac834579bb1fe56c49f40f6
-  rdoc (6.10.0) sha256=db665021883ac9df3ba29cdf71aece960749888db1bf9615b4a584cfa3fa3eda
+  rdoc (6.11.0) sha256=bec66fb9b019be64f7ba7d2cd2aecb283a3a01fef23a95b33e2349c6d1aa0040
   redis-client (0.23.1) sha256=da8c8d327e41ac0a5f5fa6916539dfc4675997a968791a5acb44df9c710e8cf5
   reline (0.6.0) sha256=57620375dcbe56ec09bac7192bfb7460c716bbf0054dc94345ecaa5438e539d2
   rexml (3.4.0) sha256=efbea1efba7fa151158e0ee1e643525834da2d8eb4cf744aa68f6480bc9804b2
