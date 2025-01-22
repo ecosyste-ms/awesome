@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
     end
 
     @pagy, @projects = pagy_countless(@scope)
+    raise ActiveRecord::RecordNotFound if @projects.empty?
     fresh_when(@projects, public: true)
   end
 
