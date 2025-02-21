@@ -74,7 +74,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    appsignal (4.4.0)
+    appsignal (4.5.0)
       logger
       rack
     autoprefixer-rails (10.4.19.0)
@@ -338,7 +338,7 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    stringio (3.1.4)
+    stringio (3.1.5)
     thor (1.3.2)
     tilt (2.6.0)
     timeout (0.4.3)
@@ -439,7 +439,7 @@ CHECKSUMS
   activestorage (8.0.1) sha256=91a8f156638568fac971ff25962a617d9c58fdc0e44eb6bd0edff36aff7df205
   activesupport (8.0.1) sha256=fd5bc74641c24ac3541055c2879789198ff42adee3e39c2933289ba008912e37
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
-  appsignal (4.4.0) sha256=9ef41aec69b81df7cc1547b80f834f86df3b2de927aad08d662393f1eeea1862
+  appsignal (4.5.0) sha256=9dd7d630eebdcd4941ecc09478621d2fcfcf844d945b70619aafe570fdac484a
   autoprefixer-rails (10.4.19.0) sha256=ccd21f47e5a07a581c7d239025e0d8d06a005825e96e06f72382d818fe665f4e
   base64 (0.2.0) sha256=0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
   benchmark (0.4.0) sha256=0f12f8c495545e3710c3e4f0480f63f06b4c842cc94cec7f33a956f5180e874a
@@ -561,7 +561,7 @@ CHECKSUMS
   sitemap_generator (6.3.0) sha256=1d803cbf03c44736bea05b9e3363d3523fec4e24f3abedad294d9c57cab994f3
   sprockets (4.2.1) sha256=951b13dd2f2fcae840a7184722689a803e0ff9d2702d902bd844b196da773f97
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
-  stringio (3.1.4) sha256=7dd68f6f1a88610817c21f6d926dbf36e1fc585d3869fcd4a56c1f3210591d70
+  stringio (3.1.5) sha256=bca92461515a131535743bc81d5559fa1de7d80cff9a654d6c0af6f9f27e35c8
   thor (1.3.2) sha256=eef0293b9e24158ccad7ab383ae83534b7ad4ed99c09f96f1a6b036550abbeda
   tilt (2.6.0) sha256=263d748466e0d83e510aa1a2e2281eff547937f0ef06be33d3632721e255f76b
   timeout (0.4.3) sha256=9509f079b2b55fe4236d79633bd75e34c1c1e7e3fb4b56cb5fda61f80a0fe30e
@@ -584,4 +584,4 @@ RUBY VERSION
    ruby 3.4.2p28
 
 BUNDLED WITH
-   2.6.4
+   2.6.5
