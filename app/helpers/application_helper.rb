@@ -6,7 +6,15 @@ module ApplicationHelper
   end
 
   def meta_description
-    @meta_description || 'An open API service indexing awesome lists of open source software.'
+    @meta_description || app_description
+  end
+
+  def app_name
+    "Awesome"
+  end
+
+  def app_description
+    'An open API service indexing awesome lists of open source software.'
   end
 
   def obfusticate_email(email)
