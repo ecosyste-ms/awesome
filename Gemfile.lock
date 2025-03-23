@@ -74,7 +74,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    appsignal (4.5.5)
+    appsignal (4.5.7)
       logger
       rack (>= 2.0.0)
     autoprefixer-rails (10.4.19.0)
@@ -102,14 +102,14 @@ GEM
     cld3 (3.7.0)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
-    counter_culture (3.8.2)
+    counter_culture (3.9.0)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
     crack (1.0.0)
       bigdecimal
       rexml
     crass (1.0.6)
-    csv (3.3.2)
+    csv (3.3.3)
     date (3.4.1)
     debug (1.10.0)
       irb (~> 1.10)
@@ -210,17 +210,17 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.4-aarch64-linux-musl)
+    nokogiri (1.18.5-aarch64-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.4-arm-linux-gnu)
+    nokogiri (1.18.5-arm-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.4-arm-linux-musl)
+    nokogiri (1.18.5-arm-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.4-arm64-darwin)
+    nokogiri (1.18.5-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.4-x86_64-linux-gnu)
+    nokogiri (1.18.5-x86_64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.4-x86_64-linux-musl)
+    nokogiri (1.18.5-x86_64-linux-musl)
       racc (~> 1.4)
     numerizer (0.1.1)
     ostruct (0.6.1)
@@ -228,7 +228,7 @@ GEM
     pg (1.5.9)
     pg_query (6.0.0)
       google-protobuf (>= 3.25.3)
-    pghero (3.6.1)
+    pghero (3.6.2)
       activerecord (>= 6.1)
     popper_js (2.11.8)
     pp (0.6.2)
@@ -445,7 +445,7 @@ CHECKSUMS
   activestorage (8.0.2) sha256=f83d221e0f06ae38f2200e55490bd155c76d0add330f6e300e8646048d672977
   activesupport (8.0.2) sha256=8565cddba31b900cdc17682fd66ecd020441e3eef320a9930285394e8c07a45e
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
-  appsignal (4.5.5) sha256=7c57666a038dfa7f3af6e3c4cb74503b9acaffc4abaecd107e075e9eb8e1fb4b
+  appsignal (4.5.7) sha256=f45147e8b700e0c77c685e4cf62ed36c90aa6877a1e9db218132d6168e64ca97
   autoprefixer-rails (10.4.19.0) sha256=ccd21f47e5a07a581c7d239025e0d8d06a005825e96e06f72382d818fe665f4e
   base64 (0.2.0) sha256=0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
   benchmark (0.4.0) sha256=0f12f8c495545e3710c3e4f0480f63f06b4c842cc94cec7f33a956f5180e874a
@@ -461,10 +461,10 @@ CHECKSUMS
   cld3 (3.7.0) sha256=b736858fc95305319355448e5783bfdbb1dcc8bcc61ab266d5d26b38ff3ec59a
   concurrent-ruby (1.3.5) sha256=813b3e37aca6df2a21a3b9f1d497f8cbab24a2b94cab325bffe65ee0f6cbebc6
   connection_pool (2.5.0) sha256=233b92f8d38e038c1349ccea65dd3772727d669d6d2e71f9897c8bf5cd53ebfc
-  counter_culture (3.8.2) sha256=24d038740fc9e5546cda2b8a17e83e7778ab73bcc959b7a3bd807e4cf6250072
+  counter_culture (3.9.0) sha256=f8b6aa6949ce57809a90f2702e5283fbb1d1e33bdfa67f645950556f2c4d64c2
   crack (1.0.0) sha256=c83aefdb428cdc7b66c7f287e488c796f055c0839e6e545fec2c7047743c4a49
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
-  csv (3.3.2) sha256=6ff0c135e65e485d1864dde6c1703b60d34cc9e19bed8452834a0b28a519bd4e
+  csv (3.3.3) sha256=7e2966befb7bdaf7d5e9b36e1de73e6a5e7a72f584f180a1726aec88a1b0a900
   date (3.4.1) sha256=bf268e14ef7158009bfeaec40b5fa3c7271906e88b196d958a89d4b408abe64f
   debug (1.10.0) sha256=11e28ca74875979e612444104f3972bd5ffb9e79179907d7ad46dba44bd2e7a4
   dotenv (3.1.7) sha256=c670df478675d23889e657beaca6fb423228f75ce9f052a0690c0d0daa333cf3
@@ -516,18 +516,18 @@ CHECKSUMS
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
   net-smtp (0.5.1) sha256=ed96a0af63c524fceb4b29b0d352195c30d82dd916a42f03c62a3a70e5b70736
   nio4r (2.7.4) sha256=d95dee68e0bb251b8ff90ac3423a511e3b784124e5db7ff5f4813a220ae73ca9
-  nokogiri (1.18.4-aarch64-linux-musl) sha256=4e231f8ba3128cfc2ef0cc0bdc807d7ce71fc62cb6a78216e817be8631fe6a96
-  nokogiri (1.18.4-arm-linux-gnu) sha256=cc2945e2c19560a61a97737e6bd3b329edb1f82ca204d46a18e5e98ad0a550a6
-  nokogiri (1.18.4-arm-linux-musl) sha256=4fb7f44de0cd85abfa869e4cfb619410da174ebf9fbe26ae0caa65462b818bcb
-  nokogiri (1.18.4-arm64-darwin) sha256=73902663b23b1123282b9c0b6d9654b1fb286dfee8d65cb1f6029087b7f0d037
-  nokogiri (1.18.4-x86_64-linux-gnu) sha256=b1c6407b346b88704e97a342a80acd4755175324e624da34d0c5cfdc8d34191e
-  nokogiri (1.18.4-x86_64-linux-musl) sha256=ea7c0356a70f3d2d0d76315b533877013d20368d5c9f437c38e0bd462c4844dc
+  nokogiri (1.18.5-aarch64-linux-musl) sha256=296a9e346d9a816526ee0944b5df26e947d91ec09225897bf2fc14561e8861ca
+  nokogiri (1.18.5-arm-linux-gnu) sha256=25fc71081c671fc4e983eac76ad1b3c8ee2707c467dcdb96a066f749f978eaba
+  nokogiri (1.18.5-arm-linux-musl) sha256=8682d38ac2015ffa3b0c23925c579ced7e455f16931130ab434f26ff1c2846fa
+  nokogiri (1.18.5-arm64-darwin) sha256=df7731e550a7653c003ed142cc8bc3c611c15fae3b7be4ff317b61dfe32842d9
+  nokogiri (1.18.5-x86_64-linux-gnu) sha256=195f4a139961f3c892ac22fda6ae4e665919e6573149f0adc786adc8c20402be
+  nokogiri (1.18.5-x86_64-linux-musl) sha256=8c2786d259e3c73687f8c595e1ab040a66809799ad066dad8eb492fd58f4f8fd
   numerizer (0.1.1) sha256=10ec9efec62472b69a3a0e275a18a44baa595ce6e2e4cfc1678d5cb2974c336f
   ostruct (0.6.1) sha256=09a3fb7ecc1fa4039f25418cc05ae9c82bd520472c5c6a6f515f03e4988cb817
   pagy (9.3.4) sha256=b058e064bd02237e76d591e90fadc02c795426dd51f90d0c51089558bf3ab5f7
   pg (1.5.9) sha256=761efbdf73b66516f0c26fcbe6515dc7500c3f0aa1a1b853feae245433c64fdc
   pg_query (6.0.0) sha256=fbf09a4e900cee1d61e2bbfda1fefdbc35bc83c5f1c7ae1be1c6ffc5ae0f5c04
-  pghero (3.6.1) sha256=e6d4f6ec3979d4828dafcd1eaa4214e70279fe2502b9fe5bd632d8333aa79cd4
+  pghero (3.6.2) sha256=0520429820a6c209e32d39471fe09ea270f73f0a8f6154897c408fb02f2e5896
   popper_js (2.11.8) sha256=f4b0be717fc0d50bdb3dbbc55788525a9e0e8f640b76c9971fc34ee609eadbd2
   pp (0.6.2) sha256=947ec3120c6f92195f8ee8aa25a7b2c5297bb106d83b41baa02983686577b6ff
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
