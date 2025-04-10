@@ -125,7 +125,7 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
-    faraday (2.12.2)
+    faraday (2.13.0)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -470,7 +470,7 @@ CHECKSUMS
   execjs (2.10.0) sha256=6bcb8be8f0052ff9d370b65d1c080f2406656e150452a0abdb185a133048450d
   factory_bot (6.5.1) sha256=40581ea7bec0aee05514b8f4f99ed477274bdf1884c1372de5209e60322d6ca9
   factory_bot_rails (6.4.4) sha256=139e17caa2c50f098fddf5e5e1f29e8067352024e91ca1186d018b36589e5c88
-  faraday (2.12.2) sha256=157339c25c7b8bcb739f5cf1207cb0cefe8fa1c65027266bcbc34c90c84b9ad6
+  faraday (2.13.0) sha256=f2697cd61a434dc446ee035f0370de654c2ad64707c4fc2541eb2338702e9614
   faraday-follow_redirects (0.3.0) sha256=d92d975635e2c7fe525dd494fcd4b9bb7f0a4a0ec0d5f4c15c729530fdb807f9
   faraday-net_http (3.4.0) sha256=a1f1e4cd6a2cf21599c8221595e27582d9936819977bbd4089a601f24c64e54a
   faraday-retry (2.3.1) sha256=4004faa21f41fc5360d359bc79889fc58fb7fae0ce93bfb737a784ac76805c03
