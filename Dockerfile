@@ -10,7 +10,6 @@ RUN apk add --update \
     build-base \
     netcat-openbsd \
     git \
-    nodejs \
     postgresql-dev \
     tzdata \
     curl \
