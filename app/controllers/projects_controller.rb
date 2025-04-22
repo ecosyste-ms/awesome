@@ -46,6 +46,7 @@ class ProjectsController < ApplicationController
       @project = Project.create(url: params[:url].downcase)
       @project.sync_async
     end
+    fresh_when @project, public: true
     redirect_to @project
   end
 end
