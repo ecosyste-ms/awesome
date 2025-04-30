@@ -42,8 +42,7 @@ class ListsController < ApplicationController
   def show
     if params[:id].to_i.to_s == params[:id]
       @list = List.find(params[:id])
-      fresh_when(@list, public: true)
-      redirect_to @list, status: :moved_permanently
+      redirect_to @list, status: :moved_permanently and return
     else
       @list = List.find_by_slug!(params[:id])
       fresh_when(@list, public: true)
