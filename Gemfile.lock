@@ -341,12 +341,12 @@ GEM
     thor (1.3.2)
     tilt (2.6.0)
     timeout (0.4.3)
-    tokenizers (0.5.4)
+    tokenizers (0.5.5)
       rb_sys
-    tokenizers (0.5.4-aarch64-linux-musl)
-    tokenizers (0.5.4-arm64-darwin)
-    tokenizers (0.5.4-x86_64-linux)
-    tokenizers (0.5.4-x86_64-linux-musl)
+    tokenizers (0.5.5-aarch64-linux-musl)
+    tokenizers (0.5.5-arm64-darwin)
+    tokenizers (0.5.5-x86_64-linux)
+    tokenizers (0.5.5-x86_64-linux-musl)
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
     tzinfo (2.0.6)
@@ -563,11 +563,11 @@ CHECKSUMS
   thor (1.3.2) sha256=eef0293b9e24158ccad7ab383ae83534b7ad4ed99c09f96f1a6b036550abbeda
   tilt (2.6.0) sha256=263d748466e0d83e510aa1a2e2281eff547937f0ef06be33d3632721e255f76b
   timeout (0.4.3) sha256=9509f079b2b55fe4236d79633bd75e34c1c1e7e3fb4b56cb5fda61f80a0fe30e
-  tokenizers (0.5.4) sha256=a6e31b8f66d22c2602a84574d0c7443e84a4227893e4b0d47627e4dd1019c065
-  tokenizers (0.5.4-aarch64-linux-musl) sha256=cbdae1af2c51d0a4c27310b8aa1a0bf3d5aec3ae02d76ac3b6715d2066f0295c
-  tokenizers (0.5.4-arm64-darwin) sha256=1a543e121a4fdd23d17990eb3277f17d74a904a4f6be7206f864999e9e881ab3
-  tokenizers (0.5.4-x86_64-linux) sha256=6fef83655dc1b6c384206ad601a82479baee9735b10762fc3e0cc0df248602d1
-  tokenizers (0.5.4-x86_64-linux-musl) sha256=71bd2d5e79c6eb0795055849a4cfe18f3a28c3c9e068699da97fb74f6de83862
+  tokenizers (0.5.5) sha256=7bf1600567a3f253ec3f24da51af338437ecd1c638874122a9c57ea1724f4d92
+  tokenizers (0.5.5-aarch64-linux-musl) sha256=ddd23414ef60e15860a1ec804496ff053aa817956036594923a086c2897c492a
+  tokenizers (0.5.5-arm64-darwin) sha256=3a1606ce6aa918d89eea816b2de4cba9a7b5ad76ba1b42ad3ff44f6ff6208a85
+  tokenizers (0.5.5-x86_64-linux) sha256=e9681afe50dc74beed880bed08d385ebb1d22d51831d9169e285f3836306730c
+  tokenizers (0.5.5-x86_64-linux-musl) sha256=f5ccc321a58b58b45ee85042ea384fb0f99600361ecd1260f77bfd020b8bdb0a
   typhoeus (1.4.1) sha256=1c17db8364bd45ab302dc61e460173c3e69835896be88a3df07c206d5c55ef7c
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   uri (1.0.3) sha256=e9f2244608eea2f7bc357d954c65c910ce0399ca5e18a7a29207ac22d8767011
