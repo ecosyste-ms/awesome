@@ -79,7 +79,7 @@ GEM
       rack (>= 2.0.0)
     base64 (0.2.0)
     benchmark (0.4.0)
-    bigdecimal (3.1.9)
+    bigdecimal (3.2.0)
     bindex (0.8.1)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
@@ -143,19 +143,19 @@ GEM
     ffi (1.17.2-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (4.31.0)
+    google-protobuf (4.31.1)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.0-aarch64-linux-musl)
+    google-protobuf (4.31.1-aarch64-linux-musl)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.0-arm64-darwin)
+    google-protobuf (4.31.1-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.0-x86_64-linux-gnu)
+    google-protobuf (4.31.1-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.31.0-x86_64-linux-musl)
+    google-protobuf (4.31.1-x86_64-linux-musl)
       bigdecimal
       rake (>= 13)
     groupdate (6.6.0)
@@ -447,7 +447,7 @@ CHECKSUMS
   appsignal (4.5.14) sha256=cf8b2d0f494e23b2f9cffd3b3bace58dd2877166cbdbb20635c846ed75d13657
   base64 (0.2.0) sha256=0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
   benchmark (0.4.0) sha256=0f12f8c495545e3710c3e4f0480f63f06b4c842cc94cec7f33a956f5180e874a
-  bigdecimal (3.1.9) sha256=2ffc742031521ad69c2dfc815a98e426a230a3d22aeac1995826a75dabfad8cc
+  bigdecimal (3.2.0) sha256=f220c34e07d98b04e02eb23193bee436fab9afcd551f43dce8837a1b4aa80762
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
   bootsnap (1.18.6) sha256=0ae2393c1e911e38be0f24e9173e7be570c3650128251bf06240046f84a07d00
   bootstrap (5.3.5) sha256=d57c9b7a21eaf2182c32fe93d1c0eaa0e1ebe82c46676c5a1fd66dd3a6ac41f8
@@ -484,11 +484,11 @@ CHECKSUMS
   ffi (1.17.2-x86_64-linux-gnu) sha256=05d2026fc9dbb7cfd21a5934559f16293815b7ce0314846fee2ac8efbdb823ea
   ffi (1.17.2-x86_64-linux-musl) sha256=97c0eb3981414309285a64dc4d466bd149e981c279a56371ef811395d68cb95c
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
-  google-protobuf (4.31.0) sha256=4db6fe6c92dd683aa9671432c38976685aaf9ba2f92450eebd63d76bcdbe4891
-  google-protobuf (4.31.0-aarch64-linux-musl) sha256=a6097e563b7fdc5fca969565cd2e026796db4e5b5abb815d858a427349f65d35
-  google-protobuf (4.31.0-arm64-darwin) sha256=2b21ed0b14c07ce63b2aa7872621edd934fb1b19879e90c211aa3e1ca056bcfb
-  google-protobuf (4.31.0-x86_64-linux-gnu) sha256=3d4f8784e448ef91831251d6c0b1d6427f1ca251cd2d33c67446d40a444d0b18
-  google-protobuf (4.31.0-x86_64-linux-musl) sha256=d4447e1ea7119836cf5c88137b4e9f845cc8bfc9d7fd5645360c72d6f7f6d393
+  google-protobuf (4.31.1) sha256=022bc82931a0860a7f2ace41bd48e904c8e65032c1d5eefc33294b5edf9741f8
+  google-protobuf (4.31.1-aarch64-linux-musl) sha256=fcd5b79ac4048e89e44c4c64fb432fa6400ec3c2f0344a7effa95fbc6895d24a
+  google-protobuf (4.31.1-arm64-darwin) sha256=177ca61d254e4516d42997aa9d3127fd5e04ffc60c4ad333b1515ded6d7af89d
+  google-protobuf (4.31.1-x86_64-linux-gnu) sha256=7def6dbf996dab289dd541a3ee8b201e2c3e35911c274325ad9b483ebffb6dcd
+  google-protobuf (4.31.1-x86_64-linux-musl) sha256=7d99d7728d9d7a6fda36130acac2a9947b868e28fe3f4aec4131cebce0d420f9
   groupdate (6.6.0) sha256=8c66d13e2fdb875133248b34d598f5a60840898b2fa679286fec1df4765f7656
   hashdiff (1.2.0) sha256=c984f13e115bfc9953332e8e83bd9d769cfde9944e2d54e07eb9df7b76e140b5
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
