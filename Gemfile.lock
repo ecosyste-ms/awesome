@@ -117,7 +117,7 @@ GEM
     erubi (1.13.1)
     ethon (0.16.0)
       ffi (>= 1.15.0)
-    factory_bot (6.5.3)
+    factory_bot (6.5.4)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
@@ -470,7 +470,7 @@ CHECKSUMS
   erb (5.0.1) sha256=760439803b36cc93eca8a266aab614614e588024a89bc30a62e78d98ff452c23
   erubi (1.13.1) sha256=a082103b0885dbc5ecf1172fede897f9ebdb745a4b97a5e8dc63953db1ee4ad9
   ethon (0.16.0) sha256=bba0da1cea8ac3e1f5cdd7cb1cb5fc78d7ac562c33736f18f0c3eb2b63053d9e
-  factory_bot (6.5.3) sha256=b6674d97c713098b96b0bc7a666ab3d7f2d92284d092d9457cfa99c8a03fc55e
+  factory_bot (6.5.4) sha256=4707fb7d80a7c14d71feb069460587bfc342e4ff1ef28097e0ad69d5ddfce613
   factory_bot_rails (6.4.4) sha256=139e17caa2c50f098fddf5e5e1f29e8067352024e91ca1186d018b36589e5c88
   faraday (2.13.1) sha256=cc531eb5467e7d74d4517630fa96f1a7003647cbf20a9a3e067d098941217b75
   faraday-follow_redirects (0.3.0) sha256=d92d975635e2c7fe525dd494fcd4b9bb7f0a4a0ec0d5f4c15c729530fdb807f9
