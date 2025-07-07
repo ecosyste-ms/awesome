@@ -206,6 +206,7 @@ class List < ApplicationRecord
   def check_url
     conn = Faraday.new(url: url) do |faraday|
       faraday.response :follow_redirects
+      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
       faraday.adapter Faraday.default_adapter
     end
 
@@ -264,6 +265,7 @@ class List < ApplicationRecord
   def fetch_repository
     conn = Faraday.new(url: repos_api_url) do |faraday|
       faraday.response :follow_redirects
+      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
       faraday.adapter Faraday.default_adapter
     end
 
@@ -313,6 +315,7 @@ class List < ApplicationRecord
     else
       conn = Faraday.new(url: archive_url(readme_file_name)) do |faraday|
         faraday.response :follow_redirects
+        faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
         faraday.adapter Faraday.default_adapter
       end
       response = conn.get
@@ -411,6 +414,7 @@ class List < ApplicationRecord
 
     conn = Faraday.new(url: url) do |faraday|
       faraday.response :follow_redirects
+      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
       faraday.adapter Faraday.default_adapter
     end
 

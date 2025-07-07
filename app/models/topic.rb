@@ -126,6 +126,7 @@ class Topic < ApplicationRecord
 
   def load_projects
     resp = Faraday.get("https://repos.ecosyste.ms/api/v1/topics/#{slug}?per_page=100") do |req|
+      req.headers['User-Agent'] = 'awesome.ecosyste.ms'
       req.options.timeout = 30           # open/read timeout in seconds
       req.options.open_timeout = 30       # connection open timeout in seconds
     end
