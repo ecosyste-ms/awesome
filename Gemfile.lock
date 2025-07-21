@@ -427,7 +427,6 @@ DEPENDENCIES
   sitemap_generator
   sprockets-rails
   tokenizers
-  tzinfo-data
   web-console
   webmock
 
