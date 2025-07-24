@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_17_150334) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_082324) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
+  enable_extension "vector"
 
   create_table "list_projects", force: :cascade do |t|
     t.integer "list_id"
@@ -43,7 +44,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_17_150334) do
     t.boolean "list_of_lists", default: false
     t.boolean "displayable", default: false
     t.string "keywords", default: [], array: true
-    t.integer "stars", default: 0
+    t.bigint "stars", default: 0
     t.index ["stars"], name: "index_lists_on_stars"
     t.index ["url"], name: "index_lists_on_url", unique: true
   end
@@ -57,7 +58,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_17_150334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "list", default: false
-    t.integer "stars", default: 0
+    t.bigint "stars", default: 0
     t.string "owner"
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
     t.index ["owner"], name: "index_projects_on_owner"
