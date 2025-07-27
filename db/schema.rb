@@ -15,7 +15,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_082324) do
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
-  enable_extension "vector"
 
   create_table "list_projects", force: :cascade do |t|
     t.integer "list_id"
