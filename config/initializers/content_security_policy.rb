@@ -4,6 +4,8 @@
 # See the Securing Rails Applications Guide for more information:
 # https://guides.rubyonrails.org/security.html#content-security-policy-header
 
+SecureHeaders::Configuration.default
+
 # Rails.application.configure do
 #   config.content_security_policy do |policy|
 #     policy.default_src :self, :https

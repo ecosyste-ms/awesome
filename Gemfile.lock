@@ -317,6 +317,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    secure_headers (7.1.0)
     securerandom (0.4.1)
     shoulda-context (2.0.0)
     shoulda-matchers (6.5.0)
@@ -422,6 +423,7 @@ DEPENDENCIES
   rswag-api
   rswag-ui
   sassc-rails
+  secure_headers
   shoulda-context
   shoulda-matchers
   sidekiq
@@ -564,6 +566,7 @@ CHECKSUMS
   ruby2_keywords (0.0.5) sha256=ffd13740c573b7301cf7a2e61fc857b2a8e3d3aff32545d6f8300d8bae10e3ef
   sassc (2.4.0) sha256=4c60a2b0a3b36685c83b80d5789401c2f678c1652e3288315a1551d811d9f83e
   sassc-rails (2.1.2) sha256=5f4fdf3881fc9bdc8e856ffbd9850d70a2878866feae8114aa45996179952db5
+  secure_headers (7.1.0) sha256=6b1f9d5f9507af2948f4636452c41c09371927836396c2185438ffdf0a731124
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   shoulda-context (2.0.0) sha256=7adf45342cd800f507d2a053658cb1cce2884b616b26004d39684b912ea32c34
   shoulda-matchers (6.5.0) sha256=ef6b572b2bed1ac4aba6ab2c5ff345a24b6d055a93a3d1c3bfc86d9d499e3f44
