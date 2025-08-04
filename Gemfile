@@ -5,7 +5,7 @@ ruby file: ".ruby-version"
 
 gem "rails", "~> 8.0.0"
 gem "sprockets-rails"
-gem "pg", "~> 1.5"
+gem "pg"
 gem "puma"
 gem "jbuilder"
 gem "bootsnap", require: false
@@ -57,4 +57,4 @@ group :test do
   gem "factory_bot_rails"
 end
 
-gem "bootstrap-icons-helper", "~> 2.0"
+gem "bootstrap-icons-helper"

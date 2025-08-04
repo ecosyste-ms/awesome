@@ -391,7 +391,7 @@ DEPENDENCIES
   appsignal
   bootsnap
   bootstrap
-  bootstrap-icons-helper (~> 2.0)
+  bootstrap-icons-helper
   cff
   cld3
   counter_culture
@@ -410,7 +410,7 @@ DEPENDENCIES
   mocha
   ostruct
   pagy
-  pg (~> 1.5)
+  pg
   pg_query
   pghero
   puma
