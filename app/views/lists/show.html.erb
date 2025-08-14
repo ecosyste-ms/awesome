@@ -12,7 +12,7 @@
   </p>
 
   <p class="card-subtitle mb-2 text-muted"><i><small>
-        Last synced: <%= distance_of_time_in_words_to_now @list.last_synced_at %> ago <br>
+        Last synced: <%= @list.last_synced_at ? distance_of_time_in_words_to_now(@list.last_synced_at) + ' ago' : 'Never' %> <br>
         <%= link_to 'JSON representation', api_v1_list_path(@list) %>
     </small></i></p>
 
