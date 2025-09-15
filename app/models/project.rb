@@ -148,6 +148,12 @@ class Project < ApplicationRecord
     end
 
     response = conn.get
+    
+    if response.status == 404
+      destroy
+      return
+    end
+    
     return unless response.success?
 
     update!(url: response.env.url.to_s) 
