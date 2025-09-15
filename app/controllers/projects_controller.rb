@@ -5,18 +5,21 @@ class ProjectsController < ApplicationController
       redirect_to @project, status: :moved_permanently
     else
       @project = Project.find_by_slug!(params[:id])
+      raise ActiveRecord::RecordNotFound if @project.owner_hidden?
       fresh_when(@project, public: true)
     end
   end
 
   def index
-    @scope = Project.not_awesome_list.where.not(last_synced_at: nil).with_repository
+    @scope = Project.not_awesome_list.where.not(last_synced_at: nil).with_repository.visible_owners
 
     if params[:keyword].present?
       @scope = @scope.keyword(params[:keyword])
     end
 
     if params[:owner].present?
+      owner_record = Owner.find_by(name: params[:owner].downcase)
+      raise ActiveRecord::RecordNotFound if owner_record&.hidden?
       @scope = @scope.owner(params[:owner])
     end
 

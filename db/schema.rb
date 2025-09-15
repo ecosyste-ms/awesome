@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_24_082324) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_15_151916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
+  enable_extension "vector"
 
   create_table "list_projects", force: :cascade do |t|
     t.integer "list_id"
@@ -48,6 +49,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_082324) do
     t.index ["url"], name: "index_lists_on_url", unique: true
   end
 
+  create_table "owners", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "hidden", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hidden"], name: "index_owners_on_hidden"
+    t.index ["name"], name: "index_owners_on_name", unique: true
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "url"
     t.json "repository"
@@ -59,8 +69,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_082324) do
     t.boolean "list", default: false
     t.bigint "stars", default: 0
     t.string "owner"
+    t.bigint "owner_id"
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
     t.index ["owner"], name: "index_projects_on_owner"
+    t.index ["owner_id"], name: "index_projects_on_owner_id"
     t.index ["stars"], name: "index_projects_on_stars"
     t.index ["url"], name: "index_projects_on_url", unique: true
   end
@@ -82,4 +94,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_082324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "projects", "owners"
 end

@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   has_many :lists, through: :list_projects
 
   belongs_to :matching_list, foreign_key: :url, primary_key: :url, optional: true, class_name: 'List'
+  belongs_to :owner_record, class_name: 'Owner', foreign_key: 'owner_id', optional: true
 
   validates :url, presence: true, uniqueness: true
 
@@ -21,6 +22,7 @@ class Project < ApplicationRecord
   scope :order_by_stars, -> { order(stars: :desc) }
 
   scope :not_awesome_list, -> { where(list: false) }
+  scope :visible_owners, -> { left_joins(:owner_record).where(owners: { hidden: [false, nil] }).or(where(owner_id: nil)) }
 
   before_save :set_is_list?
   before_save :set_stars
@@ -40,7 +42,14 @@ class Project < ApplicationRecord
   end
 
   def set_owner
-    self.owner = repository.dig('owner') if repository.present?
+    if repository.present? && repository.dig('owner').present?
+      self.owner = repository.dig('owner')
+      self.owner_record = Owner.find_or_create_by(name: self.owner.downcase)
+    end
+  end
+
+  def owner_hidden?
+    owner_record&.hidden?
   end
 
   def self.find_by_slug!(slug)

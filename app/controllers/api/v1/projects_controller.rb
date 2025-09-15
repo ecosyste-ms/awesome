@@ -7,9 +7,9 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
       else
         @list = List.find_by_slug!(params[:list_id])
       end
-      @projects = @list.projects.where.not(last_synced_at: nil)
+      @projects = @list.projects.where.not(last_synced_at: nil).visible_owners
     else
-      @projects = Project.all.where.not(last_synced_at: nil)
+      @projects = Project.all.where.not(last_synced_at: nil).visible_owners
     end
 
     if params[:keyword].present?
@@ -28,6 +28,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
       redirect_to @project, status: :moved_permanently
     else
       @project = Project.find_by_slug!(params[:id])
+      raise ActiveRecord::RecordNotFound if @project.owner_hidden?
       fresh_when(@project, public: true)
     end
   end

@@ -63,14 +63,98 @@ class ProjectTest < ActiveSupport::TestCase
 
   test "check_url handles general errors gracefully" do
     project = create(:project, url: 'https://github.com/user/repo')
-    
+
     stub_request(:get, 'https://github.com/user/repo')
       .to_raise(Faraday::ConnectionFailed.new('Connection failed'))
-    
+
     assert_no_difference 'Project.count' do
       project.check_url
     end
-    
+
     assert Project.exists?(project.id)
+  end
+
+  test "owner_hidden? returns true when owner is hidden" do
+    owner = Owner.create!(name: "hidden-owner", hidden: true)
+    project = create(:project, owner_record: owner)
+
+    assert project.owner_hidden?
+  end
+
+  test "owner_hidden? returns false when owner is visible" do
+    owner = Owner.create!(name: "visible-owner", hidden: false)
+    project = create(:project, owner_record: owner)
+
+    assert_not project.owner_hidden?
+  end
+
+  test "owner_hidden? returns false when no owner_record" do
+    project = create(:project, owner_record: nil)
+
+    assert_not project.owner_hidden?
+  end
+
+  test "visible_owners scope excludes projects with hidden owners" do
+    hidden_owner = Owner.create!(name: "hidden-owner", hidden: true)
+    visible_owner = Owner.create!(name: "visible-owner", hidden: false)
+
+    hidden_project = create(:project, owner_record: hidden_owner)
+    visible_project = create(:project, owner_record: visible_owner)
+    no_owner_project = create(:project, owner_record: nil)
+
+    visible_projects = Project.visible_owners
+
+    assert_includes visible_projects, visible_project
+    assert_includes visible_projects, no_owner_project
+    assert_not_includes visible_projects, hidden_project
+  end
+
+  test "set_owner creates owner_record when repository has owner" do
+    project = build(:project)
+    project.repository = { "owner" => "test-owner" }
+
+    assert_difference 'Owner.count', 1 do
+      project.set_owner
+    end
+
+    assert_equal "test-owner", project.owner
+    assert_equal "test-owner", project.owner_record.name
+  end
+
+  test "set_owner finds existing owner_record" do
+    existing_owner = Owner.create!(name: "existing-owner")
+    project = build(:project)
+    project.repository = { "owner" => "existing-owner" }
+
+    assert_no_difference 'Owner.count' do
+      project.set_owner
+    end
+
+    assert_equal existing_owner, project.owner_record
+  end
+
+  test "set_owner lowercases owner name when creating owner_record" do
+    project = build(:project)
+    project.repository = { "owner" => "TestOwner" }
+
+    assert_difference 'Owner.count', 1 do
+      project.set_owner
+    end
+
+    assert_equal "TestOwner", project.owner
+    assert_equal "testowner", project.owner_record.name
+  end
+
+  test "set_owner finds existing owner_record with different case" do
+    existing_owner = Owner.create!(name: "testowner")
+    project = build(:project)
+    project.repository = { "owner" => "TestOwner" }
+
+    assert_no_difference 'Owner.count' do
+      project.set_owner
+    end
+
+    assert_equal "TestOwner", project.owner
+    assert_equal existing_owner, project.owner_record
   end
 end
