@@ -208,6 +208,7 @@ class Project < ApplicationRecord
     conn = Faraday.new(url: repos_api_url) do |faraday|
       faraday.response :follow_redirects
       faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
+      faraday.headers['X-API-Key'] = ENV['ECOSYSTEMS_API_KEY'] if ENV['ECOSYSTEMS_API_KEY']
       faraday.adapter Faraday.default_adapter
     end
 
