@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :list do
     sequence(:url) { |n| "https://github.com/lists/#{n}" }
-    sequence(:name) { |n| "Sample List #{n}" }
+    name { "Sample List" }
     description { "This is a sample description for a list." }
     projects_count { rand(1..100) }
     last_synced_at { rand(1..30).days.ago }

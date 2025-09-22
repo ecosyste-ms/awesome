@@ -26,19 +26,19 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
 
   test 'renders rss' do
     # Make additional lists for RSS content
-    list1 = create(:list, name: 'List One', description: 'Description One')
-  
+    list1 = create(:list, description: 'Description One')
+
     get '/lists.rss'
-    
+
     # Assert response success and correct template
     assert_response :success
     assert_equal 'application/rss+xml; charset=utf-8', @response.content_type
     assert_template 'lists/index'
-  
+
     # Validate RSS feed content
     assert_includes @response.body, list1.name
     # assert_includes @response.body, list1.description
-  
+
     # Validate structure of RSS feed
     assert_includes @response.body, '<rss version="2.0">'
     assert_includes @response.body, '<channel>'
