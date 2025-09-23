@@ -1,6 +1,7 @@
 require 'csv'
 
 class Project < ApplicationRecord
+  include EcosystemsApiClient
 
   has_many :list_projects, dependent: :destroy
   has_many :lists, through: :list_projects
@@ -177,7 +178,7 @@ class Project < ApplicationRecord
 
   def ping
     ping_urls.each do |url|
-      Faraday.get(url) rescue nil
+      ecosystems_api_get(url) rescue nil
     end
   end
 
@@ -205,16 +206,9 @@ class Project < ApplicationRecord
   end
 
   def fetch_repository
-    conn = Faraday.new(url: repos_api_url) do |faraday|
-      faraday.response :follow_redirects
-      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
-      faraday.headers['X-API-Key'] = ENV['ECOSYSTEMS_API_KEY'] if ENV['ECOSYSTEMS_API_KEY']
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
-    return unless response.success?
-    self.repository = JSON.parse(response.body)
+    data = ecosystems_api_get(repos_api_url)
+    return unless data
+    self.repository = data
     self.keywords = repository["topics"].uniq.reject(&:blank?) if repository.present? && repository["topics"].present?
     self.save
   rescue
@@ -296,14 +290,8 @@ class Project < ApplicationRecord
   def fetch_readme
     return unless readme_file_name.present?
     return unless download_url.present?
-    conn = Faraday.new(url: archive_url(readme_file_name)) do |faraday|
-      faraday.response :follow_redirects
-      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
-      faraday.adapter Faraday.default_adapter
-    end
-    response = conn.get
-    return unless response.success?
-    json = JSON.parse(response.body)
+    json = ecosystems_api_get(archive_url(readme_file_name))
+    return unless json
 
     self.readme = json['contents']
     self.save

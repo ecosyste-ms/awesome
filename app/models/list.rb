@@ -1,4 +1,5 @@
 class List < ApplicationRecord
+  include EcosystemsApiClient
   validates :url, presence: true, format: { without: /\A.*\/\z/, message: "should not end with a slash" }
 
   has_many :list_projects, dependent: :destroy
@@ -240,7 +241,7 @@ class List < ApplicationRecord
 
   def ping
     ping_urls.each do |url|
-      Faraday.get(url) rescue nil
+      ecosystems_api_get(url) rescue nil
     end
   end
 
@@ -263,16 +264,9 @@ class List < ApplicationRecord
   end
 
   def fetch_repository
-    conn = Faraday.new(url: repos_api_url) do |faraday|
-      faraday.response :follow_redirects
-      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
-      faraday.headers['X-API-Key'] = ENV['ECOSYSTEMS_API_KEY'] if ENV['ECOSYSTEMS_API_KEY']
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
-    return unless response.success?
-    self.repository = JSON.parse(response.body)
+    data = ecosystems_api_get(repos_api_url)
+    return unless data
+    self.repository = data
     self.save
   rescue
     puts "Error fetching repository for #{repository_url}"
@@ -314,14 +308,8 @@ class List < ApplicationRecord
     if readme_file_name.blank? || download_url.blank?
       fetch_readme_fallback
     else
-      conn = Faraday.new(url: archive_url(readme_file_name)) do |faraday|
-        faraday.response :follow_redirects
-        faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
-        faraday.adapter Faraday.default_adapter
-      end
-      response = conn.get
-      return unless response.success?
-      json = JSON.parse(response.body)
+      json = ecosystems_api_get(archive_url(readme_file_name))
+      return unless json
 
       self.readme = json['contents']
       self.save
@@ -412,17 +400,8 @@ class List < ApplicationRecord
 
   def self.import_lists_from_topic(page: 1, topic: 'awesome-list', per_page: 1000)
     url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=#{per_page}?page=#{page}"
-
-    conn = Faraday.new(url: url) do |faraday|
-      faraday.response :follow_redirects
-      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
-      faraday.headers['X-API-Key'] = ENV['ECOSYSTEMS_API_KEY'] if ENV['ECOSYSTEMS_API_KEY']
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
-    return unless response.success?
-    json = JSON.parse(response.body)
+    json = ecosystems_api_get(url)
+    return unless json
 
     # TODO pagination
 

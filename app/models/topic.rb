@@ -1,4 +1,5 @@
 class Topic < ApplicationRecord
+  include EcosystemsApiClient
 
   scope :search, ->(query) { where('name ILIKE ? or short_description ILIKE ?', "%#{query}%", "%#{query}%") }
 
@@ -125,13 +126,8 @@ class Topic < ApplicationRecord
   end
 
   def load_projects
-    resp = Faraday.get("https://repos.ecosyste.ms/api/v1/topics/#{slug}?per_page=100") do |req|
-      req.headers['User-Agent'] = 'awesome.ecosyste.ms'
-      req.options.timeout = 30           # open/read timeout in seconds
-      req.options.open_timeout = 30       # connection open timeout in seconds
-    end
-    if resp.status == 200
-      data = JSON.parse(resp.body)
+    data = ecosystems_api_get("https://repos.ecosyste.ms/api/v1/topics/#{slug}?per_page=100")
+    if data
       urls = data['repositories'].map{|p| p['html_url'] }.uniq.reject(&:blank?)
       urls.each do |url|
         puts url
