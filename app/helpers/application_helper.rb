@@ -34,4 +34,10 @@ module ApplicationHelper
     return 0 unless number
     number_with_delimiter(number.round(2))
   end
+
+  def bootstrap_icon(symbol, options = {})
+    return "" if symbol.nil?
+    icon = BootstrapIcons::BootstrapIcon.new(symbol, options)
+    content_tag(:svg, icon.path.html_safe, icon.options)
+  end
 end
