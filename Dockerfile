@@ -18,7 +18,11 @@ RUN apk add --update \
     musl-dev \
     yaml-dev \
     libffi-dev \
- && rm -rf /var/cache/apk/* 
+    jemalloc \
+ && rm -rf /var/cache/apk/*
+
+ENV LD_PRELOAD=/usr/lib/libjemalloc.so.2
+ENV RUBY_YJIT_ENABLE=1 
 
 # Will invalidate cache as soon as the Gemfile changes
 COPY Gemfile Gemfile.lock .ruby-version $APP_ROOT/
