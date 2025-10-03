@@ -169,11 +169,11 @@ class Project < ApplicationRecord
     update!(url: response.env.url.to_s) 
     # TODO avoid duplicates
   rescue ActiveRecord::RecordInvalid => e
-    puts "Duplicate url #{url}"
-    puts e.class
+    Rails.logger.info "Duplicate url #{url}"
+    Rails.logger.info e.class
     destroy
   rescue
-    puts "Error checking url for #{url}"
+    Rails.logger.info "Error checking url for #{url}"
   end
 
   def ping
@@ -212,7 +212,7 @@ class Project < ApplicationRecord
     self.keywords = repository["topics"].uniq.reject(&:blank?) if repository.present? && repository["topics"].present?
     self.save
   rescue
-    puts "Error fetching repository for #{repository_url}"
+    Rails.logger.info "Error fetching repository for #{repository_url}"
   end
 
   
@@ -296,7 +296,7 @@ class Project < ApplicationRecord
     self.readme = json['contents']
     self.save
   rescue
-    puts "Error fetching readme for #{repository_url}"
+    Rails.logger.info "Error fetching readme for #{repository_url}"
   end
 
   def readme_url

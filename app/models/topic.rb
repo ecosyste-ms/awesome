@@ -94,7 +94,7 @@ class Topic < ApplicationRecord
     json['topics'].map! do |topic|
       sleep 1
       url = topic['url']
-      puts "fetching #{url}"
+      Rails.logger.info "fetching #{url}"
       resp = conn.get(url)
       next unless resp.success?
       html = Nokogiri::HTML(resp.body)
@@ -130,7 +130,7 @@ class Topic < ApplicationRecord
     if data
       urls = data['repositories'].map{|p| p['html_url'] }.uniq.reject(&:blank?)
       urls.each do |url|
-        puts url
+        Rails.logger.info url
         project = projects.find_or_create_by(url: url)
         project.sync_async unless project.last_synced_at.present?
       end

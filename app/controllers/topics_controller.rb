@@ -11,6 +11,7 @@ class TopicsController < ApplicationController
   def suggestions
     scope = Topic.where('github_count > 99').order(github_count: :desc).not_language.suggestable.not_google.other_excluded.with_github_url
     @pagy, @topics = pagy(scope)
+    fresh_when(@topics, public: true)
   end
 
   def show

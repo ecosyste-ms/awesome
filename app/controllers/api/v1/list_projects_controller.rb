@@ -17,5 +17,6 @@ class Api::V1::ListProjectsController < ApplicationController
     end
 
     @pagy, @list_projects = pagy_countless(@list_projects)
+    fresh_when(@list_projects, public: true)
   end
 end

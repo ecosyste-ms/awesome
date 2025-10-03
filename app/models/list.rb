@@ -197,11 +197,11 @@ class List < ApplicationRecord
     load_projects
     ping
   rescue ActiveRecord::RecordNotUnique => e
-    puts "Duplicate url #{url}"
-    puts e.class
+    Rails.logger.info "Duplicate url #{url}"
+    Rails.logger.info e.class
     destroy
   rescue
-    puts "Error syncing #{url}"
+    Rails.logger.info "Error syncing #{url}"
   end
 
   def check_url
@@ -213,14 +213,14 @@ class List < ApplicationRecord
 
     response = conn.get
     return unless response.success?
-    update!(url: response.env.url.to_s) 
+    update!(url: response.env.url.to_s)
     # TODO avoid duplicates
   rescue ActiveRecord::RecordInvalid => e
-    puts "Duplicate url #{url}"
-    puts e.class
+    Rails.logger.info "Duplicate url #{url}"
+    Rails.logger.info e.class
     destroy
   rescue
-    puts "Error checking url for #{url}"
+    Rails.logger.info "Error checking url for #{url}"
   end
 
   def repository_url
@@ -269,7 +269,7 @@ class List < ApplicationRecord
     self.repository = data
     self.save
   rescue
-    puts "Error fetching repository for #{repository_url}"
+    Rails.logger.info "Error fetching repository for #{repository_url}"
   end
 
   def readme_url
@@ -315,7 +315,7 @@ class List < ApplicationRecord
       self.save
     end
   rescue
-    puts "Error fetching readme for #{repository_url}"
+    Rails.logger.info "Error fetching readme for #{repository_url}"
     fetch_readme_fallback
   end
 
@@ -331,7 +331,7 @@ class List < ApplicationRecord
     self.readme = response.body
     self.save
   rescue
-    puts "Error fetching readme for #{repository_url}"
+    Rails.logger.info "Error fetching readme for #{repository_url}"
   end
 
   def readme_url
@@ -385,8 +385,6 @@ class List < ApplicationRecord
       next if link[:url].include?(list.url)
       link[:url] = link[:url].chomp('/')
 
-      p link
-      
       existing = List.find_by(url: link[:url])
       next if existing.present? && existing.projects_count && existing.projects_count > 0
 
@@ -407,7 +405,6 @@ class List < ApplicationRecord
 
     json['repositories'].each do |repo|
       url = repo['html_url'].chomp('/')
-      puts url
 
       existing = List.find_by(url: url)
       next if existing.present? && existing.projects_count && existing.projects_count > 0
