@@ -31,7 +31,7 @@ class ListsController < ApplicationController
         fresh_when(@lists, public: true)
       end
       format.rss do
-        scope = scope.order(created_at: :desc)
+        scope = scope.reorder(created_at: :desc)
         @pagy, @lists = pagy(scope, items: 100)
         fresh_when(@lists, public: true)
         render layout: false

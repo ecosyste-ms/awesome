@@ -24,6 +24,30 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should show project with repository details" do
+    project = create(:project,
+      last_synced_at: 1.hour.ago,
+      repository: {
+        'host' => { 'name' => 'GitHub' },
+        'description' => 'Test repository description',
+        'owner' => 'testowner',
+        'created_at' => '2023-01-01T00:00:00Z',
+        'default_branch' => 'main',
+        'last_synced_at' => '2023-12-01T00:00:00Z',
+        'stargazers_count' => 100,
+        'forks_count' => 10,
+        'open_issues_count' => 5,
+        'topics' => ['ruby', 'rails']
+      }
+    )
+
+    get project_path(project.slug)
+    assert_response :success
+    assert_includes response.body, 'Test repository description'
+    assert_includes response.body, 'GitHub'
+    assert_includes response.body, 'Stars:'
+  end
+
   test "index should exclude projects with hidden owners" do
     hidden_owner = create(:owner, :hidden)
     visible_owner = create(:owner)
