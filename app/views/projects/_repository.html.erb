@@ -1,4 +1,5 @@
 <% if @project.repository %>
+  <% cache [@project, 'repository-v1'] do %>
     <p>
       <%= @project.repository['description'] %>
     </p>
@@ -98,10 +99,12 @@
         <% end %>
       <% end %>
     </ul>
+  <% end %>
 
     <h3>Awesome Lists containing this project</h3>
-    <ul>
-      <% @project.list_projects.includes(:list).each do |list_project| %>
+    <% cache [@project, 'list-projects-v1'] do %>
+      <ul>
+        <% @project.list_projects.includes(:list).each do |list_project| %>
         <% next unless list_project.list.try(:is_displayable?) %>
         <li>
           <%= link_to list_project.list, list_path(list_project.list) %> - <%= list_project.name %>
@@ -109,16 +112,20 @@
            - <%= list_project.description %> (<%= list_project.category%><%= list_project.sub_category.present? ? " / #{list_project.sub_category}" : '' %>)
           <% end %>    
         </li>
-      <% end %>
-    </ul>
+        <% end %>
+      </ul>
+    <% end %>
 
     <% if @project.readme %>
+      <% cache [@project, 'readme-v1'] do %>
       <h2>
         <%= link_to 'README', @project.readme_url, target: :_blank %>
       </h2>
 
-      <pre class='card p-2'>
-        <%= simple_format @project.readme %>
-      </pre>
+        <pre class='card p-2'>
+          <%= simple_format @project.readme %>
+        </pre>
+      <% end %>
     <% end %>
+  <% end %>
 <% end %>
