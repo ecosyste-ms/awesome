@@ -45,6 +45,7 @@ class ListsController < ApplicationController
       redirect_to @list, status: :moved_permanently and return
     else
       @list = List.find_by_slug!(params[:id])
+      raise ActiveRecord::RecordNotFound unless @list.displayable?
       fresh_when(@list, public: true)
     end
   end

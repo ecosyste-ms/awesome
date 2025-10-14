@@ -3,7 +3,15 @@ require 'test_helper'
 class ListsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @list = create(:list)
+    @list = create(:list,
+      projects_count: 50,
+      repository: {
+        'fork' => false,
+        'archived' => false,
+        'description' => 'Test list',
+        'topics' => ['test']
+      }
+    )
   end
 
   test 'renders index' do
@@ -45,6 +53,29 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, 'Testing'
   end
 
+  test 'renders 404 for non-displayable list' do
+    list = create(:list, projects_count: 10)
+    list.update_column(:displayable, false)
+
+    get list_url(list)
+    assert_response :not_found
+  end
+
+  test 'renders displayable list successfully' do
+    list = create(:list,
+      projects_count: 50,
+      repository: {
+        'fork' => false,
+        'archived' => false,
+        'description' => 'A valid list description',
+        'topics' => ['ruby']
+      }
+    )
+
+    get list_url(list)
+    assert_response :success
+  end
+
   test 'renders markdown' do
     get '/lists/markdown'
     assert_response :success
@@ -53,7 +84,11 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
 
   test 'renders rss' do
     # Make additional lists for RSS content - ensure it's the newest by setting created_at
-    list1 = create(:list, description: 'Description One', created_at: 1.second.from_now)
+    list1 = create(:list,
+      url: 'https://github.com/awesome/test-rss-list',
+      description: 'RSS Test Description',
+      created_at: 1.second.from_now
+    )
 
     get '/lists.rss'
 
@@ -62,14 +97,14 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'application/rss+xml; charset=utf-8', @response.content_type
     assert_template 'lists/index'
 
-    # Validate RSS feed content
-    assert_includes @response.body, list1.name
+    # Validate RSS feed content - use the full slug rather than just the ID
+    assert_includes @response.body, 'test-rss-list'
     # assert_includes @response.body, list1.description
 
     # Validate structure of RSS feed
     assert_includes @response.body, '<rss version="2.0">'
     assert_includes @response.body, '<channel>'
     assert_includes @response.body, '<item>'
-    assert_includes @response.body, "<title>#{list1.name}</title>"
+    assert_includes @response.body, '<title>test-rss-list</title>'
   end
 end
