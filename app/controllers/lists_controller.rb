@@ -1,4 +1,6 @@
 class ListsController < ApplicationController
+  before_action :sanitize_params, only: [:index]
+
   def index
     scope = List.displayable
 
@@ -55,5 +57,13 @@ class ListsController < ApplicationController
     @other_lists = List.displayable.where(list_of_lists: false).order(stars: :desc, url: :asc).all
     fresh_when([@list_of_lists, @other_lists].flatten, public: true)
     render layout: false, content_type: 'text/plain'
+  end
+
+  private
+
+  def sanitize_params
+    [:query, :sort, :order, :topic, :language].each do |param|
+      params[param] = params[param].delete("\x00") if params[param].present?
+    end
   end
 end

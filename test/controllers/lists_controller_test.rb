@@ -107,4 +107,29 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     assert_includes @response.body, '<item>'
     assert_includes @response.body, '<title>test-rss-list</title>'
   end
+
+  test 'handles null byte in query parameter' do
+    get '/', params: { query: "test\x00query" }
+    assert_response :success
+  end
+
+  test 'handles null byte in sort parameter' do
+    get '/', params: { sort: "stars\x00" }
+    assert_response :success
+  end
+
+  test 'handles null byte in order parameter' do
+    get '/', params: { order: "asc\x00" }
+    assert_response :success
+  end
+
+  test 'handles null byte in topic parameter' do
+    get '/', params: { topic: "ruby\x00" }
+    assert_response :success
+  end
+
+  test 'handles null byte in language parameter' do
+    get '/', params: { language: "ruby\x00" }
+    assert_response :success
+  end
 end
