@@ -220,7 +220,7 @@ GEM
     rake-compiler-dock (1.9.1)
     rb_sys (0.9.117)
       rake-compiler-dock (= 1.9.1)
-    rdoc (6.15.0)
+    rdoc (6.15.1)
       erb
       psych (>= 4.0.0)
       tsort
@@ -466,7 +466,7 @@ CHECKSUMS
   rake (13.3.1) sha256=8c9e89d09f66a26a01264e7e3480ec0607f0c497a861ef16063604b1b08eb19c
   rake-compiler-dock (1.9.1) sha256=e73720a29aba9c114728ce39cc0d8eef69ba61d88e7978c57bac171724cd4d53
   rb_sys (0.9.117) sha256=755feaf6c640baceca7a9362dfb0ae87ff4ff16e3566d9ef86533896eb85cb59
-  rdoc (6.15.0) sha256=0f0e68864969e77c2acd4063a9585baa5216d362701d827a93feaa9cbae78b05
+  rdoc (6.15.1) sha256=28bfac73cd8b226a8079f53a564ceaccdb5b4480e34335100001570ddb1a481a
   redis-client (0.26.1) sha256=1e39d2862c4516a75ff777ee6ed08827af39336bfece4a48e944244891d9a073
   reline (0.6.2) sha256=1dad26a6008872d59c8e05244b119347c9f2ddaf4a53dce97856cd5f30a02846
   rexml (3.4.4) sha256=19e0a2c3425dfbf2d4fc1189747bdb2f849b6c5e74180401b15734bc97b5d142
