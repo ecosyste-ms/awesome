@@ -19,7 +19,7 @@ gem "counter_culture"
 gem "faraday"
 gem "faraday-retry"
 gem "faraday-follow_redirects"
-gem "pagy", "~> 9.4.0"
+gem "pagy", "~> 43.0.0"
 gem "pghero"
 gem "pg_query"
 gem 'bootstrap'
