@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_15_151916) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_08_165959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -45,6 +45,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_15_151916) do
     t.boolean "displayable", default: false
     t.string "keywords", default: [], array: true
     t.bigint "stars", default: 0
+    t.index ["displayable", "stars"], name: "index_lists_on_displayable_and_stars"
+    t.index ["keywords"], name: "index_lists_on_keywords", using: :gin
     t.index ["stars"], name: "index_lists_on_stars"
     t.index ["url"], name: "index_lists_on_url", unique: true
   end
@@ -71,6 +73,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_15_151916) do
     t.string "owner"
     t.bigint "owner_id"
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
+    t.index ["list", "stars"], name: "index_projects_on_list_and_stars"
     t.index ["owner"], name: "index_projects_on_owner"
     t.index ["owner_id"], name: "index_projects_on_owner_id"
     t.index ["stars"], name: "index_projects_on_stars"
