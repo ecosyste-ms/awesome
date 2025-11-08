@@ -3,10 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby file: ".ruby-version"
 
-gem "activerecord", "~> 8.0.0"
-gem "actionpack", "~> 8.0.0"
-gem "activesupport", "~> 8.0.0"
-gem "railties", "~> 8.0.0"
+gem "activerecord", "~> 8.1.1"
+gem "actionpack", "~> 8.1.1"
+gem "activesupport", "~> 8.1.1"
+gem "railties", "~> 8.1.1"
 
 gem "secure_headers"
 gem "sprockets-rails"
