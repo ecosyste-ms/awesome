@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_08_165959) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_09_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_08_165959) do
     t.string "owner"
     t.bigint "owner_id"
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
+    t.index ["last_synced_at"], name: "index_projects_on_last_synced_at"
     t.index ["list", "stars"], name: "index_projects_on_list_and_stars"
     t.index ["owner"], name: "index_projects_on_owner"
     t.index ["owner_id"], name: "index_projects_on_owner_id"
