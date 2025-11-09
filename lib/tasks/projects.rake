@@ -6,11 +6,6 @@ namespace :projects do
     Project.sync_least_recently_synced
   end
 
-  desc 'sync reviewed projects'
-  task :sync_reviewed => :environment do
-    Project.sync_least_recently_synced_reviewed
-  end
-
   desc 'import projects'
   task :import => :environment do
     Project.import_from_readme
