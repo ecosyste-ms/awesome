@@ -246,7 +246,7 @@ GEM
       tilt
     secure_headers (7.1.0)
     securerandom (0.4.1)
-    shoulda-context (2.0.0)
+    shoulda-context (3.0.0.rc1)
     shoulda-matchers (7.0.1)
       activesupport (>= 7.1)
     sidekiq (8.0.9)
@@ -351,7 +351,7 @@ DEPENDENCIES
   rswag-ui
   sassc-rails
   secure_headers
-  shoulda-context
+  shoulda-context (~> 3.0.0.rc1)
   shoulda-matchers
   sidekiq
   sidekiq-status
@@ -476,7 +476,7 @@ CHECKSUMS
   sassc-rails (2.1.2) sha256=5f4fdf3881fc9bdc8e856ffbd9850d70a2878866feae8114aa45996179952db5
   secure_headers (7.1.0) sha256=6b1f9d5f9507af2948f4636452c41c09371927836396c2185438ffdf0a731124
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
-  shoulda-context (2.0.0) sha256=7adf45342cd800f507d2a053658cb1cce2884b616b26004d39684b912ea32c34
+  shoulda-context (3.0.0.rc1) sha256=6e0d9d52ab798c13bc2b490c8537d4bf30cfd318a1ea839c39a66d1d293c6a1a
   shoulda-matchers (7.0.1) sha256=b4bfd8744c10e0a36c8ac1a687f921ee7e25ed529e50488d61b79a8688749c77
   sidekiq (8.0.9) sha256=da0e2fb8a511699abe195df93a3e96210c68067efb7668a061cbdbcdb024f2ee
   sidekiq-status (4.0.0) sha256=3f45627efaa54c7f3e3b62dda358425af07fd7c596d6ab50d56ef3e45cbcdb67
