@@ -58,9 +58,16 @@ class List < ApplicationRecord
   before_save :set_displayable
 
   def self.sync_least_recently_synced
-    List.where(last_synced_at: nil).or(List.where("last_synced_at < ?", 1.day.ago)).order('last_synced_at asc nulls first').limit(500).each do |list|
-      list.sync_async
-    end
+    # Optimized: batch enqueue jobs instead of individual sync_async calls
+    # Reduced from 500 to 100 to prevent overwhelming Sidekiq
+    ids = List.where(last_synced_at: nil)
+      .or(List.where("last_synced_at < ?", 1.day.ago))
+      .order('last_synced_at asc nulls first')
+      .limit(100)
+      .pluck(:id)
+
+    # Batch push to Sidekiq (more efficient than 100 individual pushes)
+    SyncListWorker.perform_bulk(ids.map { |id| [id] }) if ids.any?
   end
 
   def to_s
@@ -345,12 +352,86 @@ class List < ApplicationRecord
   end
 
   def load_projects
-    readme_links.each do |link|
-      project = Project.find_or_create_by(url: link[:url])
-      project.sync_async if project.last_synced_at.nil?
-      list_project = list_projects.find_or_create_by(project_id: project.id)
-      list_project.update(name: link[:name], description: link[:description], category: link[:category], sub_category: link[:sub_category])
+    links = readme_links
+    return if links.empty?
+
+    # Batch insert/update instead of individual operations
+    # This is MUCH faster than N individual find_or_create_by calls
+    urls = links.map { |link| link[:url] }
+
+    # Find existing projects in one query
+    existing_projects = Project.where(url: urls).index_by(&:url)
+
+    # Collect new projects to insert
+    new_project_attrs = []
+    projects_to_sync = []
+
+    links.each do |link|
+      url = link[:url]
+      project = existing_projects[url]
+
+      unless project
+        new_project_attrs << { url: url, created_at: Time.current, updated_at: Time.current }
+      end
+
+      if project && project.last_synced_at.nil?
+        projects_to_sync << project.id
+      end
     end
+
+    # Batch insert new projects
+    if new_project_attrs.any?
+      Project.insert_all(new_project_attrs, unique_by: :url)
+      # Reload to get the newly created projects
+      existing_projects = Project.where(url: urls).index_by(&:url)
+    end
+
+    # Batch sync projects (max 100 at a time to avoid overwhelming queue)
+    if projects_to_sync.any?
+      SyncProjectWorker.perform_bulk(projects_to_sync.first(100).map { |id| [id] })
+    end
+
+    # Now handle list_projects association
+    project_ids = existing_projects.values.map(&:id)
+    existing_list_projects = list_projects.where(project_id: project_ids).index_by(&:project_id)
+
+    list_projects_to_insert = []
+    list_projects_to_update = []
+
+    links.each do |link|
+      project = existing_projects[link[:url]]
+      next unless project
+
+      list_project = existing_list_projects[project.id]
+
+      if list_project
+        # Update existing
+        list_projects_to_update << {
+          id: list_project.id,
+          name: link[:name],
+          description: link[:description],
+          category: link[:category],
+          sub_category: link[:sub_category],
+          updated_at: Time.current
+        }
+      else
+        # Insert new
+        list_projects_to_insert << {
+          list_id: id,
+          project_id: project.id,
+          name: link[:name],
+          description: link[:description],
+          category: link[:category],
+          sub_category: link[:sub_category],
+          created_at: Time.current,
+          updated_at: Time.current
+        }
+      end
+    end
+
+    # Batch operations
+    ListProject.insert_all(list_projects_to_insert) if list_projects_to_insert.any?
+    ListProject.upsert_all(list_projects_to_update) if list_projects_to_update.any?
   end
 
   def readme_links

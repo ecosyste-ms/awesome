@@ -23,7 +23,17 @@ class Project < ApplicationRecord
   scope :order_by_stars, -> { order(stars: :desc) }
 
   scope :not_awesome_list, -> { where(list: false) }
-  scope :visible_owners, -> { left_joins(:owner_record).where(owners: { hidden: [false, nil] }).or(where(owner_id: nil)) }
+
+  def self.hidden_owner_ids
+    Rails.cache.fetch('hidden_owner_ids', expires_in: 5.minutes) do
+      Owner.where(hidden: true).pluck(:id)
+    end
+  end
+
+  def self.visible_owners
+    ids = hidden_owner_ids
+    ids.any? ? where.not(owner_id: ids) : all
+  end
 
   before_save :set_is_list?
   before_save :set_stars
@@ -66,12 +76,13 @@ class Project < ApplicationRecord
   end
   
   def self.sync_least_recently_synced
-    Project.where(last_synced_at: nil).limit(250).each do |project|
-      project.sync_async
-    end
-    Project.where("last_synced_at < ?", 1.day.ago).order(:last_synced_at).limit(250).each do |project|
-      project.sync_async
-    end
+    # Optimized: batch enqueue and reduce limits to prevent overwhelming system
+    # With 11M projects, we need to be more conservative
+    new_ids = Project.where(last_synced_at: nil).limit(50).pluck(:id)
+    old_ids = Project.where("last_synced_at < ?", 1.day.ago).order(:last_synced_at).limit(50).pluck(:id)
+
+    all_ids = (new_ids + old_ids).uniq
+    SyncProjectWorker.perform_bulk(all_ids.map { |id| [id] }) if all_ids.any?
   end
 
   def self.sync_all

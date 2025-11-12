@@ -10,92 +10,99 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_09_000000) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_12_000002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
+  enable_extension "vector"
 
   create_table "list_projects", force: :cascade do |t|
-    t.integer "list_id"
-    t.integer "project_id"
-    t.string "name"
-    t.string "description"
     t.string "category"
-    t.string "sub_category"
     t.datetime "created_at", null: false
+    t.string "description"
+    t.integer "list_id"
+    t.string "name"
+    t.integer "project_id"
+    t.string "sub_category"
     t.datetime "updated_at", null: false
+    t.index ["list_id", "project_id"], name: "index_list_projects_on_list_id_and_project_id", unique: true
     t.index ["list_id"], name: "index_list_projects_on_list_id"
     t.index ["project_id"], name: "index_list_projects_on_project_id"
   end
 
   create_table "lists", force: :cascade do |t|
-    t.citext "url"
-    t.string "name"
-    t.string "description"
-    t.integer "projects_count"
-    t.datetime "last_synced_at"
-    t.json "repository"
-    t.text "readme"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "primary_language"
-    t.boolean "list_of_lists", default: false
+    t.string "description"
     t.boolean "displayable", default: false
     t.string "keywords", default: [], array: true
+    t.datetime "last_synced_at"
+    t.boolean "list_of_lists", default: false
+    t.string "name"
+    t.string "primary_language"
+    t.integer "projects_count"
+    t.text "readme"
+    t.json "repository"
     t.bigint "stars", default: 0
+    t.datetime "updated_at", null: false
+    t.citext "url"
     t.index ["displayable", "stars"], name: "index_lists_on_displayable_and_stars"
     t.index ["keywords"], name: "index_lists_on_keywords", using: :gin
+    t.index ["list_of_lists"], name: "index_lists_on_list_of_lists"
     t.index ["stars"], name: "index_lists_on_stars"
     t.index ["url"], name: "index_lists_on_url", unique: true
   end
 
   create_table "owners", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
+    t.boolean "hidden", default: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["hidden"], name: "index_owners_on_hidden"
     t.index ["name"], name: "index_owners_on_name", unique: true
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "url"
-    t.json "repository"
-    t.text "readme"
+    t.datetime "created_at", null: false
     t.string "keywords", default: [], array: true
     t.datetime "last_synced_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "list", default: false
-    t.bigint "stars", default: 0
     t.string "owner"
     t.bigint "owner_id"
+    t.text "readme"
+    t.json "repository"
+    t.bigint "stars", default: 0
+    t.datetime "updated_at", null: false
+    t.string "url"
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
     t.index ["last_synced_at"], name: "index_projects_on_last_synced_at"
     t.index ["list", "stars"], name: "index_projects_on_list_and_stars"
+    t.index ["list"], name: "index_projects_on_list"
     t.index ["owner"], name: "index_projects_on_owner"
+    t.index ["owner_id", "last_synced_at"], name: "index_projects_on_owner_id_and_last_synced_at", where: "(owner_id IS NOT NULL)"
     t.index ["owner_id"], name: "index_projects_on_owner_id"
     t.index ["stars"], name: "index_projects_on_stars"
     t.index ["url"], name: "index_projects_on_url", unique: true
   end
 
   create_table "topics", force: :cascade do |t|
-    t.string "slug"
-    t.string "name"
-    t.string "short_description"
-    t.string "url"
-    t.integer "github_count"
-    t.string "created_by"
-    t.string "logo_url"
-    t.string "released"
-    t.string "wikipedia_url"
-    t.string "related_topics", default: [], array: true
     t.string "aliases", default: [], array: true
-    t.string "github_url"
     t.text "content"
     t.datetime "created_at", null: false
+    t.string "created_by"
+    t.integer "github_count"
+    t.string "github_url"
+    t.string "logo_url"
+    t.string "name"
+    t.string "related_topics", default: [], array: true
+    t.string "released"
+    t.string "short_description"
+    t.string "slug"
     t.datetime "updated_at", null: false
+    t.string "url"
+    t.string "wikipedia_url"
+    t.index ["github_count"], name: "index_topics_on_github_count"
+    t.index ["slug"], name: "index_topics_on_slug", unique: true
   end
 
   add_foreign_key "projects", "owners"
