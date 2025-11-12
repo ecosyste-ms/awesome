@@ -87,6 +87,9 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     list1 = create(:list,
       url: 'https://github.com/awesome/test-rss-list',
       description: 'RSS Test Description',
+      displayable: true,
+      projects_count: 30,
+      repository: { 'fork' => false, 'archived' => false },
       created_at: 1.second.from_now
     )
 

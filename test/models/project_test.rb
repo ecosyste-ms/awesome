@@ -98,6 +98,8 @@ class ProjectTest < ActiveSupport::TestCase
     hidden_owner = Owner.create!(name: "hidden-owner", hidden: true)
     visible_owner = Owner.create!(name: "visible-owner", hidden: false)
 
+    Rails.cache.clear
+
     hidden_project = create(:project, owner_record: hidden_owner)
     visible_project = create(:project, owner_record: visible_owner)
     no_owner_project = create(:project, owner_record: nil)

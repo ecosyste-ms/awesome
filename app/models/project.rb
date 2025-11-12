@@ -32,7 +32,7 @@ class Project < ApplicationRecord
 
   def self.visible_owners
     ids = hidden_owner_ids
-    ids.any? ? where.not(owner_id: ids) : all
+    ids.any? ? where(owner_id: nil).or(where.not(owner_id: ids)) : where(nil)
   end
 
   before_save :set_is_list?
