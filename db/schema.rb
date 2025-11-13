@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_12_000002) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_12_172132) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_000002) do
     t.string "sub_category"
     t.datetime "updated_at", null: false
     t.index ["list_id", "project_id"], name: "index_list_projects_on_list_id_and_project_id", unique: true
-    t.index ["list_id"], name: "index_list_projects_on_list_id"
     t.index ["project_id"], name: "index_list_projects_on_project_id"
   end
 
@@ -77,7 +76,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_000002) do
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
     t.index ["last_synced_at"], name: "index_projects_on_last_synced_at"
     t.index ["list", "stars"], name: "index_projects_on_list_and_stars"
-    t.index ["list"], name: "index_projects_on_list"
     t.index ["owner"], name: "index_projects_on_owner"
     t.index ["owner_id", "last_synced_at"], name: "index_projects_on_owner_id_and_last_synced_at", where: "(owner_id IS NOT NULL)"
     t.index ["owner_id"], name: "index_projects_on_owner_id"
