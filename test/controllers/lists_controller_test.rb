@@ -29,6 +29,7 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
   test 'renders show with list projects' do
     list = create(:list,
       displayable: true,
+      projects_count: 50,
       repository: {
         'description' => 'Test list description',
         'stargazers_count' => 500
