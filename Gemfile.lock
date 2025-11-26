@@ -281,12 +281,12 @@ GEM
     thor (1.4.0)
     tilt (2.6.1)
     timeout (0.4.4)
-    tokenizers (0.6.1)
+    tokenizers (0.6.2)
       rb_sys
-    tokenizers (0.6.1-aarch64-linux-musl)
-    tokenizers (0.6.1-arm64-darwin)
-    tokenizers (0.6.1-x86_64-linux)
-    tokenizers (0.6.1-x86_64-linux-musl)
+    tokenizers (0.6.2-aarch64-linux-musl)
+    tokenizers (0.6.2-arm64-darwin)
+    tokenizers (0.6.2-x86_64-linux)
+    tokenizers (0.6.2-x86_64-linux-musl)
     tsort (0.2.0)
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
@@ -489,11 +489,11 @@ CHECKSUMS
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
   tilt (2.6.1) sha256=35a99bba2adf7c1e362f5b48f9b581cce4edfba98117e34696dde6d308d84770
   timeout (0.4.4) sha256=f0f6f970104b82427cd990680f539b6bbb8b1e55efa913a55c6492935e4e0edb
-  tokenizers (0.6.1) sha256=4b73a4f6ca178a5934aba655f8448ff92418bcdd57685d94c6e095763295816c
-  tokenizers (0.6.1-aarch64-linux-musl) sha256=3c96ae7a7c1578db52932c345917c909d7d72d7768bd8d8b7e87409155482e77
-  tokenizers (0.6.1-arm64-darwin) sha256=bcb4073b4d3b80defa1b5f9532d06623c44d8bfa5cdca98112bb4024758f2539
-  tokenizers (0.6.1-x86_64-linux) sha256=0a22e48d2f7a5e5c75ba282706c51317e7997b7dc340cb79f6173fff5d10fe73
-  tokenizers (0.6.1-x86_64-linux-musl) sha256=1b541cc666292149b1340568941941076b9c1b4e1efd770a51039c9bc1ef1b47
+  tokenizers (0.6.2) sha256=6ea5bdd67b6f0aa7c313a139235d4ef138fc56abefd02c6302f33cfd75aba9b5
+  tokenizers (0.6.2-aarch64-linux-musl) sha256=87007113ea9e56a50dc96a6d5c36c4849ac7671c72122542656544878f5dfadc
+  tokenizers (0.6.2-arm64-darwin) sha256=79d1cc2f2d056d23f311f273e76cf30319c7412756d299e89a94d32b2acfa589
+  tokenizers (0.6.2-x86_64-linux) sha256=bf116799dc2fcf1b6becd31f84d707a916d6ebea27b13b671ee0fa0363aee733
+  tokenizers (0.6.2-x86_64-linux-musl) sha256=8e94b4487e48562352fcfc785a6898b5ecc20b14005ec3fad05295701a44b304
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   typhoeus (1.4.1) sha256=1c17db8364bd45ab302dc61e460173c3e69835896be88a3df07c206d5c55ef7c
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
