@@ -280,7 +280,7 @@ GEM
     stringio (3.1.9)
     thor (1.4.0)
     tilt (2.6.1)
-    timeout (0.4.4)
+    timeout (0.5.0)
     tokenizers (0.6.2)
       rb_sys
     tokenizers (0.6.2-aarch64-linux-musl)
@@ -488,7 +488,7 @@ CHECKSUMS
   stringio (3.1.9) sha256=c111af13d3a73eab96a3bc2655ecf93788d13d28cb8e25c1dcbff89ace885121
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
   tilt (2.6.1) sha256=35a99bba2adf7c1e362f5b48f9b581cce4edfba98117e34696dde6d308d84770
-  timeout (0.4.4) sha256=f0f6f970104b82427cd990680f539b6bbb8b1e55efa913a55c6492935e4e0edb
+  timeout (0.5.0) sha256=852aefd13f41d84c2d0d83099b275034c6517395884b58e635acc8847c9190cb
   tokenizers (0.6.2) sha256=6ea5bdd67b6f0aa7c313a139235d4ef138fc56abefd02c6302f33cfd75aba9b5
   tokenizers (0.6.2-aarch64-linux-musl) sha256=87007113ea9e56a50dc96a6d5c36c4849ac7671c72122542656544878f5dfadc
   tokenizers (0.6.2-arm64-darwin) sha256=79d1cc2f2d056d23f311f273e76cf30319c7412756d299e89a94d32b2acfa589
