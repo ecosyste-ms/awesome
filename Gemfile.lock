@@ -57,7 +57,7 @@ GEM
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
     cld3 (3.7.0)
-    concurrent-ruby (1.3.5)
+    concurrent-ruby (1.3.6)
     connection_pool (3.0.2)
     counter_culture (3.11.4)
       activerecord (>= 4.2)
@@ -260,7 +260,7 @@ GEM
       chronic_duration
       logger
       sidekiq (>= 7, < 9)
-    sidekiq-unique-jobs (8.0.11)
+    sidekiq-unique-jobs (8.0.12)
       concurrent-ruby (~> 1.0, >= 1.0.5)
       sidekiq (>= 7.0.0, < 9.0.0)
       thor (>= 1.0, < 3.0)
@@ -381,7 +381,7 @@ CHECKSUMS
   cff (1.3.0) sha256=d2b65d57160040ad244087d65b89769558a40aafb34b13d048e0ea72bc521316
   chronic_duration (0.10.6) sha256=fac58d4147d3183a40811400380cafcef049f2bb02421d2fd1c6e685fbe8facc
   cld3 (3.7.0) sha256=b736858fc95305319355448e5783bfdbb1dcc8bcc61ab266d5d26b38ff3ec59a
-  concurrent-ruby (1.3.5) sha256=813b3e37aca6df2a21a3b9f1d497f8cbab24a2b94cab325bffe65ee0f6cbebc6
+  concurrent-ruby (1.3.6) sha256=6b56837e1e7e5292f9864f34b69c5a2cbc75c0cf5338f1ce9903d10fa762d5ab
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
   counter_culture (3.11.4) sha256=af64b6e429a2755057a7162826ea68ae354b869506199a6f521d171765c2ca38
   crack (1.0.1) sha256=ff4a10390cd31d66440b7524eb1841874db86201d5b70032028553130b6d4c7e
@@ -480,7 +480,7 @@ CHECKSUMS
   shoulda-matchers (7.0.1) sha256=b4bfd8744c10e0a36c8ac1a687f921ee7e25ed529e50488d61b79a8688749c77
   sidekiq (8.1.0) sha256=6bde5eaee9e4d7b1121e97ebd585273627fb32b1f870a47893723572479ad1e4
   sidekiq-status (4.0.0) sha256=3f45627efaa54c7f3e3b62dda358425af07fd7c596d6ab50d56ef3e45cbcdb67
-  sidekiq-unique-jobs (8.0.11) sha256=63461bb943645d106f8e6eb10c773c231a53cf3781858158425c775484f1e181
+  sidekiq-unique-jobs (8.0.12) sha256=000a00976be4411a4999723086ebcad8d9b7e5ddfdfe01b77c5c6b98de3115fe
   simple_form (5.4.0) sha256=eb1ce5b0ec36ae171f2e2a07ec479ad3eaeb53fa750aa3f775a7cb7b684810ee
   sitemap_generator (6.3.0) sha256=1d803cbf03c44736bea05b9e3363d3523fec4e24f3abedad294d9c57cab994f3
   sprockets (4.2.2) sha256=761e5a49f1c288704763f73139763564c845a8f856d52fba013458f8af1b59b1
