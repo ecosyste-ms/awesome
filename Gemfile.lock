@@ -217,9 +217,9 @@ GEM
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
     rake (13.3.1)
-    rake-compiler-dock (1.10.0)
-    rb_sys (0.9.123)
-      rake-compiler-dock (= 1.10.0)
+    rake-compiler-dock (1.11.0)
+    rb_sys (0.9.124)
+      rake-compiler-dock (= 1.11.0)
     rdoc (7.0.3)
       erb
       psych (>= 4.0.0)
@@ -264,7 +264,7 @@ GEM
       concurrent-ruby (~> 1.0, >= 1.0.5)
       sidekiq (>= 7.0.0, < 9.0.0)
       thor (>= 1.0, < 3.0)
-    simple_form (5.4.0)
+    simple_form (5.4.1)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
     sitemap_generator (6.3.0)
@@ -281,12 +281,12 @@ GEM
     thor (1.4.0)
     tilt (2.6.1)
     timeout (0.6.0)
-    tokenizers (0.6.2)
+    tokenizers (0.6.3)
       rb_sys
-    tokenizers (0.6.2-aarch64-linux-musl)
-    tokenizers (0.6.2-arm64-darwin)
-    tokenizers (0.6.2-x86_64-linux)
-    tokenizers (0.6.2-x86_64-linux-musl)
+    tokenizers (0.6.3-aarch64-linux-musl)
+    tokenizers (0.6.3-arm64-darwin)
+    tokenizers (0.6.3-x86_64-linux)
+    tokenizers (0.6.3-x86_64-linux-musl)
     tsort (0.2.0)
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
@@ -337,6 +337,7 @@ DEPENDENCIES
   iso-639
   jbuilder
   jquery-rails
+  minitest (~> 5)
   mocha
   ostruct
   pagy (~> 9.4.0)
@@ -463,8 +464,8 @@ CHECKSUMS
   rails-html-sanitizer (1.6.2) sha256=35fce2ca8242da8775c83b6ba9c1bcaad6751d9eb73c1abaa8403475ab89a560
   railties (8.1.1) sha256=fb0c7038b147bea41bf6697fa443ff1c5c47d3bb1eedd9ecf1bceeb90efcb868
   rake (13.3.1) sha256=8c9e89d09f66a26a01264e7e3480ec0607f0c497a861ef16063604b1b08eb19c
-  rake-compiler-dock (1.10.0) sha256=dd62ee19df2a185a3315697e560cfa8cc9129901332152851e023fab0e94bf11
-  rb_sys (0.9.123) sha256=c22ae84d1bca3eec0f13a45ae4ca9ba6eace93d5be270a40a9c0a9a5b92a34e5
+  rake-compiler-dock (1.11.0) sha256=eab51f2cd533eb35cea6b624a75281f047123e70a64c58b607471bb49428f8c2
+  rb_sys (0.9.124) sha256=513476557b12eaf73764b3da9f8746024558fe8699bda785fb548c9aa3877ae7
   rdoc (7.0.3) sha256=dfe3d0981d19b7bba71d9dbaeb57c9f4e3a7a4103162148a559c4fc687ea81f9
   redis-client (0.26.2) sha256=1336fb5a7202d398b719531853c184b7c9cbdcace1f00f8356062b9dfba6779b
   reline (0.6.3) sha256=1198b04973565b36ec0f11542ab3f5cfeeec34823f4e54cebde90968092b1835
@@ -481,7 +482,7 @@ CHECKSUMS
   sidekiq (8.1.0) sha256=6bde5eaee9e4d7b1121e97ebd585273627fb32b1f870a47893723572479ad1e4
   sidekiq-status (4.0.0) sha256=3f45627efaa54c7f3e3b62dda358425af07fd7c596d6ab50d56ef3e45cbcdb67
   sidekiq-unique-jobs (8.0.12) sha256=000a00976be4411a4999723086ebcad8d9b7e5ddfdfe01b77c5c6b98de3115fe
-  simple_form (5.4.0) sha256=eb1ce5b0ec36ae171f2e2a07ec479ad3eaeb53fa750aa3f775a7cb7b684810ee
+  simple_form (5.4.1) sha256=58c3d229034c7e5545035c3271b6f030ef730c340b9d7d8eb730e0a385b20808
   sitemap_generator (6.3.0) sha256=1d803cbf03c44736bea05b9e3363d3523fec4e24f3abedad294d9c57cab994f3
   sprockets (4.2.2) sha256=761e5a49f1c288704763f73139763564c845a8f856d52fba013458f8af1b59b1
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
@@ -489,11 +490,11 @@ CHECKSUMS
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
   tilt (2.6.1) sha256=35a99bba2adf7c1e362f5b48f9b581cce4edfba98117e34696dde6d308d84770
   timeout (0.6.0) sha256=6d722ad619f96ee383a0c557ec6eb8c4ecb08af3af62098a0be5057bf00de1af
-  tokenizers (0.6.2) sha256=6ea5bdd67b6f0aa7c313a139235d4ef138fc56abefd02c6302f33cfd75aba9b5
-  tokenizers (0.6.2-aarch64-linux-musl) sha256=87007113ea9e56a50dc96a6d5c36c4849ac7671c72122542656544878f5dfadc
-  tokenizers (0.6.2-arm64-darwin) sha256=79d1cc2f2d056d23f311f273e76cf30319c7412756d299e89a94d32b2acfa589
-  tokenizers (0.6.2-x86_64-linux) sha256=bf116799dc2fcf1b6becd31f84d707a916d6ebea27b13b671ee0fa0363aee733
-  tokenizers (0.6.2-x86_64-linux-musl) sha256=8e94b4487e48562352fcfc785a6898b5ecc20b14005ec3fad05295701a44b304
+  tokenizers (0.6.3) sha256=cb76b8e86893695f6cfe661861cb24680755bf1fb42dca1ddd3cdfef9f657994
+  tokenizers (0.6.3-aarch64-linux-musl) sha256=c178d8556769256857d77fb396f8ab004b29d058f59c620a2cfc56b01b501e27
+  tokenizers (0.6.3-arm64-darwin) sha256=29a6a5582dce106d846a906ee9e4254c12db45a3855c3ff6881d4be8be03e6b6
+  tokenizers (0.6.3-x86_64-linux) sha256=77a45cbde59daac33bdda1a74d45c18080478992a00ee7d898e7b8d15d0b3149
+  tokenizers (0.6.3-x86_64-linux-musl) sha256=a4b08c53bf0c8f7674c3abd03e013f0bb7c0c2457174b116c2872a37c64f0297
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
   typhoeus (1.4.1) sha256=1c17db8364bd45ab302dc61e460173c3e69835896be88a3df07c206d5c55ef7c
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
@@ -504,7 +505,7 @@ CHECKSUMS
   zeitwerk (2.7.4) sha256=2bef90f356bdafe9a6c2bd32bcd804f83a4f9b8bc27f3600fff051eb3edcec8b
 
 RUBY VERSION
-   ruby 3.4.8p72
+  ruby 3.4.8
 
 BUNDLED WITH
-   2.7.2
+  4.0.3
