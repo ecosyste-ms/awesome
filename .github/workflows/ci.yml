@@ -31,7 +31,7 @@ jobs:
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
       - name: Set up Rust
-        uses: dtolnay/rust-action@stable
+        uses: dtolnay/rust-toolchain@stable
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
