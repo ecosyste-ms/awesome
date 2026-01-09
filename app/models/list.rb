@@ -542,9 +542,7 @@ class List < ApplicationRecord
     formatted_description = self.description.gsub(/[\u{1F600}-\u{1F6FF}]/, '')
     # remove markdown emoji
     formatted_description = formatted_description.gsub(/:[a-z_]+:/, '')
-    cld3 = CLD3::NNetLanguageIdentifier.new(0, 1000)
-    lang = cld3.find_language(formatted_description)
-    ISO_639.find_by_code(lang.language.to_s).try(:[],3).try(:split, ';').try(:first) if lang.probability > 0.99
+    Lingua.detect(formatted_description)
   end
 
   def categories

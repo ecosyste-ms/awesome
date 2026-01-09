@@ -1,4 +1,4 @@
-FROM ruby:3.4.8-alpine
+FROM ruby:4.0.0-alpine
 
 ENV APP_ROOT=/usr/src/app
 ENV DATABASE_PORT=5432
@@ -19,7 +19,14 @@ RUN apk add --update \
     yaml-dev \
     libffi-dev \
     jemalloc \
+    rust \
+    cargo \
+    clang \
+    clang-dev \
  && rm -rf /var/cache/apk/*
+
+# Required for lingua_rb native extension
+ENV RB_SYS_STABLE_API_COMPILED_FALLBACK=true
 
 ENV LD_PRELOAD=/usr/lib/libjemalloc.so.2
 ENV RUBY_YJIT_ENABLE=1 

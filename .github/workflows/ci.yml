@@ -30,10 +30,14 @@ jobs:
       - uses: actions/checkout@v6
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
+      - name: Set up Rust
+        uses: dtolnay/rust-action@stable
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+        env:
+          RB_SYS_STABLE_API_COMPILED_FALLBACK: "true"
 
       - name: Run tests
         env:

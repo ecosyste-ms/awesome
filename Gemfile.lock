@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/ShallmentMo/lingua_rb.git
+  revision: 94a31f6a0371edefd27ad8329f5097d0164f4768
+  specs:
+    lingua_rb (0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -56,7 +62,6 @@ GEM
       language_list (~> 1.2.1)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
-    cld3 (3.7.0)
     concurrent-ruby (1.3.6)
     connection_pool (3.0.2)
     counter_culture (3.12.1)
@@ -323,7 +328,6 @@ DEPENDENCIES
   bootstrap
   bootstrap-icons
   cff
-  cld3
   counter_culture
   csv
   dotenv-rails
@@ -337,6 +341,7 @@ DEPENDENCIES
   iso-639
   jbuilder
   jquery-rails
+  lingua_rb!
   minitest (~> 5)
   mocha
   ostruct
@@ -381,7 +386,6 @@ CHECKSUMS
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   cff (1.3.0) sha256=d2b65d57160040ad244087d65b89769558a40aafb34b13d048e0ea72bc521316
   chronic_duration (0.10.6) sha256=fac58d4147d3183a40811400380cafcef049f2bb02421d2fd1c6e685fbe8facc
-  cld3 (3.7.0) sha256=b736858fc95305319355448e5783bfdbb1dcc8bcc61ab266d5d26b38ff3ec59a
   concurrent-ruby (1.3.6) sha256=6b56837e1e7e5292f9864f34b69c5a2cbc75c0cf5338f1ce9903d10fa762d5ab
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
   counter_culture (3.12.1) sha256=8a880092321941732bfa639c449a133ff08c5197c29e853371cc03c486e43980
@@ -424,6 +428,7 @@ CHECKSUMS
   json (2.18.0) sha256=b10506aee4183f5cf49e0efc48073d7b75843ce3782c68dbeb763351c08fd505
   json_schema (0.20.9) sha256=2ccb9054df9cdbb9b46c89fd7be482108811e080ee32ccef59047d7b2a3dae1d
   language_list (1.2.1) sha256=bc7e4297c477555f830220604baea8c0ee8480075c7fac68f57a671d287286bc
+  lingua_rb (0.2.0)
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
   loofah (2.25.0) sha256=df5ed7ac3bac6a4ec802df3877ee5cc86d027299f8952e6243b3dac446b060e6
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
@@ -505,7 +510,7 @@ CHECKSUMS
   zeitwerk (2.7.4) sha256=2bef90f356bdafe9a6c2bd32bcd804f83a4f9b8bc27f3600fff051eb3edcec8b
 
 RUBY VERSION
-  ruby 3.4.8
+  ruby 4.0.0
 
 BUNDLED WITH
   4.0.3
