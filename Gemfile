@@ -21,7 +21,6 @@ gem "faraday-retry"
 gem "faraday-follow_redirects"
 gem "pagy", "~> 9.4.0"
 gem "pghero"
-gem "pg_query"
 gem 'bootstrap'
 gem 'rack-cors'
 gem 'rswag-api'
@@ -32,13 +31,12 @@ gem 'sitemap_generator'
 gem 'sidekiq'
 gem 'sidekiq-unique-jobs'
 gem 'sidekiq-status'
-gem 'google-protobuf'
 gem 'groupdate'
 gem 'simple_form'
 gem 'cff'
 gem 'tokenizers'
 gem 'appsignal'
-gem 'lingua_rb', github: 'ShallmentMo/lingua_rb', require: 'lingua'
+gem 'lingua_rb'
 gem 'iso-639'
 gem 'csv'
 gem 'ostruct'
@@ -58,7 +56,7 @@ group :test do
   gem "mocha"
   gem "rails-controller-testing"
   gem "factory_bot_rails"
-  gem "minitest", "~> 5"
+
 end
 
 gem "bootstrap-icons", require: "bootstrap_icons"
