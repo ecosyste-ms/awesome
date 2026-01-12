@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/ShallmentMo/lingua_rb.git
-  revision: 94a31f6a0371edefd27ad8329f5097d0164f4768
+  revision: f29d60baa13fc0c750e266afeaa64f9d6339098a
   specs:
-    lingua_rb (0.2.0)
+    lingua_rb (0.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -428,7 +428,7 @@ CHECKSUMS
   json (2.18.0) sha256=b10506aee4183f5cf49e0efc48073d7b75843ce3782c68dbeb763351c08fd505
   json_schema (0.20.9) sha256=2ccb9054df9cdbb9b46c89fd7be482108811e080ee32ccef59047d7b2a3dae1d
   language_list (1.2.1) sha256=bc7e4297c477555f830220604baea8c0ee8480075c7fac68f57a671d287286bc
-  lingua_rb (0.2.0)
+  lingua_rb (0.3.0)
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
   loofah (2.25.0) sha256=df5ed7ac3bac6a4ec802df3877ee5cc86d027299f8952e6243b3dac446b060e6
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
