@@ -284,7 +284,7 @@ GEM
       sprockets (>= 3.0.0)
     stringio (3.2.0)
     thor (1.5.0)
-    tilt (2.6.1)
+    tilt (2.7.0)
     timeout (0.6.0)
     tokenizers (0.6.3)
       rb_sys
@@ -493,7 +493,7 @@ CHECKSUMS
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
-  tilt (2.6.1) sha256=35a99bba2adf7c1e362f5b48f9b581cce4edfba98117e34696dde6d308d84770
+  tilt (2.7.0) sha256=0d5b9ba69f6a36490c64b0eee9f6e9aad517e20dcc848800a06eb116f08c6ab3
   timeout (0.6.0) sha256=6d722ad619f96ee383a0c557ec6eb8c4ecb08af3af62098a0be5057bf00de1af
   tokenizers (0.6.3) sha256=cb76b8e86893695f6cfe661861cb24680755bf1fb42dca1ddd3cdfef9f657994
   tokenizers (0.6.3-aarch64-linux-musl) sha256=c178d8556769256857d77fb396f8ab004b29d058f59c620a2cfc56b01b501e27
