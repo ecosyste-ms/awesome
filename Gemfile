@@ -36,7 +36,7 @@ gem 'simple_form'
 gem 'cff'
 gem 'tokenizers'
 gem 'appsignal'
-gem 'lingua_rb'
+gem 'lingua_rb', require: 'lingua'
 gem 'iso-639'
 gem 'csv'
 gem 'ostruct'
@@ -56,7 +56,6 @@ group :test do
   gem "mocha"
   gem "rails-controller-testing"
   gem "factory_bot_rails"
-
 end
 
 gem "bootstrap-icons", require: "bootstrap_icons"
