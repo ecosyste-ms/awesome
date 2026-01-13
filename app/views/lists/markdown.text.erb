@@ -8,8 +8,12 @@ Last generated: <%= Time.now.strftime("%Y-%m-%d") %>, <%= @list_of_lists.length 
 ## Contents
 - [Lists of Lists](#lists-of-lists)
 - [Programming Language Lists](#programming-language-lists)
+<% anchor_counts = Hash.new(0) %>
 <% @other_lists.map(&:primary_language).uniq.compact.each do |lang| %>
-  - [<%= lang %> Lists](#<%= lang.downcase.gsub(' ','-') %>-lists)
+<%   base_anchor = "#{lang.downcase.gsub(/[^a-z0-9\s-]/,'').gsub(' ','-')}-lists" %>
+<%   anchor_counts[base_anchor] += 1 %>
+<%   anchor = anchor_counts[base_anchor] > 1 ? "#{base_anchor}-#{anchor_counts[base_anchor] - 1}" : base_anchor %>
+  - [<%= lang %> Lists](#<%= anchor %>)
 <% end%>
 - [Other Lists](#other-lists)
 

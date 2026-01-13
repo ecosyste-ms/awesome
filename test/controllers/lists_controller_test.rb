@@ -83,6 +83,24 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     assert_template 'lists/markdown'
   end
 
+  test 'markdown generates correct TOC anchors for languages with special characters' do
+    List.delete_all
+
+    create(:list, primary_language: 'C', list_of_lists: false, displayable: true, projects_count: 50, stars: 300,
+           repository: { 'fork' => false, 'archived' => false, 'description' => 'C list' })
+    create(:list, primary_language: 'C#', list_of_lists: false, displayable: true, projects_count: 50, stars: 200,
+           repository: { 'fork' => false, 'archived' => false, 'description' => 'C# list' })
+    create(:list, primary_language: 'C++', list_of_lists: false, displayable: true, projects_count: 50, stars: 100,
+           repository: { 'fork' => false, 'archived' => false, 'description' => 'C++ list' })
+
+    get '/lists/markdown'
+    assert_response :success
+
+    assert_includes response.body, '[C Lists](#c-lists)'
+    assert_includes response.body, '[C# Lists](#c-lists-1)'
+    assert_includes response.body, '[C++ Lists](#c-lists-2)'
+  end
+
   test 'renders rss' do
     # Make additional lists for RSS content - ensure it's the newest by setting created_at
     list1 = create(:list,
