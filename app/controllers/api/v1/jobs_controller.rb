@@ -1,4 +1,5 @@
 class Api::V1::JobsController < Api::V1::ApplicationController
+  skip_before_action :set_cache_headers
   def create
     @job = Job.new(url: params[:url], status: 'pending', ip: request.remote_ip)
     if @job.save
