@@ -1,5 +1,16 @@
 class List < ApplicationRecord
   include EcosystemsApiClient
+
+  def self.sortable_columns
+    {
+      'updated_at' => 'updated_at',
+      'created_at' => 'created_at',
+      'stars' => 'stars',
+      'projects_count' => 'projects_count',
+      'name' => 'name',
+    }
+  end
+
   validates :url, presence: true, format: { without: /\A.*\/\z/, message: "should not end with a slash" }
 
   has_many :list_projects, dependent: :destroy

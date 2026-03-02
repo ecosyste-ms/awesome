@@ -3,6 +3,14 @@ require 'csv'
 class Project < ApplicationRecord
   include EcosystemsApiClient
 
+  def self.sortable_columns
+    {
+      'updated_at' => 'updated_at',
+      'created_at' => 'created_at',
+      'stars' => 'stars',
+    }
+  end
+
   has_many :list_projects, dependent: :destroy
   has_many :lists, through: :list_projects
 
