@@ -1,0 +1,27 @@
+app/views/shared/_footer.html.erb
+  477336e906d34278 53
+config/initializers/content_security_policy.rb
+  477336e906d34278 4,8
+app/views/layouts/application.html.erb
+  477336e906d34278 13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "f33bce3ae223fc111df49d4f2d6c9c89df787cb2",
+  "prompts": {
+    "477336e906d34278": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9390b30c-2229-4c05-a7de-b55467c07057",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Andrew Nesbitt <andrewnez@gmail.com>",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 3,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    }
+  }
+}
