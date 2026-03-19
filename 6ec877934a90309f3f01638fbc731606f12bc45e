@@ -1,0 +1,25 @@
+app/controllers/api/v1/lists_controller.rb
+  4148e4314a09e88f 53
+test/controllers/api/v1/lists_controller_test.rb
+  4148e4314a09e88f 1-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.15",
+  "base_commit_sha": "6ec877934a90309f3f01638fbc731606f12bc45e",
+  "prompts": {
+    "4148e4314a09e88f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89716f0a-edb3-49bc-8c8a-1b2fd5f2295f",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Andrew Nesbitt <andrewnez@gmail.com>",
+      "messages": [],
+      "total_additions": 44,
+      "total_deletions": 1,
+      "accepted_lines": 44,
+      "overriden_lines": 0
+    }
+  }
+}
