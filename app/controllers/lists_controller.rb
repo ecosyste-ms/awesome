@@ -53,8 +53,8 @@ class ListsController < ApplicationController
   end
 
   def markdown
-    @list_of_lists = List.displayable.where(list_of_lists: true).order(stars: :desc, url: :asc).all
-    @other_lists = List.displayable.where(list_of_lists: false).order(stars: :desc, url: :asc).all
+    @list_of_lists = List.displayable.where(list_of_lists: true).order(stars: :desc, url: :asc).to_a
+    @other_lists = List.displayable.where(list_of_lists: false).order(stars: :desc, url: :asc).to_a
     fresh_when([@list_of_lists, @other_lists].flatten, public: true)
     render layout: false, content_type: 'text/plain'
   end
