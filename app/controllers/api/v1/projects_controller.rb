@@ -55,17 +55,4 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     render json: { message: 'pong' }
   end
 
-  def packages
-    @projects = Project.joins(:list_projects).distinct.active
-      .where("repository -> 'packages' IS NOT NULL")
-      .where("jsonb_array_length(COALESCE(repository -> 'packages', '[]'::jsonb)) > 0")
-      .order(Arel.sql("(SELECT COALESCE(SUM((pkg->>'downloads')::bigint), 0) FROM jsonb_array_elements(COALESCE(repository->'packages', '[]'::jsonb)) AS pkg) DESC"))
-    fresh_when(@projects, public: true)
-  end
-
-  def images
-    @projects = Project.joins(:list_projects).distinct.with_readme
-      .where("readme ~ '!\\[.*?\\]\\(.*?\\)' OR readme ~ '<img.*?src=\".*?\"'")
-    fresh_when(@projects, public: true)
-  end
 end
