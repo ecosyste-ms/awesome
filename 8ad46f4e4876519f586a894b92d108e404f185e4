@@ -1,0 +1,27 @@
+app/controllers/lists_controller.rb
+  353a5960f3461a6e 56-57
+config/puma.rb
+  353a5960f3461a6e 18-31
+Gemfile
+  353a5960f3461a6e 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.5",
+  "base_commit_sha": "8ad46f4e4876519f586a894b92d108e404f185e4",
+  "prompts": {
+    "353a5960f3461a6e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "156c3545-1b9b-40eb-b025-b05775995e8e",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Andrew Nesbitt",
+      "messages": [],
+      "total_additions": 20,
+      "total_deletions": 44,
+      "accepted_lines": 17,
+      "overriden_lines": 0
+    }
+  }
+}
