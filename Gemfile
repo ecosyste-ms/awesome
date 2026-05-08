@@ -37,6 +37,7 @@ gem 'simple_form'
 gem 'cff'
 gem 'tokenizers'
 gem 'appsignal'
+gem 'dalli'
 gem 'csv'
 gem 'ostruct'
 
