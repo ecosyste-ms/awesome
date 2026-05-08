@@ -37,8 +37,6 @@ gem 'simple_form'
 gem 'cff'
 gem 'tokenizers'
 gem 'appsignal'
-gem 'lingua_rb', require: 'lingua'
-gem 'iso-639'
 gem 'csv'
 gem 'ostruct'
 

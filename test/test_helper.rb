@@ -5,9 +5,8 @@ require "rails/test_help"
 require 'webmock/minitest'
 require 'mocha/minitest'
 
+Sidekiq.testing!(:fake)
 require 'sidekiq_unique_jobs/testing'
-require 'sidekiq/testing'
-Sidekiq::Testing.fake!
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods

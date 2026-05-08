@@ -546,16 +546,6 @@ class List < ApplicationRecord
     projects_with_repository_count > projects_count / 2
   end
 
-  def find_spoken_language
-    return unless description.present?
-    return unless description.length > 20
-    # remove emojis
-    formatted_description = self.description.gsub(/[\u{1F600}-\u{1F6FF}]/, '')
-    # remove markdown emoji
-    formatted_description = formatted_description.gsub(/:[a-z_]+:/, '')
-    Lingua.detect(formatted_description)
-  end
-
   def categories
     list_projects.pluck(:category).uniq.compact
   end
