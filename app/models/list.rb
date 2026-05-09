@@ -1,6 +1,8 @@
 class List < ApplicationRecord
   include EcosystemsApiClient
 
+  README_MAX_BYTES = 100_000
+
   def self.sortable_columns
     {
       'updated_at' => 'updated_at',
