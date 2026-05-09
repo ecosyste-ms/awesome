@@ -1,5 +1,5 @@
 <% if @project.repository %>
-  <% cache [@project, 'repository-v1'] do %>
+  <% cache [@project, 'repository-v2'] do %>
     <p>
       <%= @project.repository['description'] %>
     </p>
@@ -117,13 +117,13 @@
     <% end %>
 
     <% if @project.readme %>
-      <% cache [@project, 'readme-v1'] do %>
+      <% cache [@project, 'readme-v2'] do %>
       <h2>
         <%= link_to 'README', @project.readme_url, target: :_blank %>
       </h2>
 
         <pre class='card p-2'>
-          <%= simple_format @project.readme %>
+          <%= simple_format @project.readme.byteslice(0, Project::README_MAX_BYTES).scrub %>
         </pre>
       <% end %>
     <% end %>
