@@ -303,13 +303,15 @@ class Project < ApplicationRecord
     repository['metadata']['files']['readme']
   end
 
+  README_MAX_BYTES = 100_000
+
   def fetch_readme
     return unless readme_file_name.present?
     return unless download_url.present?
     json = ecosystems_api_get(archive_url(readme_file_name))
     return unless json
 
-    self.readme = json['contents']
+    self.readme = json['contents'].to_s.byteslice(0, README_MAX_BYTES).scrub
     self.save
   rescue
     Rails.logger.info "Error fetching readme for #{repository_url}"

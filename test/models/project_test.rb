@@ -159,4 +159,33 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal "TestOwner", project.owner
     assert_equal existing_owner, project.owner_record
   end
+
+  test "fetch_readme truncates contents to README_MAX_BYTES" do
+    project = build(:project)
+    project.stubs(:readme_file_name).returns("README.md")
+    project.stubs(:download_url).returns("https://example.com/archive.tar.gz")
+    project.stubs(:archive_url).returns("https://example.com/readme")
+    project.stubs(:save).returns(true)
+
+    big = "a" * (Project::README_MAX_BYTES + 5000)
+    Project.stubs(:ecosystems_api_get).returns({ "contents" => big })
+
+    project.fetch_readme
+
+    assert_equal Project::README_MAX_BYTES, project.readme.bytesize
+  end
+
+  test "fetch_readme keeps short contents intact" do
+    project = build(:project)
+    project.stubs(:readme_file_name).returns("README.md")
+    project.stubs(:download_url).returns("https://example.com/archive.tar.gz")
+    project.stubs(:archive_url).returns("https://example.com/readme")
+    project.stubs(:save).returns(true)
+
+    Project.stubs(:ecosystems_api_get).returns({ "contents" => "hello" })
+
+    project.fetch_readme
+
+    assert_equal "hello", project.readme
+  end
 end
