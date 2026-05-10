@@ -48,6 +48,7 @@ class ListsController < ApplicationController
     else
       @list = List.find_by_slug!(params[:id])
       raise ActiveRecord::RecordNotFound unless @list.displayable?
+      @pagy, @list_projects = pagy_countless(@list.list_projects.includes(:project).order(:category, :sub_category, :id), limit: 200)
       fresh_when(@list, public: true)
     end
   end

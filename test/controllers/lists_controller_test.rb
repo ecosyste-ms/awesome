@@ -54,6 +54,14 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, 'Testing'
   end
 
+  test 'renders show with page param' do
+    create_list(:list_project, 3, list: @list)
+
+    get list_url(@list, page: 2)
+    assert_response :success
+    assert_template 'lists/show'
+  end
+
   test 'renders 404 for non-displayable list' do
     list = create(:list, projects_count: 10)
     list.update_column(:displayable, false)
