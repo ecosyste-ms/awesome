@@ -153,6 +153,7 @@ class Project < ApplicationRecord
 
   def sync
     return if last_synced_at.present? && last_synced_at > 1.day.ago
+    return if owner_hidden?
     check_url
     fetch_repository
     fetch_readme

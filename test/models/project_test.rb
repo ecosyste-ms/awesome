@@ -188,4 +188,12 @@ class ProjectTest < ActiveSupport::TestCase
 
     assert_equal "hello", project.readme
   end
+
+  test "sync skips hidden owners" do
+    owner = create(:owner, name: 'gone', hidden: true)
+    project = create(:project, url: 'https://github.com/gone/thing', owner: 'gone', owner_record: owner, last_synced_at: nil)
+
+    project.expects(:check_url).never
+    project.sync
+  end
 end
