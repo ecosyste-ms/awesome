@@ -27,7 +27,7 @@ jobs:
         options: --entrypoint redis-server
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install dependent libraries
         run: sudo apt-get install libpq-dev
       - name: Set up Ruby
