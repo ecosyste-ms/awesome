@@ -16,8 +16,15 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find_by!(slug: params[:id])
+
+    extra = request.query_parameters.keys - ['page']
+    if extra.any?
+      redirect_to topic_path(@topic, page: params[:page]), status: :moved_permanently
+      return
+    end
+
     scope = @topic.projects.order_by_stars.not_awesome_list
-    @lists = @topic.lists.limit(50).order_by_stars.displayable
+    @lists = @topic.lists.order_by_stars.limit(50)
     @pagy, @projects = pagy_countless(scope)
     fresh_when(@projects, public: true)
   end
