@@ -64,7 +64,13 @@ class Topic < ApplicationRecord
   end
 
   def categories
-    lists.map(&:category_counts).flatten(1).group_by(&:first).map{|k,v| [k, v.sum(&:last)]}.sort_by(&:last).reverse
+    Rails.cache.fetch("topic_categories/#{slug}", expires_in: 1.day) do
+      ListProject.joins(:list).merge(lists)
+        .where.not(category: nil)
+        .group(:category).count
+        .sort_by { |_, v| -v }
+        .first(50)
+    end
   end
 
   def fallback_logo_url
