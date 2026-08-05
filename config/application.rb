@@ -23,5 +23,9 @@ module Awesome
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.exceptions_app = self.routes
+
+    config.session_store :disabled
+    config.middleware.delete ActionDispatch::Session::CookieStore
+    config.middleware.delete ActionDispatch::Cookies
   end
 end
