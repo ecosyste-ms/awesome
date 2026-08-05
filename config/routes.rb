@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 require 'sidekiq-status/web'
 
+Sidekiq::Web.use ActionDispatch::Cookies
+Sidekiq::Web.use ActionDispatch::Session::CookieStore, key: '_awesome_sidekiq_session', path: '/sidekiq'
 Sidekiq::Web.use Rack::Auth::Basic do |username, password|
   ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_USERNAME"])) &
     ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))

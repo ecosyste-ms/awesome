@@ -71,4 +71,23 @@ class CacheHeadersTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_match /max-age=#{4.hours.to_i}/, response.headers['CDN-Cache-Control']
   end
+
+  test 'html pages do not set cookies' do
+    get '/'
+    assert_response :success
+    assert_nil response.headers['Set-Cookie']
+  end
+
+  test 'topic show does not set cookies' do
+    topic = Topic.create!(slug: 'cache-topic', name: 'Cache', github_count: 100)
+    get topic_url(topic)
+    assert_response :success
+    assert_nil response.headers['Set-Cookie']
+  end
+
+  test 'api endpoints do not set cookies' do
+    get api_v1_topics_path(format: :json)
+    assert_response :success
+    assert_nil response.headers['Set-Cookie']
+  end
 end
