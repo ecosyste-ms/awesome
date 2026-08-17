@@ -67,7 +67,7 @@ GEM
       rexml
     crass (1.0.7)
     csv (3.3.6)
-    dalli (5.0.6)
+    dalli (5.1.0)
       logger
     dotenv (3.2.0)
     dotenv-rails (3.2.0)
@@ -160,7 +160,7 @@ GEM
     pg (1.6.3-arm64-darwin)
     pg (1.6.3-x86_64-linux)
     pg (1.6.3-x86_64-linux-musl)
-    pghero (4.0.0)
+    pghero (4.0.1)
       activerecord (>= 7.2)
     popper_js (2.11.8)
     pp (0.6.4)
@@ -175,7 +175,7 @@ GEM
       get_process_mem (>= 0.2)
       puma (>= 2.7)
     racc (1.8.1)
-    rack (3.2.6)
+    rack (3.2.7)
     rack-cors (3.0.0)
       logger
       rack (>= 3.0.14)
@@ -370,7 +370,7 @@ CHECKSUMS
   crack (1.0.1) sha256=ff4a10390cd31d66440b7524eb1841874db86201d5b70032028553130b6d4c7e
   crass (1.0.7) sha256=94868719948664c89ddcaf0a37c65048413dfcb1c869470a5f7a7ceb5390b295
   csv (3.3.6) sha256=aba61e7e507a66f03d45cb1f3c4b6359861c3504038b422962875dce099e4456
-  dalli (5.0.6) sha256=01887253a3e788124b9e04e90b63dc54ea9ef69f981d6f5fa2a4debc9e62a456
+  dalli (5.1.0) sha256=a387fd8068777329aee25d2cb65ca636787028c4fbaf041156ef45cd5d1e03a3
   dotenv (3.2.0) sha256=e375b83121ea7ca4ce20f214740076129ab8514cd81378161f11c03853fe619d
   dotenv-rails (3.2.0) sha256=657e25554ba622ffc95d8c4f1670286510f47f2edda9f68293c3f661b303beab
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
@@ -422,7 +422,7 @@ CHECKSUMS
   pg (1.6.3-arm64-darwin) sha256=7240330b572e6355d7c75a7de535edb5dfcbd6295d9c7777df4d9dddfb8c0e5f
   pg (1.6.3-x86_64-linux) sha256=5d9e188c8f7a0295d162b7b88a768d8452a899977d44f3274d1946d67920ae8d
   pg (1.6.3-x86_64-linux-musl) sha256=9c9c90d98c72f78eb04c0f55e9618fe55d1512128e411035fe229ff427864009
-  pghero (4.0.0) sha256=b3fb400ec89a0d2cf35d2524567e55a68d70aaae64b626a0c5a6be5727c024d7
+  pghero (4.0.1) sha256=5fa794616065f030a9efc64b30ce34ee99f9cd7077e4d312322b7df3a9b7fa17
   popper_js (2.11.8) sha256=f4b0be717fc0d50bdb3dbbc55788525a9e0e8f640b76c9971fc34ee609eadbd2
   pp (0.6.4) sha256=dfcb0fce700c41456265922884f9fe195d7fbb0674a3578e6c0f69588e82b570
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
@@ -431,7 +431,7 @@ CHECKSUMS
   puma (8.0.2) sha256=c8ed871dfbbe66448ea9ffd46692342d9804d4071522b52b5331b7b6e7b686fb
   puma_worker_killer (1.0.0) sha256=12dc54feecb1758df70d9f4788841423c5416aa370feda4e51e2112a5ff909e9
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
-  rack (3.2.6) sha256=5ed78e1f73b2e25679bec7d45ee2d4483cc4146eb1be0264fc4d94cb5ef212c2
+  rack (3.2.7) sha256=93e13e1c24f93556671d85d2d79fa228c3485815c50d7e2f265b5330c6528fb7
   rack-cors (3.0.0) sha256=7b95be61db39606906b61b83bd7203fa802b0ceaaad8fcb2fef39e097bf53f68
   rack-session (2.1.2) sha256=595434f8c0c3473ae7d7ac56ecda6cc6dfd9d37c0b2b5255330aa1576967ffe8
   rack-test (2.2.0) sha256=005a36692c306ac0b4a9350355ee080fd09ddef1148a5f8b2ac636c720f5c463
