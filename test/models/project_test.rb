@@ -196,4 +196,15 @@ class ProjectTest < ActiveSupport::TestCase
     project.expects(:check_url).never
     project.sync
   end
+
+  test "sync remains eligible for retry when repository refresh fails" do
+    project = create(:project, last_synced_at: nil)
+    project.stubs(:check_url)
+    project.stubs(:fetch_repository).returns(false)
+    project.expects(:fetch_readme).never
+
+    project.sync
+
+    assert_nil project.reload.last_synced_at
+  end
 end

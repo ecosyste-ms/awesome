@@ -155,7 +155,7 @@ class Project < ApplicationRecord
     return if last_synced_at.present? && last_synced_at > 1.day.ago
     return if owner_hidden?
     check_url
-    fetch_repository
+    return unless fetch_repository
     fetch_readme
     return if destroyed?
     update_column(:last_synced_at, Time.now) 
@@ -224,12 +224,13 @@ class Project < ApplicationRecord
 
   def fetch_repository
     data = ecosystems_api_get(repos_api_url)
-    return unless data
+    return false unless data
     self.repository = data
     self.keywords = repository["topics"].uniq.reject(&:blank?) if repository.present? && repository["topics"].present?
     self.save
   rescue
     Rails.logger.info "Error fetching repository for #{repository_url}"
+    false
   end
 
   
