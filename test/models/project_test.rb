@@ -189,6 +189,14 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal "hello", project.readme
   end
 
+  test "fetch_repository reports failure without replacing cached data" do
+    project = build(:project, repository: { "full_name" => "user/repo" })
+    Project.stubs(:ecosystems_api_get).returns(nil)
+
+    assert_equal false, project.fetch_repository
+    assert_equal({ "full_name" => "user/repo" }, project.repository)
+  end
+
   test "sync skips hidden owners" do
     owner = create(:owner, name: 'gone', hidden: true)
     project = create(:project, url: 'https://github.com/gone/thing', owner: 'gone', owner_record: owner, last_synced_at: nil)
