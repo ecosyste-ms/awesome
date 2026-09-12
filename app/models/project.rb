@@ -224,7 +224,7 @@ class Project < ApplicationRecord
 
   def fetch_repository
     data = ecosystems_api_get(repos_api_url)
-    return false unless data
+    return false if data.blank?
     self.repository = data
     self.keywords = repository["topics"].uniq.reject(&:blank?) if repository.present? && repository["topics"].present?
     self.save
