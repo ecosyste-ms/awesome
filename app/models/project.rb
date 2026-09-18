@@ -3,6 +3,9 @@ require 'csv'
 class Project < ApplicationRecord
   include EcosystemsApiClient
 
+  SYNC_BATCH_SIZE = 50
+  SYNC_RETRY_BATCH_SIZE = 10
+
   def self.sortable_columns
     {
       'updated_at' => 'updated_at',
@@ -84,13 +87,20 @@ class Project < ApplicationRecord
   end
   
   def self.sync_least_recently_synced
-    # Optimized: batch enqueue and reduce limits to prevent overwhelming system
-    # With 11M projects, we need to be more conservative
-    new_ids = Project.where(last_synced_at: nil).limit(50).pluck(:id)
-    old_ids = Project.where("last_synced_at < ?", 1.day.ago).order(:last_synced_at).limit(50).pluck(:id)
+    new_ids = sync_candidate_ids(Project.where(last_synced_at: nil))
+    old_ids = sync_candidate_ids(Project.where("last_synced_at < ?", 1.day.ago).order(:last_synced_at))
 
     all_ids = (new_ids + old_ids).uniq
     SyncProjectWorker.perform_bulk(all_ids.map { |id| [id] }) if all_ids.any?
+  end
+
+  def self.sync_candidate_ids(scope)
+    retry_ids = scope.where.not(last_sync_attempt_at: nil).reorder(:last_sync_attempt_at).limit(SYNC_BATCH_SIZE).pluck(:id)
+    reserved_retry_ids = retry_ids.first(SYNC_RETRY_BATCH_SIZE)
+    first_attempt_ids = scope.where(last_sync_attempt_at: nil).limit(SYNC_BATCH_SIZE - reserved_retry_ids.length).pluck(:id)
+    remaining = SYNC_BATCH_SIZE - first_attempt_ids.length - reserved_retry_ids.length
+
+    first_attempt_ids + reserved_retry_ids + retry_ids.drop(SYNC_RETRY_BATCH_SIZE).first(remaining)
   end
 
   def self.sync_all
@@ -155,10 +165,13 @@ class Project < ApplicationRecord
     return if last_synced_at.present? && last_synced_at > 1.day.ago
     return if owner_hidden?
     check_url
-    return unless fetch_repository
+    unless fetch_repository
+      update_column(:last_sync_attempt_at, Time.current) unless destroyed?
+      return
+    end
     fetch_readme
     return if destroyed?
-    update_column(:last_synced_at, Time.now) 
+    update_columns(last_synced_at: Time.current, last_sync_attempt_at: nil)
     sync_list
     ping
   end
