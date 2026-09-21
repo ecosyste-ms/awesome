@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_12_172132) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_18_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_172132) do
   create_table "projects", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "keywords", default: [], array: true
+    t.datetime "last_sync_attempt_at"
     t.datetime "last_synced_at"
     t.boolean "list", default: false
     t.string "owner"
@@ -72,6 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_172132) do
     t.datetime "updated_at", null: false
     t.string "url"
     t.index ["keywords"], name: "index_projects_on_keywords", using: :gin
+    t.index ["last_sync_attempt_at"], name: "index_projects_on_last_sync_attempt_at", where: "(last_sync_attempt_at IS NOT NULL)"
     t.index ["last_synced_at"], name: "index_projects_on_last_synced_at"
     t.index ["list", "stars"], name: "index_projects_on_list_and_stars"
     t.index ["owner"], name: "index_projects_on_owner"
