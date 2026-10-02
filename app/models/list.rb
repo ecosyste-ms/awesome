@@ -480,7 +480,7 @@ class List < ApplicationRecord
   end
 
   def self.import_lists_from_topic(page: 1, topic: 'awesome-list', per_page: 1000)
-    url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=#{per_page}?page=#{page}"
+    url = "https://repos.ecosyste.ms/api/v1/topics/#{topic}?per_page=#{per_page}&page=#{page}"
     json = ecosystems_api_get(url)
     return unless json
 
