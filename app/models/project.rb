@@ -5,6 +5,7 @@ class Project < ApplicationRecord
 
   SYNC_BATCH_SIZE = 50
   SYNC_RETRY_BATCH_SIZE = 10
+  SYNC_RETRY_INTERVAL = 1.hour
 
   def self.sortable_columns
     {
@@ -95,7 +96,8 @@ class Project < ApplicationRecord
   end
 
   def self.sync_candidate_ids(scope)
-    retry_ids = scope.where.not(last_sync_attempt_at: nil).reorder(:last_sync_attempt_at).limit(SYNC_BATCH_SIZE).pluck(:id)
+    retry_ids = scope.where("last_sync_attempt_at <= ?", SYNC_RETRY_INTERVAL.ago)
+                     .reorder(:last_sync_attempt_at).limit(SYNC_BATCH_SIZE).pluck(:id)
     reserved_retry_ids = retry_ids.first(SYNC_RETRY_BATCH_SIZE)
     first_attempt_ids = scope.where(last_sync_attempt_at: nil).limit(SYNC_BATCH_SIZE - reserved_retry_ids.length).pluck(:id)
     remaining = SYNC_BATCH_SIZE - first_attempt_ids.length - reserved_retry_ids.length
