@@ -189,11 +189,86 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal "hello", project.readme
   end
 
+  test "sync preserves cached repository when repository refresh returns nil" do
+    project = create(:project, repository: { "full_name" => "user/repo" }, last_synced_at: 2.days.ago)
+    previous_last_synced_at = project.reload.last_synced_at
+    stub_request(:get, project.url).to_return(status: 200)
+    stub_request(:get, project.repos_api_url).to_return(status: 503)
+
+    SyncProjectWorker.new.perform(project.id)
+    project.reload
+
+    assert_equal({ "full_name" => "user/repo" }, project.repository)
+    assert_equal previous_last_synced_at, project.last_synced_at
+    assert_in_delta Time.current, project.last_sync_attempt_at, 1.second
+  end
+
+  test "sync preserves cached repository when repository refresh returns an empty response" do
+    project = create(:project, repository: { "full_name" => "user/repo" }, last_synced_at: nil)
+    project.stubs(:check_url)
+    Project.stubs(:ecosystems_api_get).returns({})
+    project.expects(:fetch_readme).never
+
+    project.sync
+    project.reload
+
+    assert_equal({ "full_name" => "user/repo" }, project.repository)
+    assert_nil project.last_synced_at
+    assert_in_delta Time.current, project.last_sync_attempt_at, 1.second
+  end
+
+  test "sync preserves cached repository when repository refresh raises" do
+    project = create(:project, repository: { "full_name" => "user/repo" }, last_synced_at: nil)
+    project.stubs(:check_url)
+    Project.stubs(:ecosystems_api_get).raises(Faraday::ConnectionFailed.new("Connection failed"))
+    project.expects(:fetch_readme).never
+
+    project.sync
+    project.reload
+
+    assert_equal({ "full_name" => "user/repo" }, project.repository)
+    assert_nil project.last_synced_at
+    assert_in_delta Time.current, project.last_sync_attempt_at, 1.second
+  end
+
   test "sync skips hidden owners" do
     owner = create(:owner, name: 'gone', hidden: true)
     project = create(:project, url: 'https://github.com/gone/thing', owner: 'gone', owner_record: owner, last_synced_at: nil)
 
     project.expects(:check_url).never
     project.sync
+  end
+
+  test "sync clears the retry marker after a successful repository refresh" do
+    project = create(:project, last_synced_at: 2.days.ago, last_sync_attempt_at: 1.hour.ago)
+    project.stubs(:check_url)
+    Project.stubs(:ecosystems_api_get).returns({ "full_name" => "user/repo", "topics" => [] })
+    project.stubs(:fetch_readme)
+    project.stubs(:sync_list)
+    project.stubs(:ping)
+
+    project.sync
+    project.reload
+
+    assert_in_delta Time.current, project.last_synced_at, 1.second
+    assert_nil project.last_sync_attempt_at
+  end
+
+  test "sync scheduler reserves capacity for first attempts and retries" do
+    retry_projects = create_list(:project, 50, last_synced_at: nil, last_sync_attempt_at: 1.hour.ago)
+    first_attempt_projects = create_list(:project, 50, last_synced_at: nil, last_sync_attempt_at: nil)
+    queued_jobs = nil
+    SyncProjectWorker.expects(:perform_bulk).with do |jobs|
+      queued_jobs = jobs
+      true
+    end
+
+    Project.sync_least_recently_synced
+
+    queued_ids = queued_jobs.flatten
+    assert_equal Project::SYNC_BATCH_SIZE, queued_ids.length
+    assert_equal Project::SYNC_RETRY_BATCH_SIZE, (queued_ids & retry_projects.map(&:id)).length
+    assert_equal Project::SYNC_BATCH_SIZE - Project::SYNC_RETRY_BATCH_SIZE,
+                 (queued_ids & first_attempt_projects.map(&:id)).length
   end
 end
