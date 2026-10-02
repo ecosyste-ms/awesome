@@ -354,8 +354,9 @@ class List < ApplicationRecord
   end
 
   def load_projects
+    return if readme.nil?
+
     links = readme_links
-    return if links.empty?
 
     # Batch insert/update instead of individual operations
     # This is MUCH faster than N individual find_or_create_by calls
@@ -431,9 +432,11 @@ class List < ApplicationRecord
       end
     end
 
-    # Batch operations
-    ListProject.insert_all(list_projects_to_insert) if list_projects_to_insert.any?
-    ListProject.upsert_all(list_projects_to_update) if list_projects_to_update.any?
+    ListProject.transaction do
+      ListProject.insert_all(list_projects_to_insert) if list_projects_to_insert.any?
+      ListProject.upsert_all(list_projects_to_update) if list_projects_to_update.any?
+      list_projects.where.not(project_id: project_ids).delete_all
+    end
   end
 
   def readme_links
