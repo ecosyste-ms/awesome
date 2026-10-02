@@ -89,19 +89,18 @@ class Topic < ApplicationRecord
 
   def self.load_from_github
     url = 'https://explore-feed.github.com/feed.json'
-    conn = Faraday.new(url: url) do |faraday|
-      faraday.response :follow_redirects
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
+    response = PublicHttp.get(url, allowed_hosts: ['explore-feed.github.com'])
     return unless response.success?
     json = JSON.parse(response.body)
     json['topics'].map! do |topic|
       sleep 1
       url = topic['url']
       Rails.logger.info "fetching #{url}"
-      resp = conn.get(url)
+      begin
+        resp = PublicHttp.get(url, allowed_hosts: ['github.com'])
+      rescue SsrfFilter::Error, URI::InvalidURIError
+        next
+      end
       next unless resp.success?
       html = Nokogiri::HTML(resp.body)
       selector = '.h3.color-fg-muted'

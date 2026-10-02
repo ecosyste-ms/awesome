@@ -184,12 +184,7 @@ class Project < ApplicationRecord
 
   def check_url
     url.chomp!('/')
-    conn = Faraday.new(url: url) do |faraday|
-      faraday.response :follow_redirects
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
+    response = PublicHttp.get(url)
     
     if response.status == 404
       destroy
@@ -198,7 +193,7 @@ class Project < ApplicationRecord
     
     return unless response.success?
 
-    update!(url: response.env.url.to_s) 
+    update!(url: response.url)
     # TODO avoid duplicates
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.info "Duplicate url #{url}"

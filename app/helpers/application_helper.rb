@@ -40,4 +40,13 @@ module ApplicationHelper
     icon = BootstrapIcons::BootstrapIcon.new(symbol, options)
     content_tag(:svg, icon.path.html_safe, icon.options)
   end
+
+  def http_link_to(url)
+    uri = URI.parse(url.to_s)
+    return h(url) unless uri.is_a?(URI::HTTP) && uri.hostname.present? && uri.userinfo.nil?
+
+    link_to url, url
+  rescue URI::InvalidURIError
+    h(url)
+  end
 end

@@ -9,20 +9,20 @@
     <img src="<%= @topic.logo_url %>" class="rounded" height='80' width='80' onerror="this.style.display='none'">
   </div>  
 
-  <%== @topic.content %>
+  <%= sanitize @topic.content %>
 
   <ul>
     <li>
-      GitHub: <%= link_to @topic.url, @topic.url %>
+      GitHub: <%= http_link_to @topic.url %>
     </li>
     <% if @topic.wikipedia_url.present? %>
       <li>
-        Wikipedia: <%= link_to @topic.wikipedia_url, @topic.wikipedia_url %>
+        Wikipedia: <%= http_link_to @topic.wikipedia_url %>
       </li>
     <% end %>
     <% if @topic.github_url.present? %>
       <li>
-        Repo: <%= link_to @topic.github_url, @topic.github_url %>
+        Repo: <%= http_link_to @topic.github_url %>
       </li>
     <% end %>
     <% if @topic.created_by.present? %>

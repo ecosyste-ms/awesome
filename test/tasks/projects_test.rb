@@ -3,6 +3,7 @@ require 'rake'
 
 class ProjectsTaskTest < ActiveSupport::TestCase
   setup do
+    Resolv.stubs(:getaddresses).with('github.com').returns(['93.184.216.34'])
     Rails.application.load_tasks unless Rake::Task.task_defined?('projects:sync')
     SyncProjectWorker.clear
   end

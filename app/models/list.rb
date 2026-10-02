@@ -225,15 +225,9 @@ class List < ApplicationRecord
   end
 
   def check_url
-    conn = Faraday.new(url: url) do |faraday|
-      faraday.response :follow_redirects
-      faraday.headers['User-Agent'] = 'awesome.ecosyste.ms'
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
+    response = PublicHttp.get(url)
     return unless response.success?
-    update!(url: response.env.url.to_s)
+    update!(url: response.url)
     # TODO avoid duplicates
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.info "Duplicate url #{url}"
@@ -341,12 +335,7 @@ class List < ApplicationRecord
 
   def fetch_readme_fallback
     file_name = readme_file_name.presence || 'README.md'
-    conn = Faraday.new(url: raw_url(file_name)) do |faraday|
-      faraday.response :follow_redirects
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = conn.get
+    response = PublicHttp.get(raw_url(file_name))
     return unless response.success?
     self.readme = response.body
     self.save

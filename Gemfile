@@ -20,6 +20,7 @@ gem "counter_culture"
 gem "faraday"
 gem "faraday-retry"
 gem "faraday-follow_redirects"
+gem "ssrf_filter", "~> 1.6"
 gem "pagy", "~> 9.4.0"
 gem "pghero"
 gem 'bootstrap'

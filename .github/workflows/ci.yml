@@ -2,10 +2,14 @@ name: CI
 
 on: [push, pull_request]
 
+permissions: {}
+
 jobs:
   verify:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     services:
       postgres:

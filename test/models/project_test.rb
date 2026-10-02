@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase
+  setup do
+    Resolv.stubs(:getaddresses).with('github.com').returns(['93.184.216.34'])
+  end
+
   test "github_pages_to_repo_url" do
     project = Project.new
     repo_url = project.github_pages_to_repo_url('https://foo.github.io/bar')
