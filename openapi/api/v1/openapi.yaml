@@ -196,11 +196,25 @@ paths:
                 $ref: '#/components/schemas/List'
   /lists/{id}/projects:
     get:
-      description: get projects of a list
+      description: Get projects of a list in ascending project ID order.
       operationId: getListProjects
       tags:
         - lists
       parameters:
+        - name: with_repository
+          in: query
+          description: Only return projects with repository data when true.
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: not_list
+          in: query
+          description: Exclude awesome lists when true.
+          required: false
+          schema:
+            type: boolean
+            default: false
         - in: path
           name: id
           schema:

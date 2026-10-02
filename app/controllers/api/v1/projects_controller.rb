@@ -3,11 +3,14 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     if params[:list_id].present?
       if params[:list_id].to_i.to_s == params[:list_id]
         @list = List.find(params[:list_id])
-        redirect_to api_v1_list_projects_url(@list), status: :moved_permanently
+        query = params.permit(:with_repository, :not_list, :keyword, :page, :per_page)
+        redirect_to api_v1_list_projects_url(@list, query.to_h), status: :moved_permanently and return
       else
         @list = List.find_by_slug!(params[:list_id])
       end
-      @projects = @list.projects.where.not(last_synced_at: nil).visible_owners
+      @projects = @list.projects.where.not(last_synced_at: nil).visible_owners.order(:id)
+      @projects = @projects.with_repository if params[:with_repository] == 'true'
+      @projects = @projects.not_awesome_list if params[:not_list] == 'true'
     else
       @projects = Project.all.where.not(last_synced_at: nil).visible_owners
     end
