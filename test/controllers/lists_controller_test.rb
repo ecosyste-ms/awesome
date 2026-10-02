@@ -18,6 +18,16 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
     get '/'
     assert_response :success
     assert_template 'lists/index'
+    assert_select 'h2', text: /\A\s*Awesome Lists\s*\z/
+  end
+
+  test 'index heading includes filters without a total count' do
+    @list.update!(primary_language: 'Ruby')
+
+    get lists_path, params: { topic: 'test', language: 'Ruby', query: 'Test list' }
+
+    assert_response :success
+    assert_select 'h2', text: /\A\s*"test"\s+"Ruby"\s+"Test list"\s+Awesome Lists\s*\z/
   end
 
   test 'renders show' do
