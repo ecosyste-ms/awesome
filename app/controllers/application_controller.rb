@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
     Arel.sql(sql)
   end
 
+  def pagy_get_page(vars, force_integer: true)
+    page = super
+    raise ActionController::BadRequest, 'Page exceeds the maximum of 10000' if page.to_i > 10_000
+
+    page
+  end
+
   def set_cache_headers
     return unless request.get? || request.head?
     expires_in 5.minutes, public: true, stale_while_revalidate: 1.hour

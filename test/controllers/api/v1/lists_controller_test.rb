@@ -18,6 +18,17 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
     end
 
+    test 'limits pagination to 10000 pages' do
+        get api_v1_lists_url, params: { page: 10_000 }
+        assert_response :success
+
+        get api_v1_lists_url, params: { page: 10_001 }
+        assert_response :bad_request
+
+        get api_v1_lists_url, params: { page: '99999999999999999999' }
+        assert_response :bad_request
+    end
+
     test 'renders show' do
         get api_v1_list_url(@list)
         assert_response :success
