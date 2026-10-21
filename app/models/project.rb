@@ -350,7 +350,7 @@ class Project < ApplicationRecord
 
   def repo_funding_links
     return [] if repository.blank? || repository['metadata'].blank? ||  repository['metadata']["funding"].blank?
-    return [] if repository['metadata']["funding"].is_a?(String)
+    return [] unless repository['metadata']["funding"].is_a?(Hash)
     repository['metadata']["funding"].map do |key,v|
       next if v.blank?
       case key

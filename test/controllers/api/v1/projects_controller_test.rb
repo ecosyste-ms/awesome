@@ -12,6 +12,40 @@ class Api::V1::ProjectsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'lookup ignores integer funding metadata' do
+    @repository_project.update!(repository: { 'metadata' => { 'funding' => 123 } })
+
+    get lookup_api_v1_projects_path, params: { url: @repository_project.url }
+
+    assert_response :success
+    assert_equal @repository_project.id, response.parsed_body['id']
+    assert_equal [], response.parsed_body['funding_links']
+  end
+
+  test 'lookup preserves README funding links with non-hash funding metadata' do
+    [nil, 'invalid', 123, 1.5, true, false, ['invalid']].each do |funding|
+      @repository_project.update!(repository: { 'metadata' => { 'funding' => funding } },
+                                  readme: 'Support: https://github.com/sponsors/example')
+
+      get lookup_api_v1_projects_path, params: { url: @repository_project.url }
+
+      assert_response :success
+      assert_equal ['https://github.com/sponsors/example'], response.parsed_body['funding_links']
+    end
+  end
+
+  test 'lookup includes links from valid funding metadata' do
+    @repository_project.update!(repository: { 'metadata' => { 'funding' => {
+      'github' => ['example'], 'open_collective' => 'example'
+    } } })
+
+    get lookup_api_v1_projects_path, params: { url: @repository_project.url }
+
+    assert_response :success
+    assert_equal ['https://github.com/sponsors/example', 'https://opencollective.com/example'],
+                 response.parsed_body['funding_links']
+  end
+
   test 'list projects includes repositories websites and lists by default' do
     get api_v1_list_projects_path(@list)
 
