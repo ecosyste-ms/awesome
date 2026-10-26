@@ -40,6 +40,7 @@ gem 'appsignal'
 gem 'dalli'
 gem 'csv'
 gem 'ostruct'
+gem 'commonmarker'
 
 group :development, :test do
   gem 'dotenv-rails'

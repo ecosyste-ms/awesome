@@ -102,4 +102,28 @@ class ListSyncTest < ActionDispatch::IntegrationTest
 
     assert_equal [retained.id, removed.id].sort, @list.list_projects.pluck(:id).sort
   end
+
+  test 'sync imports table descriptions and resets categories without importing badges' do
+    stub_request(:get, @readme_url).to_return(body: <<~README)
+      ## APIs
+      ### Security
+      | API | Description | Auth |
+      | --- | --- | --- |
+      | [Bug Bounty](https://example.com/bugs) | Write-ups from hunters | No |
+      | [Animals](https://example.com/animals) | Animal facts | No |
+      ## Software
+      - [Example](https://example.com/software) - See the [source](https://example.com/source) `MIT`.
+      - [![CC0](https://example.com/badge.svg)](https://example.com/license)
+    README
+
+    SyncListWorker.new.perform(@list.id)
+
+    entries = @list.list_projects.reload.index_by(&:name)
+    assert_equal %w[Animals Bug\ Bounty Example], entries.keys.sort
+    assert_equal 'Write-ups from hunters', entries.fetch('Bug Bounty').description
+    assert_equal 'Animal facts', entries.fetch('Animals').description
+    assert_equal 'Security', entries.fetch('Animals').sub_category
+    assert_nil entries.fetch('Example').sub_category
+    assert_equal 'See the [source](https://example.com/source) `MIT`.', entries.fetch('Example').description
+  end
 end

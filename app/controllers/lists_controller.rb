@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :sanitize_params, only: [:index]
+  before_action :sanitize_params, only: [:index, :show]
 
   def index
     scope = List.displayable
@@ -44,12 +44,14 @@ class ListsController < ApplicationController
   def show
     if params[:id].to_i.to_s == params[:id]
       @list = List.find(params[:id])
-      redirect_to @list, status: :moved_permanently and return
+      redirect_to list_path(@list, params.permit(:page, :language, :topic, :category, :sub_category)), status: :moved_permanently and return
     else
       @list = List.find_by_slug!(params[:id])
       raise ActiveRecord::RecordNotFound unless @list.displayable?
-      @pagy, @list_projects = pagy_countless(@list.list_projects.includes(:project).order(:category, :sub_category, :id), limit: 200)
-      fresh_when(@list, public: true)
+      @filters = params.permit(:language, :topic, :category, :sub_category).to_h.reject { |_, value| value.blank? }
+      scope = @list.filtered_list_projects(@filters).includes(:project).order(:category, :sub_category, :id)
+      @pagy, @list_projects = pagy_countless(scope, limit: 200)
+      fresh_when(etag: [@list, @filters, @pagy.page, @list_projects, @list_projects.map(&:project)], public: true)
     end
   end
 
@@ -67,7 +69,7 @@ class ListsController < ApplicationController
   private
 
   def sanitize_params
-    [:query, :sort, :order, :topic, :language].each do |param|
+    [:query, :sort, :order, :topic, :language, :category, :sub_category].each do |param|
       params[param] = params[param].delete("\x00") if params[param].present?
     end
   end

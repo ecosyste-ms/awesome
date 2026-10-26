@@ -1,0 +1,7 @@
+<li class="mb-2">
+  <% destination = entry.project&.repository.present? ? project_path(entry.project) : entry.url %>
+  <%= link_to entry.name, destination %>
+  <% if entry.description.present? %>
+    - <%= list_description(entry.description) %>
+  <% end %>
+</li>
