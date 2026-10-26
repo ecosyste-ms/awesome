@@ -96,6 +96,21 @@ class List < ApplicationRecord
     self.displayable = is_displayable?
   end
 
+  def filtered_list_projects(filters)
+    scope = list_projects
+    [:category, :sub_category].each do |field|
+      value = filters[field.to_s]
+      scope = scope.where("LOWER(list_projects.#{field}) = ?", value.downcase) if value.present?
+    end
+    if filters['language'].present?
+      scope = scope.joins(:project).where("LOWER(projects.repository ->> 'language') = ?", filters['language'].downcase)
+    end
+    if filters['topic'].present?
+      scope = scope.joins(:project).where('EXISTS (SELECT 1 FROM unnest(projects.keywords) AS keyword WHERE LOWER(keyword) = ?)', filters['topic'].downcase)
+    end
+    scope
+  end
+
   def is_displayable?
     !fork? && !archived? && !template? && !from_template? && has_many_projects? && not_awesome_stars? && description.present? && !name.include?('?') && !topics.include?('starred')
   end

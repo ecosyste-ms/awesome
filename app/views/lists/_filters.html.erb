@@ -1,0 +1,16 @@
+<% counts = counts.reject { |value, _| value.blank? } %>
+<% if counts.any? %>
+  <div class="card mb-3">
+    <div class="card-header"><%= title %></div>
+    <div class="list-group list-group-flush">
+      <% counts.each do |value, count| %>
+        <% changes = { field => value } %>
+        <% changes['sub_category'] = nil if field == 'category' %>
+        <%= link_to list_filter_path(changes), class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center #{'active' if value.casecmp?(@filters[field].to_s)}" do %>
+          <%= value %>
+          <span class="badge bg-primary rounded-pill"><%= number_with_delimiter count %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
