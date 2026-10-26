@@ -68,7 +68,7 @@ class ReadmeParser
   end
 
   def inline_markdown(nodes)
-    nodes.map { |node| node.to_commonmark.delete_suffix("\n") }.join.strip
+    nodes.map { |node| node.to_commonmark(plugins: { syntax_highlighter: nil }).delete_suffix("\n") }.join.strip
   end
 
   def list_entry(node)
