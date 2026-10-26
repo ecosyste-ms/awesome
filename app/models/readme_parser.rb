@@ -19,7 +19,7 @@ class ReadmeParser
   end
 
   def ignored_categories
-    ['Contents', 'Contributors', 'Artwork and License']
+    ['contents', 'table of contents', 'contributors', 'artwork and license', 'license', 'licenses', 'list of licenses']
   end
 
   def links(category, sub_category)
@@ -31,64 +31,64 @@ class ReadmeParser
     links = {}
     current_category = nil
     current_sub_category = nil
+    ignored = false
 
-    @readme.each_line do |line|
-      line.strip!
-      if line.start_with?('## ')
-        category = line[3..-1].try(:strip)
-        if ignored_categories.include?(category)
-          current_category = nil
-        else
-          current_category = category
-          links[current_category] ||= {}
+    Commonmarker.parse(readme).walk do |node|
+      if node.type == :heading && node.header_level == 2
+        current_category = plain_text(node)
+        current_sub_category = nil
+        ignored = ignored_categories.include?(current_category.downcase)
+      elsif node.type == :heading && node.header_level == 3
+        current_sub_category = plain_text(node)
+      elsif !ignored
+        entry = if node.type == :table_row && node.previous_sibling
+          table_entry(node)
+        elsif node.type == :paragraph && node.parent.type == :item && node.previous_sibling.nil?
+          list_entry(node)
         end
-      elsif current_category && line.start_with?('### ')
-        current_sub_category = line[4..-1].try(:strip)
-        links[current_category][current_sub_category] ||= []
-      elsif current_category && line.include?('[') && line.include?('](')
-        link_text_start = line.index('[') + 1
-        link_text_end = line.index(']')
-        link_text = line[link_text_start...link_text_end]
-  
-        link_url_start = line.index('](') + 2
-        link_url_end = line.index(')', link_url_start)
-        link_url = line[link_url_start...link_url_end]
-  
-        if link_url_end && line.index('-', link_url_end)
-          description_start = line.index('-', link_url_end) + 1
-          description = line[description_start..-1].try(:strip)
-        else
-          description = nil
-        end
+        next unless entry
 
-        links[current_category][current_sub_category] ||= []
-        links[current_category][current_sub_category] << { name: link_text.try(:strip), url: link_url.try(:strip), description: description.try(:strip) }
-      elsif line.start_with?('- ') && line.include?('[') && line.include?('](')
-        link_text_start = line.index('[') + 1
-        link_text_end = line.index(']')
-        link_text = line[link_text_start...link_text_end]
-
-        link_url_start = line.index('](') + 2
-        link_url_end = line.index(')', link_url_start)
-        link_url = line[link_url_start...link_url_end]
-
-        if link_url_end && line.index('-', link_url_end)
-          description_start = line.index('-', link_url_end) + 1
-          description = line[description_start..-1].try(:strip)
-        else
-          description = nil
-        end
-
-        links['Uncategorized'] ||= {}
-        links['Uncategorized']['Uncategorized'] ||= []
-        links['Uncategorized']['Uncategorized'] << { name: link_text.try(:strip), url: link_url.try(:strip), description: description.try(:strip) }
-      
-
-      
-      
+        category = current_category || 'Uncategorized'
+        sub_category = current_category ? current_sub_category : 'Uncategorized'
+        links[category] ||= {}
+        links[category][sub_category] ||= []
+        links[category][sub_category] << entry
       end
     end
-  
+
     links
+  end
+
+  def entry_link(node)
+    node.walk.find { |child| child.type == :link && child.walk.none? { |descendant| descendant.type == :image } && plain_text(child).present? }
+  end
+
+  def plain_text(node)
+    node.walk.filter_map { |child| child.string_content if [:text, :code].include?(child.type) }.join.strip
+  end
+
+  def inline_markdown(nodes)
+    nodes.map { |node| node.to_commonmark.delete_suffix("\n") }.join.strip
+  end
+
+  def list_entry(node)
+    children = node.to_a
+    index = children.index { |child| entry_link(child) }
+    return unless index
+
+    link = entry_link(children[index])
+    description = inline_markdown(children.drop(index + 1)).sub(/\A[-–—:]\s+/, '')
+    { name: plain_text(link), url: link.url, description: description.presence }
+  end
+
+  def table_entry(node)
+    cells = node.to_a
+    link = entry_link(cells.first)
+    return unless link
+
+    headers = node.parent.first_child.map { |cell| plain_text(cell).downcase }
+    description_cell = cells[headers.index('description') || 1]
+    description = inline_markdown(description_cell.to_a) if description_cell
+    { name: plain_text(link), url: link.url, description: description.presence }
   end
 end
