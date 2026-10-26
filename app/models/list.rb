@@ -234,19 +234,17 @@ class List < ApplicationRecord
 
   def sync
     check_url
-    fetch_repository
-    fetch_readme
+    return if destroyed?
+    return unless fetch_repository
+    return unless fetch_readme
+    load_projects
+    self.projects_count = list_projects.count
     set_primary_language
     set_list_of_lists
-    update(projects_count: readme_links.length, last_synced_at: Time.now)
-    load_projects
+    update!(last_synced_at: Time.current)
     ping
-  rescue ActiveRecord::RecordNotUnique => e
-    Rails.logger.info "Duplicate url #{url}"
-    Rails.logger.info e.class
-    destroy
-  rescue
-    Rails.logger.info "Error syncing #{url}"
+  rescue => e
+    Rails.logger.info "Error syncing #{url}: #{e.class}: #{e.message}"
   end
 
   def check_url
@@ -309,6 +307,7 @@ class List < ApplicationRecord
     self.save
   rescue
     Rails.logger.info "Error fetching repository for #{repository_url}"
+    false
   end
 
   def readme_url
@@ -366,6 +365,7 @@ class List < ApplicationRecord
     self.save
   rescue
     Rails.logger.info "Error fetching readme for #{repository_url}"
+    false
   end
 
   def readme_url
@@ -483,7 +483,7 @@ class List < ApplicationRecord
       end
     end
 
-    all_links
+    all_links.uniq { |link| link[:url] }
   end
 
   def self.import_lists_from_sindresorhus
