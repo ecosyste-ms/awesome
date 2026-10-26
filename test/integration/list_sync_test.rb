@@ -102,4 +102,35 @@ class ListSyncTest < ActionDispatch::IntegrationTest
 
     assert_equal [retained.id, removed.id].sort, @list.list_projects.pluck(:id).sort
   end
+
+  test 'repeated source URLs do not prevent updates or removal of obsolete entries' do
+    retained = create(:project, url: 'https://example.com/retained', last_synced_at: Time.current)
+    retained_join = create(:list_project, list: @list, project: retained, name: 'Old name', category: 'Old language')
+    removed = create(:list_project, list: @list)
+    stub_request(:get, @readme_url).to_return(body: <<~README)
+      ## Software
+      - [Current name](https://example.com/retained) - Current description
+      - [Repeated](https://example.com/retained#usage) - Another mention
+    README
+
+    SyncListWorker.new.perform(@list.id)
+
+    assert_equal [retained_join.id], @list.list_projects.reload.pluck(:id)
+    assert_equal 'Current name', retained_join.reload.name
+    assert_equal 'Software', retained_join.category
+    assert_equal 1, @list.reload.projects_count
+    assert_not ListProject.exists?(removed.id)
+  end
+
+  test 'a failed import does not advance the successful sync timestamp' do
+    @list.update_columns(last_synced_at: 2.days.ago, projects_count: 10)
+    synced_at = @list.reload.last_synced_at
+    stub_request(:get, @readme_url).to_return(body: '- [New](https://example.com/new) - New project')
+    ListProject.expects(:insert_all).raises(ActiveRecord::StatementInvalid, 'Import failed')
+
+    SyncListWorker.new.perform(@list.id)
+
+    assert_equal synced_at, @list.reload.last_synced_at
+    assert_equal 10, @list.projects_count
+  end
 end
