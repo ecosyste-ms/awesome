@@ -1,7 +1,7 @@
 # The Ultimate Awesome List [![Awesome](https://awesome.re/badge-flat.svg)](https://awesome.re)
 Every awesome list on every topic, including awesome lists of awesome lists, updated daily.
 
-This is list was generated automatically from [awesome.ecosyste.ms](https://awesome.ecosyste.ms/), an open API service indexing awesome lists of open source software. It includes every awesome list with at least 30 items and a description, sorted by most stars first.
+This list was generated automatically from [awesome.ecosyste.ms](https://awesome.ecosyste.ms/), an open API service indexing awesome lists of open source software. It includes every eligible awesome list with at least 30 items and a description. Within each section, lists are grouped by star count (1,000–9,999, 100–999, 10–99, and so on), highest groups first, then sorted alphabetically.
 
 Last generated: <%= Time.now.strftime("%Y-%m-%d") %>, <%= @list_of_lists.length + @other_lists.length %> lists.
 
@@ -9,12 +9,21 @@ Last generated: <%= Time.now.strftime("%Y-%m-%d") %>, <%= @list_of_lists.length 
 - [Lists of Lists](#lists-of-lists)
 - [Programming Language Lists](#programming-language-lists)
 <% anchor_counts = Hash.new(0) %>
-<% @other_lists.map(&:primary_language).uniq.compact.each do |lang| %>
+<% @languages.each do |lang| %>
 <%   base_anchor = "#{lang.downcase.gsub(/[^a-z0-9\s-]/,'').gsub(' ','-')}-lists" %>
 <%   anchor_counts[base_anchor] += 1 %>
 <%   anchor = anchor_counts[base_anchor] > 1 ? "#{base_anchor}-#{anchor_counts[base_anchor] - 1}" : base_anchor %>
   - [<%= lang %> Lists](#<%= anchor %>)
 <% end%>
+<% if @topic_lists.any? %>
+- [Topic Lists](#topic-lists)
+<% @topic_lists.each_value do |group| %>
+<%   base_anchor = "#{group[:name].downcase.gsub(/[^[:alnum:]\s_-]/, '').gsub(' ', '-')}-topic-lists" %>
+<%   anchor_counts[base_anchor] += 1 %>
+<%   anchor = anchor_counts[base_anchor] > 1 ? "#{base_anchor}-#{anchor_counts[base_anchor] - 1}" : base_anchor %>
+  - [<%= group[:name] %> Topic Lists](#<%= anchor %>)
+<% end %>
+<% end %>
 - [Other Lists](#other-lists)
 
 ## Lists of Lists
@@ -24,15 +33,27 @@ Last generated: <%= Time.now.strftime("%Y-%m-%d") %>, <%= @list_of_lists.length 
 <% end %>
 
 ## Programming Language Lists
-<% @other_lists.map(&:primary_language).uniq.compact.each do |lang| %>
+<% @languages.each do |lang| %>
 ### <%= lang %> Lists
 <% @other_lists.select{|l| l.primary_language == lang}.each do |list| %>
 <%= "- [#{list.name}](#{list.url}) - #{list.awesome_description}" %>
 <% end%>
 
 <% end%>
+<% if @topic_lists.any? %>
+## Topic Lists
+
+<% @topic_lists.each_value do |group| %>
+### <%= group[:name] %> Topic Lists
+
+<% group[:lists].each do |list| %>
+<%= "- [#{list.name}](#{list.url}) - #{list.awesome_description}" %>
+<% end %>
+
+<% end %>
+<% end %>
 ## Other Lists
 
-<% @other_lists.select{|l| l.primary_language.blank?}.each do |list| %>
+<% @uncategorized_lists.each do |list| %>
 <%= "- [#{list.name}](#{list.url}) - #{list.awesome_description}" %>
 <% end %>

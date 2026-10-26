@@ -26,13 +26,14 @@ class List < ApplicationRecord
   scope :source, -> { where("(repository ->> 'fork') = ?", 'false') }
 
   scope :template, -> { where("(repository ->> 'template') = ?", 'true') }
-  scope :not_from_template, -> { where("length(repository ->> 'template_full_name') = 0") }
+  scope :not_template, -> { where("(repository ->> 'template') IS DISTINCT FROM 'true'") }
+  scope :not_from_template, -> { where("COALESCE(repository ->> 'template_full_name', '') = ''") }
   scope :from_template, -> { where("length(repository ->> 'template_full_name') > 0") }
 
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
-  scope :displayable, -> { where(displayable: true) }
+  scope :displayable, -> { where(displayable: true).not_template.not_from_template }
   scope :not_awesome_stars, -> { where.not('url LIKE ?', '%awesome-stars%') }
   
   scope :with_primary_language, -> { where.not(primary_language: nil) }
@@ -96,7 +97,33 @@ class List < ApplicationRecord
   end
 
   def is_displayable?
-    !fork? && !archived? && has_many_projects? && not_awesome_stars? && description.present? && !name.include?('?') && !topics.include?('starred')
+    !fork? && !archived? && !template? && !from_template? && has_many_projects? && not_awesome_stars? && description.present? && !name.include?('?') && !topics.include?('starred')
+  end
+
+  def template?
+    repository.present? && repository['template'] == true
+  end
+
+  def from_template?
+    repository.present? && repository['template_full_name'].present?
+  end
+
+  def markdown_sort_key
+    [-[stars.to_i, 0].max.to_s.length, name.downcase, url.downcase]
+  end
+
+  def self.markdown_topic_groups(lists)
+    slugs = lists.flat_map(&:topics).map(&:downcase).uniq - (ignorable_topics + %w[awesome awesome-list awesome-lists])
+    names = Topic.where(slug: slugs).pluck(:slug, :name).to_h
+    lists.group_by { |list| list.markdown_topic(names.keys) }
+      .sort_by { |slug, _| slug.to_s }
+      .to_h { |slug, entries| [slug, { name: names[slug].presence || slug, lists: entries }] }
+  end
+
+  def markdown_topic(known_topics)
+    candidates = (topics.map(&:downcase) & known_topics).sort
+    matching_name = name.downcase.delete_prefix('awesome-').delete_suffix('-awesome')
+    candidates.include?(matching_name) ? matching_name : candidates.first
   end
 
   def fork?
@@ -146,38 +173,21 @@ class List < ApplicationRecord
 
   def awesome_description
     return if description.blank?
-    # add a period if there isn't one
-    d = description.dup
-    # remove whitespace from start and end
-    d.strip!
-    # add a period if there isn't one
-    d = description[-1] == '.' ? description : "#{description}."
-    # start with a capital letter
+    d = description.gsub(/https?:\/\/\S+/, '').squish
+    return if d.blank?
     d[0] = d[0].capitalize
-    # Should not repeat "."  or "!" more than once 
     d.gsub!(/([.!?])\1+/, '\1')
-    # remove extra urls (e.g. http://example.com)
-    d.gsub!(/https?:\/\/\S+/, '')
-    # proper case for "GitHub"
     d.gsub!(/github/i, 'GitHub')
-    # proper case for "JavaScript"
     d.gsub!(/javascript/i, 'JavaScript')
-    # OSX should be macOS
     d.gsub!(/MacOS/, 'macOS')
     d.gsub!(/OS X/, 'macOS')
     d.gsub!(/Mac OS X/, 'macOS')
     d.gsub!(/OSX/, 'macOS')
     d.gsub!(/Mac macOS/, 'macOS')
-    # youtube should be YouTube
     d.gsub!(/youtube/i, 'YouTube')
-    # stackoverflow should be Stack Overflow
     d.gsub!(/stackoverflow/i, 'Stack Overflow')
-    # Nodejs should be Node.js
     d.gsub!(/Nodejs/i, 'Node.js')
-    # remove all new lines
-    d.gsub!(/\n/, ' ')
-    # remove all carriage returns
-    d.gsub!(/\r/, ' ')
+    d << '.' unless d.end_with?('.', '!', '?')
     d
   end
 
