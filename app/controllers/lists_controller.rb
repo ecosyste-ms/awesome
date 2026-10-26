@@ -54,10 +54,14 @@ class ListsController < ApplicationController
   end
 
   def markdown
-    @list_of_lists = List.displayable.where(list_of_lists: true).order(stars: :desc, url: :asc).to_a
-    @other_lists = List.displayable.where(list_of_lists: false).order(stars: :desc, url: :asc).to_a
-    fresh_when([@list_of_lists, @other_lists].flatten, public: true)
-    render layout: false, content_type: 'text/plain'
+    @list_of_lists = List.displayable.where(list_of_lists: true).sort_by(&:markdown_sort_key)
+    @other_lists = List.displayable.where(list_of_lists: false).sort_by(&:markdown_sort_key)
+    @languages = @other_lists.map(&:primary_language).reject(&:blank?).uniq.sort_by(&:downcase)
+    @topic_lists = List.markdown_topic_groups(@other_lists.select { |list| list.primary_language.blank? })
+    @uncategorized_lists = @topic_lists.delete(nil)&.fetch(:lists) || []
+    if stale?(etag: [@list_of_lists, @other_lists, @topic_lists.transform_values { |group| group[:name] }], public: true)
+      render layout: false, content_type: 'text/plain'
+    end
   end
 
   private
