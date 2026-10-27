@@ -1,0 +1,14 @@
+<div id="header__global__menu" class="collapse header__global__menu">
+  <% ecosystems_services.each do |category, services| %>
+    <div class="header__global__menu__category">
+      <h2 class="header__global__menu__category-title"><%= category %></h2>
+      <ul class="header__global__menu__category-links">
+        <% services.each do |service| %>
+          <li>
+            <a href="<%= service[:url] %>" target="_blank" class="<%= 'active' if service[:url] == request.base_url %>"><%= service[:name] %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
