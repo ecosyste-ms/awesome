@@ -3,17 +3,25 @@ name: Upgrade Ruby
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * 0" # Runs weekly
+    - cron: "0 0 * * 0"
 
-permissions:
-  contents: write
-  pull-requests: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
 
 jobs:
   upgrade-ruby:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
-      - uses: andrew/ruby-upgrade-action@main
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: andrew/ruby-upgrade-action@f8fd7cb3693608d8b38c1972e538a56e186c3e04
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
