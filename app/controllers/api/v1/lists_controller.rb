@@ -5,9 +5,11 @@ class Api::V1::ListsController < Api::V1::ApplicationController
     if params[:project_id].present?
       if params[:project_id].to_i.to_s == params[:project_id]
         @project = Project.find(params[:project_id])
+        raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
         redirect_to api_v1_project_lists_url(@project), status: :moved_permanently
       else
         @project = Project.find_by_slug!(params[:project_id])
+        raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
       end
 
       scope = scope.joins(:projects).where(projects: { id: @project.id })

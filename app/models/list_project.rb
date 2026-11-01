@@ -2,6 +2,8 @@ class ListProject < ApplicationRecord
   belongs_to :list
   belongs_to :project
 
+  scope :without_blocked_topics, -> { left_joins(:project).merge(Project.without_blocked_topics) }
+
   def to_s
     project.try(:name) || name
   end

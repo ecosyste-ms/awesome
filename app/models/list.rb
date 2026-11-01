@@ -97,7 +97,7 @@ class List < ApplicationRecord
   end
 
   def filtered_list_projects(filters)
-    scope = list_projects
+    scope = list_projects.without_blocked_topics
     [:category, :sub_category].each do |field|
       value = filters[field.to_s]
       scope = scope.where("LOWER(list_projects.#{field}) = ?", value.downcase) if value.present?

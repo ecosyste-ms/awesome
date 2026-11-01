@@ -19,7 +19,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
       @projects = @projects.keyword(params[:keyword])
     end
 
-    @projects = @projects.includes(:list_projects)
+    @projects = @projects.without_blocked_topics.includes(:list_projects)
     
     @pagy, @projects = pagy_countless(@projects)
     fresh_when(@projects, public: true)
@@ -28,9 +28,11 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   def show
     if params[:id].to_i.to_s == params[:id]
       @project = Project.find(params[:id])
+      raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
       redirect_to @project, status: :moved_permanently
     else
       @project = Project.find_by_slug!(params[:id])
+      raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
       raise ActiveRecord::RecordNotFound if @project.owner_hidden?
       fresh_when(@project, public: true)
     end
@@ -47,13 +49,14 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
         @project = Project.find_by(url: params[:url].downcase)
       end
     end
-    raise ActiveRecord::RecordNotFound if @project.nil?
+    raise ActiveRecord::RecordNotFound if @project.nil? || @project.has_blocked_topic?
     @project.sync_async if @project.last_synced_at.nil? || @project.last_synced_at < 1.day.ago
     fresh_when(@project, public: true)
   end
 
   def ping
     @project = Project.find(params[:id])
+    raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
     @project.sync_async
     render json: { message: 'pong' }
   end

@@ -6,7 +6,7 @@ class Api::V1::ListProjectsController < ApplicationController
     else
       @list = List.find_by_slug!(params[:list_id])
     end
-    @list_projects = @list.list_projects
+    @list_projects = @list.list_projects.without_blocked_topics
 
     if params[:category].present?
       @list_projects = @list_projects.where(category: params[:category])

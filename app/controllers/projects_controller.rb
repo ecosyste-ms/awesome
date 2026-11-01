@@ -2,16 +2,18 @@ class ProjectsController < ApplicationController
   def show
     if params[:id].to_i.to_s == params[:id]
       @project = Project.find(params[:id])
+      raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
       redirect_to @project, status: :moved_permanently
     else
       @project = Project.find_by_slug!(params[:id])
+      raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
       raise ActiveRecord::RecordNotFound if @project.owner_hidden?
       fresh_when(@project, public: true)
     end
   end
 
   def index
-    @scope = Project.not_awesome_list.where.not(last_synced_at: nil).with_repository.visible_owners
+    @scope = Project.not_awesome_list.where.not(last_synced_at: nil).with_repository.visible_owners.without_blocked_topics
 
     if params[:keyword].present?
       @scope = @scope.keyword(params[:keyword])
@@ -45,6 +47,7 @@ class ProjectsController < ApplicationController
 
   def lookup
     @project = Project.find_by(url: params[:url].downcase)
+    raise ActiveRecord::RecordNotFound if @project&.has_blocked_topic?
     if @project.nil?
       @project = Project.create(url: params[:url].downcase)
       @project.sync_async

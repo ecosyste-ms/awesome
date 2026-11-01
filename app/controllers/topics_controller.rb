@@ -23,7 +23,7 @@ class TopicsController < ApplicationController
       return
     end
 
-    scope = @topic.projects.order_by_stars.not_awesome_list
+    scope = @topic.projects.without_blocked_topics.order_by_stars.not_awesome_list
     @lists = @topic.lists.order_by_stars.limit(50)
     @pagy, @projects = pagy_countless(scope)
     fresh_when(@projects, public: true)

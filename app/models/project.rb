@@ -36,6 +36,21 @@ class Project < ApplicationRecord
 
   scope :not_awesome_list, -> { where(list: false) }
 
+  def self.blocked_topics
+    ENV.fetch('BLOCKED_TOPICS', '').split(',').map { |topic| topic.strip.downcase }.reject(&:blank?).uniq
+  end
+
+  def self.without_blocked_topics
+    topics = blocked_topics
+    return all if topics.empty?
+
+    where('NOT EXISTS (SELECT 1 FROM unnest(projects.keywords) AS keyword WHERE LOWER(keyword) IN (?))', topics)
+  end
+
+  def has_blocked_topic?
+    (Array(keywords).compact.map(&:downcase) & self.class.blocked_topics).any?
+  end
+
   def self.hidden_owner_ids
     Rails.cache.fetch('hidden_owner_ids', expires_in: 5.minutes) do
       Owner.where(hidden: true).pluck(:id)
