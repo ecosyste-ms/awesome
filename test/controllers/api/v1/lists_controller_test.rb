@@ -18,6 +18,17 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
     end
 
+    test 'renders only displayable lists that contain the project' do
+        project = create(:project)
+        create(:list_project, project: project, list: @list)
+        create(:list_project, project: project, list: create(:list, projects_count: 1))
+        create(:list, projects_count: 50)
+
+        get api_v1_project_lists_url(project)
+        assert_response :success
+        assert_equal [@list.id], response.parsed_body.pluck('id')
+    end
+
     test 'limits pagination to 10000 pages' do
         get api_v1_lists_url, params: { page: 10_000 }
         assert_response :success
