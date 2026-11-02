@@ -12,7 +12,7 @@ class Api::V1::ListsController < Api::V1::ApplicationController
         raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
       end
 
-      scope = scope.joins(:projects).where(projects: { id: @project.id })
+      scope = scope.where(id: @project.list_projects.select(:list_id))
     end
 
     if params[:topic].present?
