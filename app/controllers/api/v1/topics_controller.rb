@@ -9,7 +9,7 @@ class Api::V1::TopicsController < Api::V1::ApplicationController
   end
 
   def show
-    @topic = Topic.find_by!(slug: params[:id])
+    @topic = Topic.find_by_slug!(params[:id])
     fresh_when(@topic, public: true)
   end
 

@@ -28,4 +28,10 @@ class TopicTest < ActiveSupport::TestCase
     Rails.cache.expects(:fetch).with("topic_categories/cache-topic", expires_in: 1.day).returns([['Cached', 99]])
     assert_equal [['Cached', 99]], topic.categories
   end
+
+  test "find_by_slug! matches the slug regardless of case" do
+    topic = Topic.create!(slug: 'case-topic', name: 'Case', github_count: 100)
+    assert_equal topic, Topic.find_by_slug!('Case-Topic')
+    assert_raises(ActiveRecord::RecordNotFound) { Topic.find_by_slug!('missing-topic') }
+  end
 end
