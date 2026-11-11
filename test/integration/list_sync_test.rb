@@ -161,8 +161,8 @@ class ListSyncTest < ActionDispatch::IntegrationTest
 
   test 'lists that keep failing do not stop stale lists from being refreshed' do
     @list.update_columns(last_synced_at: 1.hour.ago)
-    failing = create_list(:list, 100, last_synced_at: nil, last_sync_attempt_at: 2.hours.ago)
-    new_lists = create_list(:list, 50, last_synced_at: nil, last_sync_attempt_at: nil)
+    failing = create_list(:list, List::SYNC_BATCH_SIZE, last_synced_at: nil, last_sync_attempt_at: 2.hours.ago)
+    new_lists = create_list(:list, List::SYNC_BATCH_SIZE, last_synced_at: nil, last_sync_attempt_at: nil)
     recently_failed = create(:list, last_synced_at: nil, last_sync_attempt_at: 30.minutes.ago)
     stale = create_list(:list, 2, last_synced_at: 2.days.ago)
 

@@ -3,7 +3,7 @@ class List < ApplicationRecord
   include SyncScheduling
 
   README_MAX_BYTES = 100_000
-  SYNC_BATCH_SIZE = 50
+  SYNC_BATCH_SIZE = 100
   SYNC_RETRY_BATCH_SIZE = 10
   SYNC_RETRY_INTERVAL = 1.hour
 

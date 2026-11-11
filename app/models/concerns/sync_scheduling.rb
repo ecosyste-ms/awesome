@@ -2,9 +2,7 @@ module SyncScheduling
   extend ActiveSupport::Concern
 
   class_methods do
-    # Picks up to SYNC_BATCH_SIZE ids from scope, reserving SYNC_RETRY_BATCH_SIZE
-    # slots for records whose last sync failed at least SYNC_RETRY_INTERVAL ago,
-    # so records that keep failing can't crowd out first attempts (or vice versa).
+    # Retries get reserved slots so failing records can't crowd out first attempts.
     def sync_candidate_ids(scope)
       retry_ids = scope.where("last_sync_attempt_at <= ?", self::SYNC_RETRY_INTERVAL.ago)
                        .reorder(:last_sync_attempt_at).limit(self::SYNC_BATCH_SIZE).pluck(:id)
