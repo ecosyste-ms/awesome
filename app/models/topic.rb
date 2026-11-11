@@ -17,6 +17,10 @@ class Topic < ApplicationRecord
 
   scope :not_google, -> { where('name not ilike ?', '%google%') }
 
+  def self.find_by_slug!(slug)
+    find_by!(slug: slug.downcase)
+  end
+
   PROGRAMMING_LANGUAGES = %w[Ruby JavaScript Python Java PHP C C++ C# D Swift Objective-C Go Kotlin
                              TypeScript Scala R Rust Perl Shell HTML CSS Bash Haskell Elixir Assembly
                              Elm Erlang OCaml Lisp Groovy Nim F# Crystal Fortran ClojureScript Haxe
