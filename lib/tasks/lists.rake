@@ -4,6 +4,11 @@ namespace :lists do
     List.sync_least_recently_synced
   end
 
+  desc 'remove lists that have never resolved to a repository'
+  task clean_up: :environment do
+    puts "[awesome] removed #{List.remove_unresolved} unresolved lists"
+  end
+
   desc 'discover lists'
   task :discover => :environment do
     List.import_lists_from_sindresorhus

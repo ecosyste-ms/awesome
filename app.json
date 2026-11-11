@@ -13,6 +13,10 @@
       "schedule": "0 0 * * *"
     },
     {
+      "command": "bundle exec rake lists:clean_up",
+      "schedule": "0 12 * * *"
+    },
+    {
       "command": "bundle exec rake topics:load_from_github",
       "schedule": "0 0 * * *"
     }
