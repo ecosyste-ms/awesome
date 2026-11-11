@@ -6,6 +6,7 @@ class List < ApplicationRecord
   SYNC_BATCH_SIZE = 100
   SYNC_RETRY_BATCH_SIZE = 10
   SYNC_RETRY_INTERVAL = 1.hour
+  UNRESOLVED_RETENTION = 30.days
 
   def self.sortable_columns
     {
@@ -36,6 +37,13 @@ class List < ApplicationRecord
 
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
+
+  # e.g. deleted repositories or GitHub pages that aren't repositories
+  scope :unresolved, -> {
+    where(last_synced_at: nil, repository: nil)
+      .where.not(last_sync_attempt_at: nil)
+      .where('lists.created_at < ?', UNRESOLVED_RETENTION.ago)
+  }
 
   scope :displayable, -> { where(displayable: true).not_template.not_from_template }
   scope :not_awesome_stars, -> { where.not('url LIKE ?', '%awesome-stars%') }
@@ -74,6 +82,10 @@ class List < ApplicationRecord
   end
 
   before_save :set_displayable
+
+  def self.remove_unresolved
+    unresolved.destroy_all.length
+  end
 
   def self.sync_least_recently_synced
     # Never-synced and stale lists get separate batches so lists that keep
