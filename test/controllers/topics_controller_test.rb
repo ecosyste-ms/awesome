@@ -72,4 +72,10 @@ class TopicsControllerTest < ActionDispatch::IntegrationTest
     get topic_url(topic)
     assert_response :success
   end
+
+  test "show finds topics regardless of slug letter case" do
+    Topic.create!(slug: 'ruby', name: 'Ruby', github_count: 100)
+    get topic_url('Ruby')
+    assert_response :success
+  end
 end

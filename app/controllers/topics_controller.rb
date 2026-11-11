@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by!(slug: params[:id])
+    @topic = Topic.find_by!(slug: params[:id].downcase)
 
     extra = request.query_parameters.keys - ['page']
     if extra.any?
