@@ -46,7 +46,7 @@ paths:
                   $ref: '#/components/schemas/Project'
   /projects/{id}:
     get:
-      description: get a project by id
+      description: get a project by slug or id
       operationId: getProject
       tags:
         - projects
@@ -54,9 +54,10 @@ paths:
         - in: path
           name: id
           schema:
-            type: integer
+            type: string
           required: true
-          description: id of the project
+          description: Project slug in `host/owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric project ID is also accepted and redirects to the slug URL.
+          example: github.com/bcoe/awesome-cross-platform-nodejs
       responses:
         200:
           description: OK
@@ -74,9 +75,10 @@ paths:
         - in: path
           name: id
           schema:
-            type: integer
+            type: string
           required: true
-          description: id of the project
+          description: Project slug in `host/owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric project ID is also accepted and redirects to the slug URL.
+          example: github.com/bcoe/awesome-cross-platform-nodejs
         - name: page
           in: query
           description: pagination page number 
@@ -176,7 +178,7 @@ paths:
                   $ref: '#/components/schemas/List'
   /lists/{id}:
     get:
-      description: get a list by id
+      description: get a list by slug or id
       operationId: getList
       tags:
         - lists
@@ -184,9 +186,10 @@ paths:
         - in: path
           name: id
           schema:
-            type: integer
+            type: string
           required: true
-          description: id of the list
+          description: List slug in `owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric list ID is also accepted and redirects to the slug URL.
+          example: sindresorhus/awesome
       responses:
         200:
           description: OK
@@ -218,9 +221,10 @@ paths:
         - in: path
           name: id
           schema:
-            type: integer
+            type: string
           required: true
-          description: id of the list
+          description: List slug in `owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric list ID is also accepted and redirects to the slug URL.
+          example: sindresorhus/awesome
         - name: page
           in: query
           description: pagination page number 
@@ -252,9 +256,10 @@ paths:
         - in: path
           name: id
           schema:
-            type: integer
+            type: string
           required: true
-          description: id of the list
+          description: List slug in `owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric list ID is also accepted and redirects to the slug URL.
+          example: sindresorhus/awesome
         - name: category
           in: query
           description: category of the list project
@@ -346,9 +351,10 @@ paths:
         - in: path
           name: slug
           schema:
-            type: integer
+            type: string
           required: true
-          description: slug of the topic
+          description: Slug of the topic, matched regardless of letter case.
+          example: ruby
       responses:
         200:
           description: OK
