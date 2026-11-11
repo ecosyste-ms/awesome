@@ -16,6 +16,14 @@ class Api::V1::ListProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [@platforms.id, @tools.id].sort, response.parsed_body.pluck('id').sort
   end
 
+  test 'includes pagination headers' do
+    get api_v1_list_list_projects_url(@list), params: { per_page: 1 }
+
+    assert_response :success
+    assert_equal '1', response.headers['page-items']
+    assert_match(/rel="next"/, response.headers['link'])
+  end
+
   test 'numeric list redirects preserve filters and pagination' do
     params = { category: 'Platforms', sub_category: 'Web', page: '2', per_page: '1' }
 

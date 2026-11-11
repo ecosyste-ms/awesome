@@ -117,4 +117,12 @@ class Api::V1::ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'application/json', response.media_type
     assert_equal @repository_project.id, response.parsed_body['id']
   end
+
+  test 'numeric project id returns 404 when the owner is hidden' do
+    hidden = create(:project, owner_record: create(:owner, :hidden), last_synced_at: Time.current)
+
+    get api_v1_project_path(hidden.id)
+
+    assert_response :not_found
+  end
 end

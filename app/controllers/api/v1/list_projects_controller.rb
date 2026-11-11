@@ -1,4 +1,4 @@
-class Api::V1::ListProjectsController < ApplicationController
+class Api::V1::ListProjectsController < Api::V1::ApplicationController
   def index
     if params[:list_id].to_i.to_s == params[:list_id]
       @list = List.find(params[:list_id])
