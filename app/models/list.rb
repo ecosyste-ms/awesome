@@ -38,9 +38,7 @@ class List < ApplicationRecord
   scope :with_readme, -> { where.not(readme: nil) }
   scope :with_repository, -> { where.not(repository: nil) }
 
-  # Lists created over a month ago whose syncs have failed without ever
-  # resolving a repository, e.g. URLs for deleted repositories or GitHub pages
-  # that aren't repositories.
+  # e.g. deleted repositories or GitHub pages that aren't repositories
   scope :unresolved, -> {
     where(last_synced_at: nil, repository: nil)
       .where.not(last_sync_attempt_at: nil)
