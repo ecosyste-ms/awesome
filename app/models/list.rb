@@ -1,7 +1,11 @@
 class List < ApplicationRecord
   include EcosystemsApiClient
+  include SyncScheduling
 
   README_MAX_BYTES = 100_000
+  SYNC_BATCH_SIZE = 100
+  SYNC_RETRY_BATCH_SIZE = 10
+  SYNC_RETRY_INTERVAL = 1.hour
 
   def self.sortable_columns
     {
@@ -72,15 +76,12 @@ class List < ApplicationRecord
   before_save :set_displayable
 
   def self.sync_least_recently_synced
-    # Optimized: batch enqueue jobs instead of individual sync_async calls
-    # Reduced from 500 to 100 to prevent overwhelming Sidekiq
-    ids = List.where(last_synced_at: nil)
-      .or(List.where("last_synced_at < ?", 1.day.ago))
-      .order('last_synced_at asc nulls first')
-      .limit(100)
-      .pluck(:id)
+    # Never-synced and stale lists get separate batches so lists that keep
+    # failing to sync can't stop successfully synced lists from refreshing.
+    new_ids = sync_candidate_ids(List.where(last_synced_at: nil))
+    old_ids = sync_candidate_ids(List.where("last_synced_at < ?", 1.day.ago).order(:last_synced_at))
 
-    # Batch push to Sidekiq (more efficient than 100 individual pushes)
+    ids = (new_ids + old_ids).uniq
     SyncListWorker.perform_bulk(ids.map { |id| [id] }) if ids.any?
   end
 
@@ -235,16 +236,23 @@ class List < ApplicationRecord
   def sync
     check_url
     return if destroyed?
-    return unless fetch_repository
-    return unless fetch_readme
+    unless fetch_repository && fetch_readme
+      record_sync_attempt
+      return
+    end
     load_projects
     self.projects_count = list_projects.count
     set_primary_language
     set_list_of_lists
-    update!(last_synced_at: Time.current)
+    update!(last_synced_at: Time.current, last_sync_attempt_at: nil)
     ping
   rescue => e
     Rails.logger.info "Error syncing #{url}: #{e.class}: #{e.message}"
+    record_sync_attempt
+  end
+
+  def record_sync_attempt
+    update_column(:last_sync_attempt_at, Time.current) if persisted?
   end
 
   def check_url

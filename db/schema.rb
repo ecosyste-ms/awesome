@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_18_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_11_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_18_000001) do
     t.string "description"
     t.boolean "displayable", default: false
     t.string "keywords", default: [], array: true
+    t.datetime "last_sync_attempt_at"
     t.datetime "last_synced_at"
     t.boolean "list_of_lists", default: false
     t.string "name"
