@@ -2,6 +2,7 @@ require 'csv'
 
 class Project < ApplicationRecord
   include EcosystemsApiClient
+  include SyncScheduling
 
   SYNC_BATCH_SIZE = 50
   SYNC_RETRY_BATCH_SIZE = 10
@@ -108,16 +109,6 @@ class Project < ApplicationRecord
 
     all_ids = (new_ids + old_ids).uniq
     SyncProjectWorker.perform_bulk(all_ids.map { |id| [id] }) if all_ids.any?
-  end
-
-  def self.sync_candidate_ids(scope)
-    retry_ids = scope.where("last_sync_attempt_at <= ?", SYNC_RETRY_INTERVAL.ago)
-                     .reorder(:last_sync_attempt_at).limit(SYNC_BATCH_SIZE).pluck(:id)
-    reserved_retry_ids = retry_ids.first(SYNC_RETRY_BATCH_SIZE)
-    first_attempt_ids = scope.where(last_sync_attempt_at: nil).limit(SYNC_BATCH_SIZE - reserved_retry_ids.length).pluck(:id)
-    remaining = SYNC_BATCH_SIZE - first_attempt_ids.length - reserved_retry_ids.length
-
-    first_attempt_ids + reserved_retry_ids + retry_ids.drop(SYNC_RETRY_BATCH_SIZE).first(remaining)
   end
 
   def self.sync_all

@@ -76,6 +76,30 @@ class ListSyncTest < ActionDispatch::IntegrationTest
 
     assert ListProject.exists?(join.id)
     assert_nil @list.reload.readme
+    assert_in_delta Time.current, @list.last_sync_attempt_at, 1.second
+  end
+
+  test 'a failed repository lookup records the attempt without advancing the sync timestamp' do
+    @list.update_columns(last_synced_at: 2.days.ago)
+    synced_at = @list.reload.last_synced_at
+    stub_request(:get, @list.repos_api_url).to_return(status: 503)
+    readme = stub_request(:get, @readme_url)
+
+    SyncListWorker.new.perform(@list.id)
+
+    assert_equal synced_at, @list.reload.last_synced_at
+    assert_in_delta Time.current, @list.last_sync_attempt_at, 1.second
+    assert_not_requested readme
+  end
+
+  test 'a successful sync clears the retry marker' do
+    @list.update_columns(last_synced_at: nil, last_sync_attempt_at: 2.hours.ago)
+    stub_request(:get, @readme_url).to_return(body: '- [Example](https://example.com/example) - Example project')
+
+    SyncListWorker.new.perform(@list.id)
+
+    assert_in_delta Time.current, @list.reload.last_synced_at, 1.second
+    assert_nil @list.last_sync_attempt_at
   end
 
   test 'sync preserves current joins when the README fetch fails' do
@@ -132,6 +156,25 @@ class ListSyncTest < ActionDispatch::IntegrationTest
 
     assert_equal synced_at, @list.reload.last_synced_at
     assert_equal 10, @list.projects_count
+    assert_in_delta Time.current, @list.last_sync_attempt_at, 1.second
+  end
+
+  test 'lists that keep failing do not stop stale lists from being refreshed' do
+    @list.update_columns(last_synced_at: 1.hour.ago)
+    failing = create_list(:list, 100, last_synced_at: nil, last_sync_attempt_at: 2.hours.ago)
+    new_lists = create_list(:list, 50, last_synced_at: nil, last_sync_attempt_at: nil)
+    recently_failed = create(:list, last_synced_at: nil, last_sync_attempt_at: 30.minutes.ago)
+    stale = create_list(:list, 2, last_synced_at: 2.days.ago)
+
+    List.sync_least_recently_synced
+
+    queued_ids = SyncListWorker.jobs.map { |job| job['args'].first }
+    assert_equal List::SYNC_BATCH_SIZE + stale.length, queued_ids.length
+    assert_equal stale.map(&:id).sort, (queued_ids & stale.map(&:id)).sort
+    assert_equal List::SYNC_RETRY_BATCH_SIZE, (queued_ids & failing.map(&:id)).length
+    assert_equal List::SYNC_BATCH_SIZE - List::SYNC_RETRY_BATCH_SIZE, (queued_ids & new_lists.map(&:id)).length
+    assert_not_includes queued_ids, recently_failed.id
+    assert_not_includes queued_ids, @list.id
   end
 
   test 'sync imports table descriptions and resets categories without importing badges' do
