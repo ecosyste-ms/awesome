@@ -106,4 +106,15 @@ class Api::V1::ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal [@repository_project.id], response.parsed_body.pluck('id')
   end
+
+  test 'numeric project id redirects to the API project url' do
+    get api_v1_project_path(@repository_project.id)
+
+    assert_redirected_to api_v1_project_url(@repository_project)
+    follow_redirect!
+
+    assert_response :success
+    assert_equal 'application/json', response.media_type
+    assert_equal @repository_project.id, response.parsed_body['id']
+  end
 end

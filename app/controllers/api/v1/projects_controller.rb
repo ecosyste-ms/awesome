@@ -29,7 +29,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     if params[:id].to_i.to_s == params[:id]
       @project = Project.find(params[:id])
       raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
-      redirect_to @project, status: :moved_permanently
+      redirect_to api_v1_project_url(@project), status: :moved_permanently
     else
       @project = Project.find_by_slug!(params[:id])
       raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?

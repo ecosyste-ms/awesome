@@ -62,4 +62,16 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
         get lookup_api_v1_lists_url
         assert_response :bad_request
     end
+
+    test 'numeric project redirects preserve filters and pagination' do
+        project = create(:project)
+        create(:list_project, project: project, list: @list)
+        params = { topic: 'test', language: 'Ruby', sort: 'projects_count', order: 'asc', page: '1', per_page: '1' }
+
+        get api_v1_project_lists_url(project.id), params: params
+        assert_redirected_to api_v1_project_lists_url(project, params)
+        follow_redirect!
+
+        assert_response :success
+    end
 end
