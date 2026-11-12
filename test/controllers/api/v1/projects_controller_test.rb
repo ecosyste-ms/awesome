@@ -179,6 +179,17 @@ class Api::V1::ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'pong', response.parsed_body['message']
   end
 
+  test 'ping returns not found when the owner is hidden' do
+    hidden = create(:project, owner_record: create(:owner, :hidden), last_synced_at: Time.current)
+    Project.any_instance.expects(:sync_async).never
+
+    get "/api/v1/projects/#{hidden.slug}/ping"
+    assert_response :not_found
+
+    get "/api/v1/projects/#{hidden.id}/ping"
+    assert_response :not_found
+  end
+
   test 'ping returns not found for an unknown project' do
     get '/api/v1/projects/github.com/missing/project/ping'
 

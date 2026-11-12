@@ -11,8 +11,7 @@ class Api::V1::ApplicationController < ApplicationController
 
   # Slugs contain slashes and may be sent unencoded, so a slug whose last
   # segment is a nested route name (owner/projects, host/owner/lists) is routed
-  # to that nested action with the rest of the slug as its parent. Returns the
-  # record the whole path names when the parent doesn't exist.
+  # to that nested action with the rest of the slug as its parent.
   def misrouted_record(model, parent, nested_route)
     return if find_by_id_or_slug(model, parent)
 

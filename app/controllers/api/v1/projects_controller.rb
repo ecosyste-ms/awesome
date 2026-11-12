@@ -62,7 +62,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     end
 
     @project = find_by_id_or_slug(Project, params[:id])
-    raise ActiveRecord::RecordNotFound if @project.nil? || @project.has_blocked_topic?
+    raise ActiveRecord::RecordNotFound if @project.nil? || @project.has_blocked_topic? || @project.owner_hidden?
     @project.sync_async
     render json: { message: 'pong' }
   end
