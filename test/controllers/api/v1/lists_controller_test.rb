@@ -45,6 +45,43 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
     end
 
+    test 'renders show for percent-encoded slugs ending in a nested route name' do
+        list = create(:list, url: 'https://github.com/owner/projects')
+
+        get '/api/v1/lists/owner%2Fprojects'
+
+        assert_response :success
+        assert_equal list.id, response.parsed_body['id']
+    end
+
+    test 'project slugs ending in lists render the project' do
+        project = create(:project, url: 'https://github.com/owner/lists')
+
+        get '/api/v1/projects/github.com/owner/lists'
+
+        assert_response :success
+        assert_equal project.id, response.parsed_body['id']
+    end
+
+    test 'project slugs ending in lists prefer the nested route when the shorter slug is a project' do
+        parent = create(:project, url: 'https://github.com/owner')
+        create(:project, url: 'https://github.com/owner/lists')
+        create(:list_project, project: parent, list: @list)
+
+        get '/api/v1/projects/github.com/owner/lists'
+
+        assert_response :success
+        assert_equal [@list.id], response.parsed_body.pluck('id')
+    end
+
+    test 'project slugs ending in lists return not found when the owner is hidden' do
+        create(:project, url: 'https://github.com/owner/lists', owner_record: create(:owner, :hidden))
+
+        get '/api/v1/projects/github.com/owner/lists'
+
+        assert_response :not_found
+    end
+
     test 'lookup returns existing list' do
         List.any_instance.stubs(:sync_async)
         get lookup_api_v1_lists_url, params: { url: @list.url }

@@ -3,6 +3,10 @@ class Api::V1::ListsController < Api::V1::ApplicationController
     scope = List.displayable
 
     if params[:project_id].present?
+      if (project = misrouted_record(Project, params[:project_id], 'lists'))
+        return render_project(project)
+      end
+
       if params[:project_id].to_i.to_s == params[:project_id]
         @project = Project.find(params[:project_id])
         raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
@@ -44,8 +48,7 @@ class Api::V1::ListsController < Api::V1::ApplicationController
       @list = List.find(params[:id])
       redirect_to api_v1_list_url(@list), status: :moved_permanently
     else
-      @list = List.find_by_slug!(params[:id])
-      fresh_when(@list, public: true)
+      render_list(List.find_by_slug!(params[:id]))
     end
   end
 

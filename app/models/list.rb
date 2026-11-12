@@ -69,6 +69,10 @@ class List < ApplicationRecord
     self.keywords = repository['topics'] if repository.present? && repository['topics'].present?
   end
 
+  def self.find_by_slug(slug)
+    find_by(url: "https://github.com/#{slug.downcase}")
+  end
+
   def self.find_by_slug!(slug)
     find_by!(url: "https://github.com/#{slug.downcase}")
   end
