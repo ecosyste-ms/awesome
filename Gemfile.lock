@@ -57,6 +57,8 @@ GEM
     cgi (0.5.2)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
+    cld (0.13.0)
+      ffi
     commonmarker (2.10.1-aarch64-linux-musl)
     commonmarker (2.10.1-arm-linux-gnu)
     commonmarker (2.10.1-arm-linux-musl)
@@ -324,6 +326,7 @@ DEPENDENCIES
   bootstrap
   bootstrap-icons
   cff
+  cld
   commonmarker
   counter_culture
   csv
@@ -382,6 +385,7 @@ CHECKSUMS
   cff (1.3.0) sha256=d2b65d57160040ad244087d65b89769558a40aafb34b13d048e0ea72bc521316
   cgi (0.5.2) sha256=61ca30298171190fd4fa0d8018e57ada456eae9b7a2b78526debf7f0a0e6f8bb
   chronic_duration (0.10.6) sha256=fac58d4147d3183a40811400380cafcef049f2bb02421d2fd1c6e685fbe8facc
+  cld (0.13.0) sha256=4269b5741756989e7ebcc5ff78c8c30d53cedfe408eb091d610113d82f3e490c
   commonmarker (2.10.1-aarch64-linux-musl) sha256=98e6d1a03ba708438d804702e3c25f3423bff21a1e9975280eb265d889677dfc
   commonmarker (2.10.1-arm-linux-gnu) sha256=dc1ce6cfe5547d2814351ef306d5d1dd05f9c08ad405c76baa94748326c83b7f
   commonmarker (2.10.1-arm-linux-musl) sha256=97d40662414df1e6babcd78d7fbeb0bc7a2ee6fc0d0d592f12539ef535c00c90

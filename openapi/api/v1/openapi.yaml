@@ -79,6 +79,12 @@ paths:
           required: true
           description: Project slug in `host/owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric project ID is also accepted and redirects to the slug URL.
           example: github.com/bcoe/awesome-cross-platform-nodejs
+        - name: natural_language
+          in: query
+          description: Only return lists written in this natural language, given as the language code reported in `natural_language`, e.g. `zh`. Matched regardless of letter case.
+          required: false
+          schema:
+            type: string
         - name: page
           in: query
           description: pagination page number 
@@ -155,6 +161,12 @@ paths:
       tags:
         - lists
       parameters:
+        - name: natural_language
+          in: query
+          description: Only return lists written in this natural language, given as the language code reported in `natural_language`, e.g. `zh`. Matched regardless of letter case.
+          required: false
+          schema:
+            type: string
         - name: page
           in: query
           description: pagination page number 
@@ -460,6 +472,10 @@ components:
           format: date-time
         primary_language:
           type: string
+        natural_language:
+          type: string
+          nullable: true
+          description: Code of the natural language the list is written in, detected from its README, e.g. `en`, `zh` or `zh-TW`. Null when it can't be reliably detected.
         list_of_lists:
           type: boolean
         displayable:

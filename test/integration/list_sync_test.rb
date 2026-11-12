@@ -200,4 +200,19 @@ class ListSyncTest < ActionDispatch::IntegrationTest
     assert_nil entries.fetch('Example').sub_category
     assert_equal 'See the [source](https://example.com/source) `MIT`.', entries.fetch('Example').description
   end
+
+  test 'sync records the natural language of the README' do
+    stub_request(:get, @readme_url).to_return(body: <<~README)
+      # Awesome Deutschland
+
+      Eine kuratierte Liste mit nützlichen Werkzeugen, Behörden und Diensten für Menschen, die in Deutschland leben oder arbeiten.
+
+      ## Werkzeuge
+      - [Beispiel](https://example.com/beispiel) - Ein Werkzeug, das die Steuererklärung deutlich einfacher macht.
+    README
+
+    SyncListWorker.new.perform(@list.id)
+
+    assert_equal 'de', @list.reload.natural_language
+  end
 end

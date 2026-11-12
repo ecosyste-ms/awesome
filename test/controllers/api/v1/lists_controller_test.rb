@@ -66,7 +66,7 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
     test 'numeric project redirects preserve filters and pagination' do
         project = create(:project)
         create(:list_project, project: project, list: @list)
-        params = { topic: 'test', language: 'Ruby', sort: 'projects_count', order: 'asc', page: '1', per_page: '1' }
+        params = { topic: 'test', language: 'Ruby', natural_language: 'en', sort: 'projects_count', order: 'asc', page: '1', per_page: '1' }
 
         get api_v1_project_lists_url(project.id), params: params
         assert_redirected_to api_v1_project_lists_url(project, params)
@@ -84,5 +84,24 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
 
         get api_v1_project_lists_url(project.id)
         assert_response :not_found
+    end
+
+    test 'renders the natural language of a list' do
+        @list.update!(natural_language: 'zh')
+
+        get api_v1_list_url(@list)
+        assert_equal 'zh', response.parsed_body['natural_language']
+    end
+
+    test 'filters lists by natural language' do
+        @list.update!(natural_language: 'zh')
+        other = create(:list, projects_count: 50, natural_language: 'en')
+
+        get api_v1_lists_url, params: { natural_language: 'ZH' }
+        assert_response :success
+        assert_equal [@list.id], response.parsed_body.pluck('id')
+
+        get api_v1_lists_url, params: { natural_language: 'en' }
+        assert_equal [other.id], response.parsed_body.pluck('id')
     end
 end

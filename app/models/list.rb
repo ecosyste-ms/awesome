@@ -53,6 +53,7 @@ class List < ApplicationRecord
 
   scope :topic, -> (keyword) { where("keywords @> ARRAY[?]::varchar[]", keyword) }
   scope :primary_language, -> (language) { where(primary_language: language) }
+  scope :natural_language, -> (language) { where('LOWER(lists.natural_language) = ?', language.to_s.downcase) }
 
   scope :search, -> (query) { where('url ILIKE ? OR repository ->> \'description\' ILIKE ?', "%#{query}%", "%#{query}%") }
 
@@ -256,6 +257,7 @@ class List < ApplicationRecord
     self.projects_count = list_projects.count
     set_primary_language
     set_list_of_lists
+    set_natural_language
     update!(last_synced_at: Time.current, last_sync_attempt_at: nil)
     ping
   rescue => e
@@ -563,6 +565,20 @@ class List < ApplicationRecord
       self.primary_language = nil
     end
   end 
+
+  def set_natural_language
+    self.natural_language = detect_natural_language
+  end
+
+  # e.g. en, zh or zh-TW; nil when it can't be reliably detected
+  def detect_natural_language
+    text = ReadmeParser.new(readme).text if readme.present?
+    text = description if text.blank?
+    return if text.blank?
+
+    result = CLD.detect_language(text)
+    result[:code].encode(Encoding::UTF_8) if result[:reliable] && result[:code] != 'un'
+  end
 
   def projects_with_language_count
     projects.with_repository.map(&:language).compact.length
