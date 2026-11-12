@@ -59,6 +59,11 @@ class ReadmeParser
     links
   end
 
+  # README prose without code, HTML or URLs
+  def text
+    Commonmarker.parse(readme).walk.filter_map { |node| node.string_content if node.type == :text }.join(' ').gsub(%r{https?://\S+}, ' ').squish
+  end
+
   def entry_link(node)
     node.walk.find { |child| child.type == :link && child.walk.none? { |descendant| descendant.type == :image } && plain_text(child).present? }
   end
