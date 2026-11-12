@@ -7,7 +7,7 @@ class Api::V1::ListsController < Api::V1::ApplicationController
         @project = Project.find(params[:project_id])
         raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
         raise ActiveRecord::RecordNotFound if @project.owner_hidden?
-        query =params.permit(:topic, :language, :sort, :order, :page, :per_page)
+        query =params.permit(:topic, :language, :natural_language, :sort, :order, :page, :per_page)
         redirect_to api_v1_project_lists_url(@project, query.to_h), status: :moved_permanently and return
       else
         @project = Project.find_by_slug!(params[:project_id])
@@ -24,6 +24,10 @@ class Api::V1::ListsController < Api::V1::ApplicationController
 
     if params[:language].present?
       scope = scope.primary_language(params[:language])
+    end
+
+    if params[:natural_language].present?
+      scope = scope.natural_language(params[:natural_language])
     end
 
     if params[:sort].present? || params[:order].present?

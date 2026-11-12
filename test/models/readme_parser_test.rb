@@ -106,4 +106,20 @@ class ReadmeParserTest < ActiveSupport::TestCase
     assert_equal 'https://example.com/a_(b)', entry[:url]
     assert_equal 'Read the [source](https://example.com/source) and use `MIT`.', entry[:description]
   end
+
+  test 'text returns prose without code, HTML or URLs' do
+    markdown = <<~MARKDOWN
+      <p align="center"><img src="logo.png" alt="Logo"></p>
+
+      # 精选列表
+
+      - [Example](https://example.com/example) - 一个示例项目，见 https://example.com/docs 和 `npm install example`。
+
+      ```sh
+      curl https://example.com/install.sh | sh
+      ```
+    MARKDOWN
+
+    assert_equal '精选列表 Example - 一个示例项目，见 和 。', ReadmeParser.new(markdown).text
+  end
 end

@@ -41,6 +41,7 @@ gem 'dalli'
 gem 'csv'
 gem 'ostruct'
 gem 'commonmarker'
+gem 'cld'
 
 group :development, :test do
   gem 'dotenv-rails'
