@@ -113,40 +113,13 @@ paths:
           required: true
           schema:
             type: string
+          example: https://github.com/bcoe/awesome-cross-platform-nodejs
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Project'
-  /projects/packages:
-    get:
-      description: get projects with packages
-      operationId: getProjectPackages
-      tags:
-        - projects
-      parameters:
-        - name: page
-          in: query
-          description: pagination page number 
-          required: false
-          schema:
-            type: integer
-        - name: per_page
-          in: query
-          description: Number of records to return 
-          required: false
-          schema:
-            type: integer
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
                   $ref: '#/components/schemas/Project'
   /lists:
     get:
@@ -306,6 +279,7 @@ paths:
           required: true
           schema:
             type: string
+          example: https://github.com/sindresorhus/awesome
       responses:
         200:
           description: OK

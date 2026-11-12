@@ -19,15 +19,19 @@ class OpenapiTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'path parameter examples resolve with and without percent-encoding' do
-    path_parameters.each do |path, parameters|
+  test 'documented operations respond with path parameters sent as-is and percent-encoded' do
+    SPEC['paths'].each do |path, operations|
+      parameters = operations.dig('get', 'parameters').to_a
+      query = parameters.select { |parameter| parameter['in'] == 'query' && parameter['required'] }
+        .to_h { |parameter| [parameter['name'], parameter['example']] }
+
       [false, true].each do |encode|
-        url = parameters.reduce(path) do |result, parameter|
+        url = parameters.select { |parameter| parameter['in'] == 'path' }.reduce(path) do |result, parameter|
           value = parameter['example'].to_s
           result.sub("{#{parameter['name']}}", encode ? ERB::Util.url_encode(value) : value)
         end
 
-        get "/api/v1#{url}"
+        get "/api/v1#{url}", params: query
 
         assert_response :success, "GET #{url} should succeed"
       end
