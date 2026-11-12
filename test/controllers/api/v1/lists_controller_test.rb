@@ -74,4 +74,15 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
 
         assert_response :success
     end
+
+    test 'project lists return not found when the owner is hidden' do
+        project = create(:project, owner_record: create(:owner, :hidden))
+        create(:list_project, project: project, list: @list)
+
+        get api_v1_project_lists_url(project)
+        assert_response :not_found
+
+        get api_v1_project_lists_url(project.id)
+        assert_response :not_found
+    end
 end
