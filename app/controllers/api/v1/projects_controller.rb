@@ -1,6 +1,10 @@
 class Api::V1::ProjectsController < Api::V1::ApplicationController
   def index
     if params[:list_id].present?
+      if (list = misrouted_record(List, params[:list_id], 'projects'))
+        return render_list(list)
+      end
+
       if params[:list_id].to_i.to_s == params[:list_id]
         @list = List.find(params[:list_id])
         query = params.permit(:with_repository, :not_list, :keyword, :page, :per_page)
@@ -32,10 +36,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
       raise ActiveRecord::RecordNotFound if @project.owner_hidden?
       redirect_to api_v1_project_url(@project), status: :moved_permanently
     else
-      @project = Project.find_by_slug!(params[:id])
-      raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
-      raise ActiveRecord::RecordNotFound if @project.owner_hidden?
-      fresh_when(@project, public: true)
+      render_project(Project.find_by_slug!(params[:id]))
     end
   end
 
@@ -56,8 +57,12 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
   end
 
   def ping
-    @project = Project.find(params[:id])
-    raise ActiveRecord::RecordNotFound if @project.has_blocked_topic?
+    if (project = misrouted_record(Project, params[:id], 'ping'))
+      return render_project(project)
+    end
+
+    @project = find_by_id_or_slug(Project, params[:id])
+    raise ActiveRecord::RecordNotFound if @project.nil? || @project.has_blocked_topic? || @project.owner_hidden?
     @project.sync_async
     render json: { message: 'pong' }
   end

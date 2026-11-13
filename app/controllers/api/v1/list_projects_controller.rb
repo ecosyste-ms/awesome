@@ -1,5 +1,9 @@
 class Api::V1::ListProjectsController < Api::V1::ApplicationController
   def index
+    if (list = misrouted_record(List, params[:list_id], 'list_projects'))
+      return render_list(list)
+    end
+
     if params[:list_id].to_i.to_s == params[:list_id]
       @list = List.find(params[:list_id])
       query = params.permit(:category, :sub_category, :page, :per_page)

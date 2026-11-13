@@ -91,6 +91,10 @@ class Project < ApplicationRecord
     owner_record&.hidden?
   end
 
+  def self.find_by_slug(slug)
+    find_by(url: "https://#{slug}")
+  end
+
   def self.find_by_slug!(slug)
     find_by!(url: "https://#{slug}")
   end

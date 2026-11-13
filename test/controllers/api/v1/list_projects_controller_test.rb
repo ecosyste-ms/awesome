@@ -16,6 +16,21 @@ class Api::V1::ListProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [@platforms.id, @tools.id].sort, response.parsed_body.pluck('id').sort
   end
 
+  test 'list slugs ending in list_projects render the list' do
+    list = create(:list, url: 'https://github.com/owner/list_projects')
+
+    get '/api/v1/lists/owner/list_projects'
+
+    assert_response :success
+    assert_equal list.id, response.parsed_body['id']
+  end
+
+  test 'returns not found when neither list exists' do
+    get '/api/v1/lists/missing/list_projects'
+
+    assert_response :not_found
+  end
+
   test 'includes pagination headers' do
     get api_v1_list_list_projects_url(@list), params: { per_page: 1 }
 

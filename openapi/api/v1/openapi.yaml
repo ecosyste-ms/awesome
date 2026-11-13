@@ -68,7 +68,7 @@ paths:
           schema:
             type: string
           required: true
-          description: Project slug in `host/owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric project ID is also accepted and redirects to the slug URL.
+          description: Project slug in `host/owner/name` form. Percent-encoding the slashes is recommended. Slashes sent as-is also work, but a slug ending in `/lists` or `/ping` is treated as that nested route when the slug before it is also a project. A numeric project ID is also accepted and redirects to the slug URL.
           example: github.com/bcoe/awesome-cross-platform-nodejs
       responses:
         200:
@@ -89,7 +89,7 @@ paths:
           schema:
             type: string
           required: true
-          description: Project slug in `host/owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric project ID is also accepted and redirects to the slug URL.
+          description: Project slug in `host/owner/name` form. Percent-encoding the slashes is recommended. Slashes sent as-is also work, but a slug ending in `/lists` or `/ping` is treated as that nested route when the slug before it is also a project. A numeric project ID is also accepted and redirects to the slug URL.
           example: github.com/bcoe/awesome-cross-platform-nodejs
         - name: page
           in: query
@@ -264,7 +264,7 @@ paths:
           schema:
             type: string
           required: true
-          description: List slug in `owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric list ID is also accepted and redirects to the slug URL.
+          description: List slug in `owner/name` form. Percent-encoding the slash is recommended. A slash sent as-is also works, but a slug ending in `/projects` or `/list_projects` is treated as that nested route when the owner is also a numeric list ID. A numeric list ID is also accepted and redirects to the slug URL.
           example: sindresorhus/awesome
       responses:
         200:
@@ -299,7 +299,7 @@ paths:
           schema:
             type: string
           required: true
-          description: List slug in `owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric list ID is also accepted and redirects to the slug URL.
+          description: List slug in `owner/name` form. Percent-encoding the slash is recommended. A slash sent as-is also works, but a slug ending in `/projects` or `/list_projects` is treated as that nested route when the owner is also a numeric list ID. A numeric list ID is also accepted and redirects to the slug URL.
           example: sindresorhus/awesome
         - name: page
           in: query
@@ -346,7 +346,7 @@ paths:
           schema:
             type: string
           required: true
-          description: List slug in `owner/name` form. Slashes may be sent as-is or percent-encoded. A numeric list ID is also accepted and redirects to the slug URL.
+          description: List slug in `owner/name` form. Percent-encoding the slash is recommended. A slash sent as-is also works, but a slug ending in `/projects` or `/list_projects` is treated as that nested route when the owner is also a numeric list ID. A numeric list ID is also accepted and redirects to the slug URL.
           example: sindresorhus/awesome
         - name: category
           in: query
