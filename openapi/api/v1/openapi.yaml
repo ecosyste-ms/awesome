@@ -18,23 +18,35 @@ servers:
 paths:
   /projects:
     get:
-      description: get projects
+      description: Get projects that have been synced.
       operationId: getProjects
       tags:
         - projects
       parameters:
         - name: page
           in: query
-          description: pagination page number 
+          description: Page number. Pages above 10000 are rejected with a 400 response.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
         - name: per_page
           in: query
-          description: Number of records to return 
+          description: Number of records to return per page. Values above 1000 are reduced to 1000.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - name: keyword
+          in: query
+          description: Only return projects tagged with this repository topic. Must match the topic exactly.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: OK
@@ -67,7 +79,7 @@ paths:
                 $ref: '#/components/schemas/Project'
   /projects/{id}/lists:
     get:
-      description: get lists of a project
+      description: Get displayable lists that include a project.
       operationId: getProjectLists
       tags:
         - projects
@@ -81,16 +93,48 @@ paths:
           example: github.com/bcoe/awesome-cross-platform-nodejs
         - name: page
           in: query
-          description: pagination page number 
+          description: Page number. Pages above 10000 are rejected with a 400 response.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
         - name: per_page
           in: query
-          description: Number of records to return 
+          description: Number of records to return per page. Values above 1000 are reduced to 1000.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - name: topic
+          in: query
+          description: Only return lists tagged with this repository topic. Must match the topic exactly.
+          required: false
+          schema:
+            type: string
+        - name: language
+          in: query
+          description: Only return lists whose primary programming language is this one, e.g. `Ruby`. Must match exactly; TypeScript lists are counted as `JavaScript`.
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Field to sort by. When neither `sort` nor `order` is given, lists are sorted by `stars`, most first. An unknown field, or `order` without `sort`, sorts by `updated_at`.
+          required: false
+          schema:
+            type: string
+            enum: [updated_at, created_at, stars, projects_count, name]
+        - name: order
+          in: query
+          description: Sort direction. Any value other than `asc` sorts descending. Lists without a value for the sort field come last either way.
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
       responses:
         200:
           description: OK
@@ -102,7 +146,7 @@ paths:
                   $ref: '#/components/schemas/List'
   /projects/lookup:
     get:
-      description: lookup project by url
+      description: Look up a project by URL. If no project exists for the URL, one is created and a sync is enqueued, so the response may not include repository data yet. A sync is also enqueued for a project that hasn't been synced in the last day. Projects with blocked topics return 404.
       operationId: lookupProject
       tags:
         - projects
@@ -150,23 +194,55 @@ paths:
                   $ref: '#/components/schemas/Project'
   /lists:
     get:
-      description: get lists
+      description: Get displayable lists.
       operationId: getLists
       tags:
         - lists
       parameters:
         - name: page
           in: query
-          description: pagination page number 
+          description: Page number. Pages above 10000 are rejected with a 400 response.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
         - name: per_page
           in: query
-          description: Number of records to return 
+          description: Number of records to return per page. Values above 1000 are reduced to 1000.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - name: topic
+          in: query
+          description: Only return lists tagged with this repository topic. Must match the topic exactly.
+          required: false
+          schema:
+            type: string
+        - name: language
+          in: query
+          description: Only return lists whose primary programming language is this one, e.g. `Ruby`. Must match exactly; TypeScript lists are counted as `JavaScript`.
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Field to sort by. When neither `sort` nor `order` is given, lists are sorted by `stars`, most first. An unknown field, or `order` without `sort`, sorts by `updated_at`.
+          required: false
+          schema:
+            type: string
+            enum: [updated_at, created_at, stars, projects_count, name]
+        - name: order
+          in: query
+          description: Sort direction. Any value other than `asc` sorts descending. Lists without a value for the sort field come last either way.
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
       responses:
         200:
           description: OK
@@ -227,16 +303,28 @@ paths:
           example: sindresorhus/awesome
         - name: page
           in: query
-          description: pagination page number 
+          description: Page number. Pages above 10000 are rejected with a 400 response.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
         - name: per_page
           in: query
-          description: Number of records to return 
+          description: Number of records to return per page. Values above 1000 are reduced to 1000.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - name: keyword
+          in: query
+          description: Only return projects tagged with this repository topic. Must match the topic exactly.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: OK
@@ -274,16 +362,22 @@ paths:
             type: string
         - name: page
           in: query
-          description: pagination page number 
+          description: Page number. Pages above 10000 are rejected with a 400 response.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
         - name: per_page
           in: query
-          description: Number of records to return 
+          description: Number of records to return per page. Values above 1000 are reduced to 1000.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
       responses:
         200:
           description: OK
@@ -295,7 +389,7 @@ paths:
                   $ref: '#/components/schemas/ListProject'
   /lists/lookup:
     get:
-      description: lookup list by url
+      description: Look up a list by URL. If no list exists for the URL, one is created and a sync is enqueued, so the response may not include repository data yet. A sync is also enqueued for a list that hasn't been synced in the last day. Unlike `GET /lists`, lists that aren't displayable are returned too.
       operationId: lookupList
       tags:
         - lists
@@ -315,23 +409,35 @@ paths:
                   $ref: '#/components/schemas/List'
   /topics:
     get:
-      description: get topics
+      description: Get topics, most used on GitHub first.
       operationId: getTopics
       tags:
         - topics
       parameters:
         - name: page
           in: query
-          description: pagination page number 
+          description: Page number. Pages above 10000 are rejected with a 400 response.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
         - name: per_page
           in: query
-          description: Number of records to return 
+          description: Number of records to return per page. Values above 1000 are reduced to 1000.
           required: false
           schema:
             type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - name: query
+          in: query
+          description: Only return topics whose name or short description contains this text, ignoring case.
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: OK

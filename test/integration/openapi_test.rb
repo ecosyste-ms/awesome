@@ -34,6 +34,18 @@ class OpenapiTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'list sort fields match the sortable columns' do
+    sort_parameters = SPEC['paths'].filter_map do |path, operations|
+      parameter = operations.dig('get', 'parameters').to_a.find { |parameter| parameter['in'] == 'query' && parameter['name'] == 'sort' }
+      [path, parameter] if parameter
+    end
+
+    assert_equal ['/lists', '/projects/{id}/lists'], sort_parameters.map(&:first).sort
+    sort_parameters.each do |path, parameter|
+      assert_equal List.sortable_columns.keys.sort, parameter.dig('schema', 'enum').sort, "#{path} sort"
+    end
+  end
+
   private
 
   def path_parameters
