@@ -7,8 +7,6 @@ class Api::V1::ApplicationController < ApplicationController
     response.headers['CDN-Cache-Control'] = "max-age=#{1.hour.to_i}, stale-while-revalidate=#{4.hours.to_i}"
   end
 
-  private
-
   # Slugs contain slashes and may be sent unencoded, so a slug whose last
   # segment is a nested route name (owner/projects, host/owner/lists) is routed
   # to that nested action with the rest of the slug as its parent.
