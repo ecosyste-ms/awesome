@@ -146,7 +146,7 @@ paths:
                   $ref: '#/components/schemas/List'
   /projects/lookup:
     get:
-      description: Look up a project by URL. If no project exists for the URL, one is created and a sync is enqueued, so the response may not include repository data yet. A sync is also enqueued for a project that hasn't been synced in the last day. Projects with blocked topics return 404.
+      description: Look up a project by URL. If no project exists for the URL, one is created and a sync is enqueued, so the response may not include repository data yet. A sync is also enqueued for a project that hasn't been synced in the last day. Projects with blocked topics or hidden owners return 404.
       operationId: lookupProject
       tags:
         - projects
