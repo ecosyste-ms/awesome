@@ -92,6 +92,35 @@ class ListSyncTest < ActionDispatch::IntegrationTest
     assert_not_requested readme
   end
 
+  test 'sync follows a redirect to a URL no other list tracks' do
+    stub_request(:get, @list.url).to_return(status: 301, headers: { 'Location' => 'https://github.com/example/renamed' })
+    stub_request(:get, 'https://github.com/example/renamed').to_return(status: 200)
+    stub_request(:get, 'https://repos.ecosyste.ms/api/v1/repositories/lookup?url=https://github.com/example/renamed')
+      .to_return(status: 200, body: @list.repository.to_json)
+    stub_request(:get, @readme_url).to_return(body: '- [Example](https://example.com/example) - Example project')
+
+    SyncListWorker.new.perform(@list.id)
+
+    assert_equal 'https://github.com/example/renamed', @list.reload.url
+    assert_in_delta Time.current, @list.last_synced_at, 1.second
+  end
+
+  test 'sync removes a list that redirects to a URL another list tracks' do
+    tracked = create(:list, url: 'https://github.com/example/renamed')
+    join = create(:list_project, list: @list)
+    stub_request(:get, @list.url).to_return(status: 301, headers: { 'Location' => tracked.url })
+    stub_request(:get, tracked.url).to_return(status: 200)
+
+    assert_difference 'List.count', -1 do
+      SyncListWorker.new.perform(@list.id)
+    end
+
+    assert_not List.exists?(@list.id)
+    assert_not ListProject.exists?(join.id)
+    assert_equal 'https://github.com/example/renamed', tracked.reload.url
+    assert_not_requested :get, @list.repos_api_url
+  end
+
   test 'a successful sync clears the retry marker' do
     @list.update_columns(last_synced_at: nil, last_sync_attempt_at: 2.hours.ago)
     stub_request(:get, @readme_url).to_return(body: '- [Example](https://example.com/example) - Example project')
