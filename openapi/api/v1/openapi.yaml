@@ -91,12 +91,6 @@ paths:
           required: true
           description: Project slug in `host/owner/name` form. Percent-encoding the slashes is recommended. Slashes sent as-is also work, but a slug ending in `/lists` or `/ping` is treated as that nested route when the slug before it is also a project. A numeric project ID is also accepted and redirects to the slug URL.
           example: github.com/bcoe/awesome-cross-platform-nodejs
-        - name: natural_language
-          in: query
-          description: Only return lists written in this natural language, given as the language code reported in `natural_language`, e.g. `zh`. Matched regardless of letter case.
-          required: false
-          schema:
-            type: string
         - name: page
           in: query
           description: Page number. Pages above 10000 are rejected with a 400 response.
@@ -124,6 +118,12 @@ paths:
         - name: language
           in: query
           description: Only return lists whose primary programming language is this one, e.g. `Ruby`. Must match exactly; TypeScript lists are counted as `JavaScript`.
+          required: false
+          schema:
+            type: string
+        - name: natural_language
+          in: query
+          description: Only return lists written in this natural language, given as the language code reported in `natural_language`, e.g. `zh`. Matched regardless of letter case.
           required: false
           schema:
             type: string
@@ -178,12 +178,6 @@ paths:
       tags:
         - lists
       parameters:
-        - name: natural_language
-          in: query
-          description: Only return lists written in this natural language, given as the language code reported in `natural_language`, e.g. `zh`. Matched regardless of letter case.
-          required: false
-          schema:
-            type: string
         - name: page
           in: query
           description: Page number. Pages above 10000 are rejected with a 400 response.
@@ -211,6 +205,12 @@ paths:
         - name: language
           in: query
           description: Only return lists whose primary programming language is this one, e.g. `Ruby`. Must match exactly; TypeScript lists are counted as `JavaScript`.
+          required: false
+          schema:
+            type: string
+        - name: natural_language
+          in: query
+          description: Only return lists written in this natural language, given as the language code reported in `natural_language`, e.g. `zh`. Matched regardless of letter case.
           required: false
           schema:
             type: string
