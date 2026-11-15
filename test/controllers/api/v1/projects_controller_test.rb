@@ -34,6 +34,15 @@ class Api::V1::ProjectsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'lookup returns not found when the owner is hidden' do
+    hidden = create(:project, owner_record: create(:owner, :hidden), last_synced_at: 2.days.ago)
+    Project.any_instance.expects(:sync_async).never
+
+    get lookup_api_v1_projects_path, params: { url: hidden.url }
+
+    assert_response :not_found
+  end
+
   test 'lookup includes links from valid funding metadata' do
     @repository_project.update!(repository: { 'metadata' => { 'funding' => {
       'github' => ['example'], 'open_collective' => 'example'

@@ -51,7 +51,7 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
         @project = Project.find_by(url: params[:url].downcase)
       end
     end
-    raise ActiveRecord::RecordNotFound if @project.nil? || @project.has_blocked_topic?
+    raise ActiveRecord::RecordNotFound if @project.nil? || @project.has_blocked_topic? || @project.owner_hidden?
     @project.sync_async if @project.last_synced_at.nil? || @project.last_synced_at < 1.day.ago
     fresh_when(@project, public: true)
   end
