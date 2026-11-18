@@ -11,6 +11,11 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
                 'topics' => ['test']
             }
         )
+        SyncListWorker.clear
+    end
+
+    teardown do
+        SyncListWorker.clear
     end
 
     test 'renders index' do
@@ -93,6 +98,55 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
         get lookup_api_v1_lists_url, params: { url: 'https://github.com/new/list' }
         assert_response :success
         assert List.find_by(url: 'https://github.com/new/list')
+    end
+
+    test 'lookup enqueues a single sync for a new list' do
+        get lookup_api_v1_lists_url, params: { url: 'https://github.com/new/list' }
+
+        assert_response :success
+        list = List.find_by!(url: 'https://github.com/new/list')
+        assert_equal list.id, response.parsed_body['id']
+        assert_equal [[list.id]], SyncListWorker.jobs.map { |job| job['args'] }
+    end
+
+    test 'lookup enqueues a sync only for a stale list' do
+        @list.update!(last_synced_at: 2.days.ago)
+
+        get lookup_api_v1_lists_url, params: { url: @list.url }
+        assert_response :success
+        assert_equal [[@list.id]], SyncListWorker.jobs.map { |job| job['args'] }
+
+        SyncListWorker.clear
+        @list.update!(last_synced_at: 1.hour.ago)
+
+        get lookup_api_v1_lists_url, params: { url: @list.url }
+        assert_response :success
+        assert_empty SyncListWorker.jobs
+    end
+
+    test 'lookup ignores a trailing slash' do
+        assert_no_difference 'List.count' do
+            get lookup_api_v1_lists_url, params: { url: "#{@list.url}/" }
+        end
+
+        assert_response :success
+        assert_equal @list.id, response.parsed_body['id']
+
+        get lookup_api_v1_lists_url, params: { url: 'https://github.com/foo/bar/' }
+
+        assert_response :success
+        list = List.find_by!(url: 'https://github.com/foo/bar')
+        assert_equal list.id, response.parsed_body['id']
+        assert_equal 'https://github.com/foo/bar', response.parsed_body['url']
+    end
+
+    test 'lookup returns unprocessable content for an invalid url without enqueuing a sync' do
+        assert_no_difference 'List.count' do
+            get lookup_api_v1_lists_url, params: { url: 'https://github.com/foo/bar//' }
+        end
+
+        assert_response :unprocessable_content
+        assert_empty SyncListWorker.jobs
     end
 
     test 'lookup returns bad request without url' do
