@@ -149,6 +149,17 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
         assert_empty SyncListWorker.jobs
     end
 
+    test 'lookup returns the existing list when another request creates it first' do
+        List.stubs(:find_by).returns(nil)
+
+        assert_no_difference 'List.count' do
+            get lookup_api_v1_lists_url, params: { url: @list.url }
+        end
+
+        assert_response :success
+        assert_equal @list.id, response.parsed_body['id']
+    end
+
     test 'lookup returns bad request without url' do
         get lookup_api_v1_lists_url
         assert_response :bad_request
