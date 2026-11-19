@@ -46,7 +46,6 @@ class Api::V1::ProjectsController < Api::V1::ApplicationController
     if @project.nil?
       begin
         @project = Project.create(url: params[:url].downcase)
-        @project.sync_async
       rescue ActiveRecord::RecordNotUnique
         @project = Project.find_by(url: params[:url].downcase)
       end

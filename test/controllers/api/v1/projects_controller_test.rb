@@ -10,6 +10,11 @@ class Api::V1::ProjectsControllerTest < ActionDispatch::IntegrationTest
     [@awesome_project, @website, @repository_project].each do |project|
       create(:list_project, list: @list, project: project)
     end
+    SyncProjectWorker.clear
+  end
+
+  teardown do
+    SyncProjectWorker.clear
   end
 
   test 'lookup ignores integer funding metadata' do
@@ -32,6 +37,15 @@ class Api::V1::ProjectsControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_equal ['https://github.com/sponsors/example'], response.parsed_body['funding_links']
     end
+  end
+
+  test 'lookup enqueues a single sync for a new project' do
+    get lookup_api_v1_projects_path, params: { url: 'https://github.com/new/project' }
+
+    assert_response :success
+    project = Project.find_by!(url: 'https://github.com/new/project')
+    assert_equal project.id, response.parsed_body['id']
+    assert_equal [[project.id]], SyncProjectWorker.jobs.map { |job| job['args'] }
   end
 
   test 'lookup returns not found when the owner is hidden' do
