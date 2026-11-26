@@ -108,8 +108,8 @@ class Project < ApplicationRecord
   end
   
   def self.sync_least_recently_synced
-    new_ids = sync_candidate_ids(Project.where(last_synced_at: nil))
-    old_ids = sync_candidate_ids(Project.where("last_synced_at < ?", 1.day.ago).order(:last_synced_at))
+    new_ids = sync_candidate_ids(Project.visible_owners.where(last_synced_at: nil))
+    old_ids = sync_candidate_ids(Project.visible_owners.where("last_synced_at < ?", 1.day.ago).order(:last_synced_at))
 
     all_ids = (new_ids + old_ids).uniq
     SyncProjectWorker.perform_bulk(all_ids.map { |id| [id] }) if all_ids.any?
@@ -175,7 +175,10 @@ class Project < ApplicationRecord
 
   def sync
     return if last_synced_at.present? && last_synced_at > 1.day.ago
-    return if owner_hidden?
+    if owner_hidden?
+      destroy
+      return
+    end
     check_url
     unless fetch_repository
       update_column(:last_sync_attempt_at, Time.current) unless destroyed?
