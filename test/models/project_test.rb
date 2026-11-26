@@ -235,12 +235,14 @@ class ProjectTest < ActiveSupport::TestCase
     assert_in_delta Time.current, project.last_sync_attempt_at, 1.second
   end
 
-  test "sync skips hidden owners" do
+  test "sync destroys projects with hidden owners" do
     owner = create(:owner, name: 'gone', hidden: true)
     project = create(:project, url: 'https://github.com/gone/thing', owner: 'gone', owner_record: owner, last_synced_at: nil)
 
     project.expects(:check_url).never
     project.sync
+
+    assert_not Project.exists?(project.id)
   end
 
   test "sync clears the retry marker after a successful repository refresh" do
@@ -256,6 +258,28 @@ class ProjectTest < ActiveSupport::TestCase
 
     assert_in_delta Time.current, project.last_synced_at, 1.second
     assert_nil project.last_sync_attempt_at
+  end
+
+  test "sync scheduler skips projects with hidden owners" do
+    hidden_owner = Owner.create!(name: "hidden-owner", hidden: true)
+    Rails.cache.clear
+
+    hidden_projects = create_list(:project, 5, last_synced_at: 3.years.ago, owner_record: hidden_owner)
+    stale_project = create(:project, last_synced_at: 2.days.ago)
+    new_project = create(:project, last_synced_at: nil)
+
+    queued_jobs = nil
+    SyncProjectWorker.expects(:perform_bulk).with do |jobs|
+      queued_jobs = jobs
+      true
+    end
+
+    Project.sync_least_recently_synced
+
+    queued_ids = queued_jobs.flatten
+    assert_includes queued_ids, stale_project.id
+    assert_includes queued_ids, new_project.id
+    assert_empty queued_ids & hidden_projects.map(&:id)
   end
 
   test "sync scheduler reserves capacity for first attempts and retries" do
