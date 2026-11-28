@@ -497,7 +497,7 @@ class List < ApplicationRecord
         links.each do |link|
           next unless link[:url].present?
           next unless link[:url].start_with?('http')
-          next if link[:url].include?(url)
+          next if links_to_self?(link[:url])
           link[:category] = category
           link[:sub_category] = sub_category
           # strip anchor from url
@@ -511,6 +511,15 @@ class List < ApplicationRecord
     all_links.uniq { |link| link[:url] }
   end
 
+  # Links into the list's own repository (e.g. anchors, CONTRIBUTING.md) are
+  # not projects, but repos that merely share the URL as a prefix are, e.g.
+  # https://github.com/sindresorhus/awesome-nodejs on sindresorhus/awesome.
+  def links_to_self?(link_url)
+    link = link_url.downcase.sub(/\Ahttps?:\/\//, '').chomp('/')
+    own = url.downcase.sub(/\Ahttps?:\/\//, '')
+    link == own || link.start_with?("#{own}/", "#{own}#", "#{own}?")
+  end
+
   def self.import_lists_from_sindresorhus
     list = List.find_or_create_by(url: 'https://github.com/sindresorhus/awesome')
     list.fetch_repository
@@ -518,7 +527,6 @@ class List < ApplicationRecord
     list.readme_links.each do |link|
       next unless link[:url].present?
       next unless link[:url].start_with?('https://github.com/')
-      next if link[:url].include?(list.url)
       link[:url] = link[:url].chomp('/')
 
       existing = List.find_by(url: link[:url])
