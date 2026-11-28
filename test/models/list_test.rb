@@ -54,4 +54,27 @@ class ListTest < ActiveSupport::TestCase
 
     assert_equal [traditional], List.natural_language('ZH-tw').to_a
   end
+
+  test 'readme links skip links into the list itself' do
+    list = List.new(url: 'https://github.com/example/awesome', readme: <<~README)
+      ## Resources
+      - [Tools](https://github.com/example/awesome#tools)
+      - [Contributing](https://github.com/example/awesome/blob/main/contributing.md)
+      - [Mirror](http://GitHub.com/Example/Awesome/)
+      - [Tool](https://github.com/example/tool) - A tool.
+    README
+
+    assert_equal ['https://github.com/example/tool'], list.readme_links.map { |link| link[:url] }
+  end
+
+  test 'readme links keep repositories whose url starts with the list url' do
+    list = List.new(url: 'https://github.com/example/awesome', readme: <<~README)
+      ## Lists
+      - [Node.js](https://github.com/example/awesome-nodejs) - Node.js packages.
+      - [Electron](https://github.com/example/awesome-electron#readme) - Electron resources.
+    README
+
+    assert_equal ['https://github.com/example/awesome-nodejs', 'https://github.com/example/awesome-electron'],
+      list.readme_links.map { |link| link[:url] }
+  end
 end
